@@ -1,0 +1,130 @@
+
+/* TIG -  Navigation Logo - Left Menu =============================================================================== */
+
+.tinycdn-section .admin__page-nav-link {
+    padding: 2rem 1rem 2rem 1rem;
+}
+
+.tinycdn-section .admin__page-nav-link:after {
+    float:right;
+    width: 30px;
+    height: 30px;
+    margin-top:-7px;
+    margin-right: 3px;
+
+    background-image: url(../images/logo_tig.png) !important;
+    background-size: 30px !important;
+    background-repeat:no-repeat;
+    content: ' ';
+}
+
+
+/* SupportTab - Default styling ===================================================================================== */
+
+#section { float: left; width: 100%; clear: both; }
+
+#supporttab { margin-left: 4rem;  }
+#supporttab #section { border-bottom: 1px solid #cccccc; }
+#supporttab #section:last-child { border-bottom: none; }
+
+/* Default styling collapsible tabs */
+.collapse-title[aria-expanded=true] h3:before {
+    font-family:'Admin Icons';
+    content: '\e615';
+
+}
+.collapse-title h3:before {
+    font-family:'Admin Icons';
+    font-weight: lighter;
+    content: '\e616';
+    padding-right: 10px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.collapse-content {
+    box-sizing: border-box;
+    padding:0 15px 15px 15px;
+    height:auto !important;
+    float:left; width: 100%;
+}
+
+#supporttab h3 {
+    font-size: 1.7rem;
+    margin:0 !important;
+    padding:1.9rem 2.7rem 1.9rem 1rem;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#supporttab h4 {
+    font-size: 1.1em;
+    margin:20px 0 5px 0;
+    padding:0;
+    color: rgba(0,136,204,1);
+}
+
+#supporttab p {
+    line-height: 2em;
+}
+
+#supporttab ol, ul {
+    margin-left: 20px;
+    position :relative;
+}
+
+#supporttab ul li {
+    line-height: 2em;
+    list-style-type: none;
+    margin-bottom: 10px;
+}
+
+/* SupportTab - 3rd Party | Version compatibility =================================================================== */
+
+.block-version h3 {
+    cursor: auto !important;
+}
+
+.block-version {
+    padding:10px;
+    background: #F8F8F8;
+    float:left;
+    width: 100%;
+}
+
+
+@media screen and (min-width: 1200px){
+    .block-version {
+        float:left;
+        width: 50%;
+    }
+}
+#supporttab .version-compatibility {
+    float:left;
+    width: calc(100% - 30px);
+    clear:both;
+}
+#supporttab .version-compatibility li {
+    clear: both;
+    margin-bottom: 15px;
+    float:left;
+    width: 100%;
+}
+#supporttab .version-compatibility  span.text {
+     font-weight: 600;
+     float:left;
+     width: calc(50% - 20px);
+ }
+#supporttab .version-compatibility  span.version {
+    float:left;
+    width: calc(50% - 30px);
+    text-align:right;
+    margin-left: 10px;
+}
+
+/* SupportTab - Documentation ======================================================================================= */
+
+.external_link {
+    margin-left: 5px;
+    vertical-align: middle;
+}

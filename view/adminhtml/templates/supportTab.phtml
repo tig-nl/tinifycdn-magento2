@@ -1,0 +1,48 @@
+<?php
+/** @var \TIG\TinyCDN\Block\Adminhtml\Config\Support\SupportTab $this */
+?>
+<div id="supporttab" class="tig-tinycdn-supporttab" data-mage-init='{"tinyConfig": true}'>
+
+    <div id="block">
+        <div class="block-version">
+            <h3 ><?php echo $block->escapeHtml(__('Magento version compatibility'));?></h3>
+            <div>
+                <ul class="version-compatibility">
+                    <li>
+                        <span class="text">
+                            <?php echo $block->escapeHtml(__('Magento Commerce'));?>:
+                        </span>
+                        <span class="version"> x.x.xx, x.x.xx, x.x.x </span>
+                    </li>
+                    <li>
+                        <span class="text">
+                            <?php echo $block->escapeHtml(__('Magento Open Source'));?>:
+                        </span>
+                        <span class="version"> x.x.xx, x.x.xx, x.x.x </span>
+                    </li>
+
+                    <li>
+                        <span class="text"><?php echo $block->escapeHtml(__('Your PHP version'));?>:</span>
+                        <span class="version">
+                           <?php echo $block->escapeHtml(implode('.', $this->getPhpVersionArray())); ?>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="text"><?php echo $block->escapeHtml(__('TinyCDN version'));?>:</span>
+                        <span class="version"><?php echo $block->escapeHtml($this->getVersionNumber()); ?></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="section">
+        <div class="collapse-title" data-role="title">
+            <h3 data-role="trigger"><?php echo $block->escapeHtml(__('Support'));?></h3>
+        </div>
+        <div class="collapse-content support-tinycdn-tig" data-role="content" style="display:none;">
+
+        </div>
+    </div>
+
+</div>
