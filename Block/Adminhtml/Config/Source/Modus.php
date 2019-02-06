@@ -29,24 +29,25 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+namespace TIG\TinyCDN\Config\Source;
 
-namespace TIG\TinyCDN\Block\Adminhtml\Config\Support;
+use Magento\Framework\Option\ArrayInterface;
 
-use Magento\Backend\Block\Template;
-use Magento\Backend\Block\Template\Context;
-use Magento\Framework\View\Element\BlockInterface;
-
-class BodyClass extends Template implements BlockInterface
+class Modus implements ArrayInterface
 {
     /**
-     * @return $this
+     * Return option array for the extension modus.
+     * @return array
      */
-    // @codingStandardsIgnoreLine
-    protected function _prepareLayout()
+    public function toOptionArray()
     {
-        if ($this->_request->getParam('section') == 'tig_tinycdn') {
-            $this->pageConfig->addBodyClass('tinycdn-config-page');
-        }
-        return parent::_prepareLayout();
+        // @codingStandardsIgnoreStart
+        $options = [
+            ['value' => '1', 'label' => __('Live')],
+            ['value' => '2', 'label' => __('Test')],
+            ['value' => '0', 'label' => __('Off')],
+        ];
+        // @codingStandardsIgnoreEnd
+        return $options;
     }
 }

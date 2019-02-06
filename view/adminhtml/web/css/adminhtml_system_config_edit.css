@@ -18,6 +18,19 @@
     content: ' ';
 }
 
+.tinycdn-section .admin__page-nav-link:before {
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    content: ' ';
+    background-image: url(../images/george-menu-icon@2x.png) !important;
+    background-position: 0;
+    background-repeat: no-repeat;
+    background-size: auto 35px;
+    margin-top: -12px;
+}
+
 
 /* SupportTab - Default styling ===================================================================================== */
 
@@ -26,6 +39,21 @@
 #supporttab { margin-left: 4rem;  }
 #supporttab #section { border-bottom: 1px solid #cccccc; }
 #supporttab #section:last-child { border-bottom: none; }
+
+.colset-2 {
+    float:left;
+    width: 100%;
+}
+
+.colset-2 .col-1 {
+    float:left;
+     width: 50%;
+}
+
+.colset-2 .col-2 {
+    float:left;
+    width: 50%;
+}
 
 /* Default styling collapsible tabs */
 .collapse-title[aria-expanded=true] h3:before {
@@ -61,7 +89,7 @@
     font-size: 1.1em;
     margin:20px 0 5px 0;
     padding:0;
-    color: rgba(0,136,204,1);
+    color: black;
 }
 
 #supporttab p {
@@ -81,28 +109,16 @@
 
 /* SupportTab - 3rd Party | Version compatibility =================================================================== */
 
-.block-version h3 {
-    cursor: auto !important;
+#supporttab .version-compatibility h3 {
+    cursor: default;
+    padding: 20px 0 15px 0 !important;
 }
 
-.block-version {
-    padding:10px;
-    background: #F8F8F8;
+#supporttab .version-compatibility ul {
     float:left;
     width: 100%;
-}
-
-
-@media screen and (min-width: 1200px){
-    .block-version {
-        float:left;
-        width: 50%;
-    }
-}
-#supporttab .version-compatibility {
-    float:left;
-    width: calc(100% - 30px);
     clear:both;
+    margin: 0;
 }
 #supporttab .version-compatibility li {
     clear: both;
@@ -110,21 +126,71 @@
     float:left;
     width: 100%;
 }
-#supporttab .version-compatibility  span.text {
+#supporttab .version-compatibility span.text {
      font-weight: 600;
      float:left;
      width: calc(50% - 20px);
  }
-#supporttab .version-compatibility  span.version {
+#supporttab .version-compatibility span.version {
     float:left;
     width: calc(50% - 30px);
     text-align:right;
     margin-left: 10px;
 }
 
-/* SupportTab - Documentation ======================================================================================= */
+#supporttab .version-compatibility .panda-george {
+    float:right;
+    max-width: 300px;
+    width: 100%;
+}
 
-.external_link {
-    margin-left: 5px;
-    vertical-align: middle;
+/* SupportTab - Legend ============================================================================================== */
+
+.legend h3 {
+    cursor: auto !important;
+}
+
+.legend {
+    padding: 10px;
+    float:left;
+    width:100%;
+}
+
+@media screen and (min-width: 1200px){
+    .legend {
+        float:left;
+        width: 50%;
+    }
+}
+
+.disabled span.text,
+.live span.text,
+.test span.text {
+    margin-right: 15px;
+    font-weight: 600;
+}
+
+.disabled{
+    border-left: 5px solid #CCCCCC;
+    padding-left: 10px;
+}
+
+.live {
+    border-left: 5px solid #49AB43;
+    padding-left: 10px;
+}
+
+.test {
+    border-left: 5px solid #FFC107;
+    padding-left: 10px;
+}
+
+.advanced span.img {
+    display:block;
+    float:left;
+    margin-top: 2px; margin-right:10px;
+    border: 6px solid;
+    border-color: transparent transparent transparent #ff2e31;
+    width:0;
+    height:0;
 }

@@ -6,7 +6,7 @@
 var config = {
     map: {
         '*': {
-            tinyConfig: 'TIG_TinyCDN/js/adminJS'
+            tinyConfig: 'TIG_TinyCDN/js/support'
         }
     }
 };

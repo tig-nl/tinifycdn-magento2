@@ -29,24 +29,29 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+namespace TIG\TinyCDN\Block\Adminhtml\Config\Form\Field;
 
-namespace TIG\TinyCDN\Block\Adminhtml\Config\Support;
+use Magento\Config\Block\System\Config\Form\Fieldset as MagentoFieldset;
+use TIG\TinyCDN\Config\Provider\ModuleConfiguration;
 
-use Magento\Backend\Block\Template;
-use Magento\Backend\Block\Template\Context;
-use Magento\Framework\View\Element\BlockInterface;
-
-class BodyClass extends Template implements BlockInterface
+class Fieldset extends MagentoFieldset
 {
+    private $classNames = [
+        '1' => 'modus_live',
+        '2' => 'modus_test',
+        '0' => 'modus_off'
+    ];
     /**
-     * @return $this
+     * {@inheritdoc}
      */
     // @codingStandardsIgnoreLine
-    protected function _prepareLayout()
+    protected function _getFrontendClass($element)
     {
-        if ($this->_request->getParam('section') == 'tig_tinycdn') {
-            $this->pageConfig->addBodyClass('tinycdn-config-page');
+        $modus = $this->_scopeConfig->getValue(ModuleConfiguration::XPATH_CONFIGURATION_MODUS);
+        $class = 'modus_off';
+        if (array_key_exists($modus, $this->classNames)) {
+            $class = $this->classNames[$modus];
         }
-        return parent::_prepareLayout();
+        return parent::_getFrontendClass($element) . ' ' . $class;
     }
 }
