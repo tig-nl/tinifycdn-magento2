@@ -44,7 +44,7 @@
     </head>
     <body>
         <referenceContainer name="content">
-            <!--<block class="TIG\TinyCDN\Block\Adminhtml\Config\Support\BodyClass" name="tinycdn.support" before="system.config.edit" />-->
+            <block class="TIG\TinyCDN\Block\Adminhtml\Config\Support\BodyClass" name="tinycdn.support" before="system.config.edit" />
         </referenceContainer>
     </body>
 </page>
