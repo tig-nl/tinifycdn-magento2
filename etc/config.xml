@@ -36,7 +36,7 @@
             <supported_magento_version>2.2.6 - 2.2.7, 2.3.0</supported_magento_version>
             <stability/>
             <configuration>
-                <modus>0</modus>
+                <mode>0</mode>
             </configuration>
         </tig_tinycdn>
     </default>

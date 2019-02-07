@@ -33,10 +33,10 @@ namespace TIG\TinyCDN\Config\Source;
 
 use Magento\Framework\Option\ArrayInterface;
 
-class Modus implements ArrayInterface
+class Mode implements ArrayInterface
 {
     /**
-     * Return option array for the extension modus.
+     * Return option array for the extension mode.
      * @return array
      */
     public function toOptionArray()

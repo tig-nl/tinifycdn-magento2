@@ -37,9 +37,9 @@ use TIG\TinyCDN\Config\Provider\ModuleConfiguration;
 class Fieldset extends MagentoFieldset
 {
     private $classNames = [
-        '1' => 'modus_live',
-        '2' => 'modus_test',
-        '0' => 'modus_off'
+        '1' => 'mode_live',
+        '2' => 'mode_test',
+        '0' => 'mode_off'
     ];
     /**
      * {@inheritdoc}
@@ -47,10 +47,10 @@ class Fieldset extends MagentoFieldset
     // @codingStandardsIgnoreLine
     protected function _getFrontendClass($element)
     {
-        $modus = $this->_scopeConfig->getValue(ModuleConfiguration::XPATH_CONFIGURATION_MODUS);
-        $class = 'modus_off';
-        if (array_key_exists($modus, $this->classNames)) {
-            $class = $this->classNames[$modus];
+        $mode = $this->_scopeConfig->getValue(ModuleConfiguration::XPATH_CONFIGURATION_MODE);
+        $class = 'mode_off';
+        if (array_key_exists($mode, $this->classNames)) {
+            $class = $this->classNames[$mode];
         }
         return parent::_getFrontendClass($element) . ' ' . $class;
     }

@@ -32,7 +32,7 @@
 namespace TIG\TinyCDN\Config\Provider;
 class ModuleConfiguration extends AbstractConfigProvider
 {
-    const XPATH_CONFIGURATION_MODUS       = 'tig_postcode/configuration/modus';
+    const XPATH_CONFIGURATION_MODE       = 'tig_postcode/configuration/mode';
     const XPATH_CHECKOUT_COMPATIBILITY    = 'tig_postcode/configuration/checkout_compatible';
     const XPATH_MODULE_STABILITY          = 'tig_postcode/stability';
     const XPATH_SUPPORTED_MAGENTO_VERSION = 'tig_postcode/supported_magento_version';
@@ -46,21 +46,21 @@ class ModuleConfiguration extends AbstractConfigProvider
      * @param null|int $store
      * @return mixed
      */
-    public function getModus($store = null)
+    public function getMode($store = null)
     {
         if (!$this->isModuleOutputEnabled()) {
             return '0';
         }
-        return $this->getConfigFromXpath(static::XPATH_CONFIGURATION_MODUS, $store);
+        return $this->getConfigFromXpath(static::XPATH_CONFIGURATION_MODE, $store);
     }
     /**
      * Checks if the extension is on status live
      * @param null|int $store
      * @return bool
      */
-    public function isModusLive($store = null)
+    public function isModeLive($store = null)
     {
-        if ($this->getModus($store) == '1') {
+        if ($this->getMode($store) == '1') {
             return true;
         }
         return false;
@@ -70,9 +70,9 @@ class ModuleConfiguration extends AbstractConfigProvider
      * @param null|int $store
      * @return bool
      */
-    public function isModusTest($store = null)
+    public function isModeTest($store = null)
     {
-        if ($this->getModus($store) == '2') {
+        if ($this->getMode($store) == '2') {
             return true;
         }
         return false;
@@ -82,9 +82,9 @@ class ModuleConfiguration extends AbstractConfigProvider
      * @param null|int $store
      * @return bool
      */
-    public function isModusOff($store = null)
+    public function isModeOff($store = null)
     {
-        if ($this->getModus($store) == '0' || false == $this->getModus()) {
+        if ($this->getMode($store) == '0' || false == $this->getMode()) {
             return true;
         }
         return false;

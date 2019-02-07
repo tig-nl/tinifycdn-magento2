@@ -47,7 +47,8 @@
 
 .colset-2 .col-1 {
     float:left;
-     width: 50%;
+    width: 50%;
+    box-sizing: border-box;
 }
 
 .colset-2 .col-2 {
@@ -109,36 +110,46 @@
 
 /* SupportTab - 3rd Party | Version compatibility =================================================================== */
 
-#supporttab .version-compatibility h3 {
+#supporttab .legend-version {
+    padding-left: 1rem;
+    box-sizing: border-box;
+}
+
+#supporttab .legend-version div {
+    float:left;
+    width: 100%;
+}
+
+#supporttab .legend-version h3 {
     cursor: default;
     padding: 20px 0 15px 0 !important;
 }
 
-#supporttab .version-compatibility ul {
+#supporttab .legend-version ul {
     float:left;
     width: 100%;
     clear:both;
     margin: 0;
 }
-#supporttab .version-compatibility li {
+#supporttab .legend-version li {
     clear: both;
     margin-bottom: 15px;
     float:left;
     width: 100%;
 }
-#supporttab .version-compatibility span.text {
+#supporttab .legend-version span.text {
      font-weight: 600;
      float:left;
      width: calc(50% - 20px);
  }
-#supporttab .version-compatibility span.version {
+#supporttab .legend-version span.version {
     float:left;
     width: calc(50% - 30px);
     text-align:right;
     margin-left: 10px;
 }
 
-#supporttab .version-compatibility .panda-george {
+#supporttab .legend-version .panda-george {
     float:right;
     max-width: 300px;
     width: 100%;

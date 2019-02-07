@@ -5,44 +5,46 @@
 
     <div class="colset-2">
 
-        <div id="legend">
-            <h3 ><?php echo $block->escapeHtml(__('Legend'));?></h3>
-            <ul>
-                <li class="disabled">
-                    <span class="img"></span>
-                    <span class="text"><?php echo $block->escapeHtml(__('Extension status'));?>: </span>
-                    <span class="status"><?php echo $block->escapeHtml(__('Disabled'));?></span>
-                </li>
-                <li class="test">
-                    <span class="img"></span>
-                    <span class="text"><?php echo $block->escapeHtml(__('Extension status'));?>: </span>
-                    <span class="status"><?php echo $block->escapeHtml(__('Test Mode'));?></span>
-                </li>
-                <li class="live">
-                    <span class="img"></span>
-                    <span class="text"><?php echo $block->escapeHtml(__('Extension status'));?>: </span>
-                    <span class="status"><?php echo $block->escapeHtml(__('Live Mode'));?></span>
-                </li>
-            </ul>
-        </div>
+        <div class="col-1 legend-version">
+            <div id="legend">
+                <h3 ><?php echo $block->escapeHtml(__('Legend'));?></h3>
+                <ul>
+                    <li class="disabled">
+                        <span class="img"></span>
+                        <span class="text"><?php echo $block->escapeHtml(__('Extension status'));?>: </span>
+                        <span class="status"><?php echo $block->escapeHtml(__('Disabled'));?></span>
+                    </li>
+                    <li class="test">
+                        <span class="img"></span>
+                        <span class="text"><?php echo $block->escapeHtml(__('Extension status'));?>: </span>
+                        <span class="status"><?php echo $block->escapeHtml(__('Test Mode'));?></span>
+                    </li>
+                    <li class="live">
+                        <span class="img"></span>
+                        <span class="text"><?php echo $block->escapeHtml(__('Extension status'));?>: </span>
+                        <span class="status"><?php echo $block->escapeHtml(__('Live Mode'));?></span>
+                    </li>
+                </ul>
+            </div>
 
-        <div class="col-1 version-compatibility">
-            <h3 ><?php echo $block->escapeHtml(__('Magento version compatibility'));?></h3>
-            <ul>
-                <li>
+            <div class="version-compatibility">
+                <h3 ><?php echo $block->escapeHtml(__('Magento version compatibility'));?></h3>
+                <ul>
+                    <li>
                     <span class="text">
                         <?php echo $block->escapeHtml(__('Supported Magento versions'));?>:
                     </span>
-                    <span class="version"><?php echo $block->escapeHtml($this->getSupportedMagentoVersions()); ?></span>
-                </li>
-                <li>
-                    <span class="text"><?php echo $block->escapeHtml(__('TinyCDN version'));?>:</span>
-                    <span class="version"><?php echo $block->escapeHtml($this->getVersionNumber()); ?></span>
-                </li>
-            </ul>
+                        <span class="version"><?php echo $block->escapeHtml($this->getSupportedMagentoVersions()); ?></span>
+                    </li>
+                    <li>
+                        <span class="text"><?php echo $block->escapeHtml(__('TinyCDN version'));?>:</span>
+                        <span class="version"><?php echo $block->escapeHtml($this->getVersionNumber()); ?></span>
+                    </li>
+                </ul>
+            </div>
         </div>
 
-        <div class="col-2 version-compatibility">
+        <div class="col-2 legend-version">
             <img class="panda-george" src="<?php echo $this->getViewFileUrl('TIG_TinyCDN::images/george-magento@2x_opt.png'); ?>" alt="George the TinyCDN panda" />
         </div>
 
