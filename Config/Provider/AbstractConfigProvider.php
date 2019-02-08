@@ -99,7 +99,7 @@ abstract class AbstractConfigProvider
     // @codingStandardsIgnoreLine
     protected function isModuleOutputEnabled()
     {
-        return $this->moduleManager->isOutputEnabled('TIG_Postcode');
+        return $this->moduleManager->isOutputEnabled('TIG_TinyCDN');
     }
     /**
      * @param $type

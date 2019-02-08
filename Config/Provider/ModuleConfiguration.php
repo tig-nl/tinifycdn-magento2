@@ -32,10 +32,10 @@
 namespace TIG\TinyCDN\Config\Provider;
 class ModuleConfiguration extends AbstractConfigProvider
 {
-    const XPATH_CONFIGURATION_MODE       = 'tig_postcode/configuration/mode';
-    const XPATH_CHECKOUT_COMPATIBILITY    = 'tig_postcode/configuration/checkout_compatible';
-    const XPATH_MODULE_STABILITY          = 'tig_postcode/stability';
-    const XPATH_SUPPORTED_MAGENTO_VERSION = 'tig_postcode/supported_magento_version';
+    const XPATH_CONFIGURATION_MODE       = 'tig_tinycdn/configuration/mode';
+    const XPATH_CHECKOUT_COMPATIBILITY    = 'tig_tinycdn/configuration/checkout_compatible';
+    const XPATH_MODULE_STABILITY          = 'tig_tinycdn/stability';
+    const XPATH_SUPPORTED_MAGENTO_VERSION = 'tig_tinycdn/supported_magento_version';
 
     /**
      * Should return on of these values
