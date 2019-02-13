@@ -32,6 +32,7 @@
 
 namespace TIG\TinyCDN\Block\Adminhtml\Config\Support;
 
+use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 use Magento\Framework\Data\Form\Element\AbstractElement;
@@ -45,49 +46,154 @@ class Tab extends Template implements RendererInterface
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_TinyCDN::config/support/tab.phtml';
 
+    /** @var array  */
+    protected $phpVersionSupport = ['2.0' => ['5.5' => ['22','+'],'5.6' => ['+'],'7.0' => ['2', '6', '+']],
+                                    '2.1' => ['5.6' => ['5', '+'],'7.0' => ['2', '5', '6', '+']],
+                                    '2.2' => ['7.0' => ['2', '5', '6', '+'],'7.1' => ['+']],
+                                    '2.3' => ['7.0' => ['2', '5', '6', '+'],'7.1' => ['+']]
+    ];
+
     /**
      * @var ModuleConfiguration
      */
-
     private $moduleConfiguration;
+
+    /**
+     * @var \Magento\Framework\App\ProductMetadataInterface
+     */
+    private $productMetadata;
+
     /**
      * Tab constructor.
      *
-     * @param Template\Context    $context
-     * @param ModuleConfiguration $moduleConfiguration
-     * @param array               $data
+     * @param Template\Context         $context
+     * @param ModuleConfiguration      $moduleConfiguration
+     * @param ProductMetadataInterface $productMetadata
+     * @param array                    $data
      */
+
     public function __construct(
         Template\Context $context,
         ModuleConfiguration $moduleConfiguration,
+        ProductMetadataInterface $productMetadata,
         array $data = []
     ) {
         parent::__construct($context, $data);
         $this->moduleConfiguration = $moduleConfiguration;
+        $this->productMetadata = $productMetadata;
     }
+
     /**
      * {@inheritdoc}
      */
+
     public function render(AbstractElement $element)
     {
         /** @noinspection PhpUndefinedMethodInspection */
         $this->setElement($element);
         return $this->toHtml();
     }
+
     /**
      * Retrieve the version number from the database.
      *
      * @return bool|false|string
      */
+
     public function getVersionNumber()
     {
         return static::EXTENTION_VERSION;
     }
+
     /**
      * @return string
      */
+
     public function getSupportedMagentoVersions()
     {
         return $this->moduleConfiguration->getSupportedMagentoVersions();
+    }
+
+    /**
+     * @return bool|int
+     */
+
+    public function phpVersionCheck()
+    {
+        $magentoVersion = $this->getMagentoVersionArray();
+        $phpVersion = $this->getPhpVersionArray();
+
+        if (!is_array($magentoVersion) || !is_array($phpVersion)) {
+            return -1;
+        }
+
+        $magentoMajorMinor = $magentoVersion[0] . '.' . $magentoVersion[1];
+        $phpMajorMinor = $phpVersion[0] . '.' . $phpVersion[1];
+        $phpPatch = (int) $phpVersion[2];
+
+        if (!isset($this->phpVersionSupport[$magentoMajorMinor]) ||
+            !isset($this->phpVersionSupport[$magentoMajorMinor][$phpMajorMinor])) {
+            return 0;
+        }
+
+        $currentVersion = $this->phpVersionSupport[$magentoMajorMinor][$phpMajorMinor];
+        if (isset($currentVersion)) {
+
+            if (in_array($phpPatch, $currentVersion)) {
+                return true;
+            }
+            elseif(in_array('+', $currentVersion) && $phpPatch >= max($currentVersion)){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        return -1;
+    }
+
+    public function getPhpVersionArray()
+    {
+        $version = false;
+        if (defined('PHP_VERSION')) {
+            $version = explode('.', PHP_VERSION);
+        }
+        elseif (function_exists('phpversion')){
+            $version = explode('.', phpversion());
+        }
+
+        return $version;
+    }
+
+    /**
+     * @return array|bool
+     */
+
+    public function getMagentoVersionArray()
+    {
+        $version = false;
+        $currentVersion = $this->productMetadata->getVersion();
+
+        if (isset($currentVersion)) {
+            $version = explode('.', $currentVersion);
+        }
+
+        return $version;
+    }
+
+    /**
+     * @return array|bool
+     */
+
+    public function getMagentoVersionTidyString()
+    {
+        $magentoVersion = $this->getMagentoVersionArray();
+
+        if (is_array($magentoVersion)) {
+            return $magentoVersion[0] . '.' . $magentoVersion[1];
+        }
+
+        return false;
     }
 }
