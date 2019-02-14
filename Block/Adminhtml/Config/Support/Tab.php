@@ -41,7 +41,7 @@ use TIG\TinyCDN\Config\Provider\ModuleConfiguration;
 class Tab extends Template implements RendererInterface
 {
     const MODULE_NAME = 'TIG_TinyCDN';
-    const EXTENTION_VERSION = '1.0.0';
+    const EXTENSION_VERSION = '1.0.0';
 
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_TinyCDN::config/support/tab.phtml';
@@ -59,7 +59,7 @@ class Tab extends Template implements RendererInterface
     private $moduleConfiguration;
 
     /**
-     * @var \Magento\Framework\App\ProductMetadataInterface
+     * @var ProductMetadataInterface
      */
     private $productMetadata;
 
@@ -71,7 +71,6 @@ class Tab extends Template implements RendererInterface
      * @param ProductMetadataInterface $productMetadata
      * @param array                    $data
      */
-
     public function __construct(
         Template\Context $context,
         ModuleConfiguration $moduleConfiguration,
@@ -86,7 +85,6 @@ class Tab extends Template implements RendererInterface
     /**
      * {@inheritdoc}
      */
-
     public function render(AbstractElement $element)
     {
         /** @noinspection PhpUndefinedMethodInspection */
@@ -99,55 +97,61 @@ class Tab extends Template implements RendererInterface
      *
      * @return bool|false|string
      */
-
     public function getVersionNumber()
     {
-        return static::EXTENTION_VERSION;
+        return static::EXTENSION_VERSION;
     }
 
     /**
      * @return string
      */
-
     public function getSupportedMagentoVersions()
     {
         return $this->moduleConfiguration->getSupportedMagentoVersions();
     }
 
     /**
+     * @return bool
+     */
+    public function getPhpVersion($phpPatch, $currentVersion)
+    {
+        $return = false;
+
+        if (in_array($phpPatch, $currentVersion)
+            || (in_array('+', $currentVersion)
+                && $phpPatch >= max(
+                    $currentVersion
+                ))) {
+            $return = true;
+        }
+
+        return $return;
+    }
+
+    /**
      * @return bool|int
      */
-
     public function phpVersionCheck()
     {
         $magentoVersion = $this->getMagentoVersionArray();
-        $phpVersion = $this->getPhpVersionArray();
+        $phpVersion     = $this->getPhpVersionArray();
 
         if (!is_array($magentoVersion) || !is_array($phpVersion)) {
             return -1;
         }
 
         $magentoMajorMinor = $magentoVersion[0] . '.' . $magentoVersion[1];
-        $phpMajorMinor = $phpVersion[0] . '.' . $phpVersion[1];
-        $phpPatch = (int) $phpVersion[2];
+        $phpMajorMinor     = $phpVersion[0] . '.' . $phpVersion[1];
+        $phpPatch          = (int)$phpVersion[2];
 
-        if (!isset($this->phpVersionSupport[$magentoMajorMinor]) ||
-            !isset($this->phpVersionSupport[$magentoMajorMinor][$phpMajorMinor])) {
+        if (!isset($this->phpVersionSupport[$magentoMajorMinor])
+            || !isset($this->phpVersionSupport[$magentoMajorMinor][$phpMajorMinor])) {
             return 0;
         }
 
         $currentVersion = $this->phpVersionSupport[$magentoMajorMinor][$phpMajorMinor];
         if (isset($currentVersion)) {
-
-            if (in_array($phpPatch, $currentVersion)) {
-                return true;
-            }
-            elseif(in_array('+', $currentVersion) && $phpPatch >= max($currentVersion)){
-                return true;
-            }
-            else {
-                return false;
-            }
+            return $this->getPhpVersion($phpPatch, $currentVersion);
         }
 
         return -1;
@@ -156,11 +160,13 @@ class Tab extends Template implements RendererInterface
     public function getPhpVersionArray()
     {
         $version = false;
+
+        if (function_exists('phpversion')){
+            $version = explode('.', phpversion());
+        }
+
         if (defined('PHP_VERSION')) {
             $version = explode('.', PHP_VERSION);
-        }
-        elseif (function_exists('phpversion')){
-            $version = explode('.', phpversion());
         }
 
         return $version;
@@ -169,7 +175,6 @@ class Tab extends Template implements RendererInterface
     /**
      * @return array|bool
      */
-
     public function getMagentoVersionArray()
     {
         $version = false;
@@ -185,7 +190,6 @@ class Tab extends Template implements RendererInterface
     /**
      * @return array|bool
      */
-
     public function getMagentoVersionTidyString()
     {
         $magentoVersion = $this->getMagentoVersionArray();
