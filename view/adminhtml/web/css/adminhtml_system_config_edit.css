@@ -155,6 +155,10 @@
     width: 100%;
 }
 
+#supporttab .legend-version .compatible-image {
+    vertical-align: text-bottom;
+}
+
 /* SupportTab - Legend ============================================================================================== */
 
 .legend h3 {
