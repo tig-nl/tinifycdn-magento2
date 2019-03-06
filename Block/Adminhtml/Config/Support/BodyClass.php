@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
- *
+<?php
+/**
  *
  *          ..::..
  *     ..::::::::::::..
@@ -28,16 +28,25 @@
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
- *
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
-    <default>
-        <tig_tinycdn>
-            <supported_magento_version>2.2.6 - 2.2.7, 2.3.0</supported_magento_version>
-            <stability/>
-            <configuration>
-                <mode>0</mode>
-            </configuration>
-        </tig_tinycdn>
-    </default>
-</config>
+ */
+
+namespace TIG\TinyCDN\Block\Adminhtml\Config\Support;
+
+use Magento\Backend\Block\Template;
+use Magento\Backend\Block\Template\Context;
+use Magento\Framework\View\Element\BlockInterface;
+
+class BodyClass extends Template implements BlockInterface
+{
+    /**
+     * @return $this
+     */
+    // @codingStandardsIgnoreLine
+    protected function _prepareLayout()
+    {
+        if ($this->_request->getParam('section') == 'tig_tinycdn') {
+            $this->pageConfig->addBodyClass('tinycdn-config-page');
+        }
+        return parent::_prepareLayout();
+    }
+}

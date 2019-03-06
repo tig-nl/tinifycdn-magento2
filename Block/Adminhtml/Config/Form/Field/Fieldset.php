@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
- *
+<?php
+/**
  *
  *          ..::..
  *     ..::::::::::::..
@@ -28,16 +28,30 @@
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
- *
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
-    <default>
-        <tig_tinycdn>
-            <supported_magento_version>2.2.6 - 2.2.7, 2.3.0</supported_magento_version>
-            <stability/>
-            <configuration>
-                <mode>0</mode>
-            </configuration>
-        </tig_tinycdn>
-    </default>
-</config>
+ */
+namespace TIG\TinyCDN\Block\Adminhtml\Config\Form\Field;
+
+use Magento\Config\Block\System\Config\Form\Fieldset as MagentoFieldset;
+use TIG\TinyCDN\Config\Provider\ModuleConfiguration;
+
+class Fieldset extends MagentoFieldset
+{
+    private $classNames = [
+        '1' => 'mode_live',
+        '2' => 'mode_test',
+        '0' => 'mode_off'
+    ];
+    /**
+     * {@inheritdoc}
+     */
+    // @codingStandardsIgnoreLine
+    protected function _getFrontendClass($element)
+    {
+        $mode = $this->_scopeConfig->getValue(ModuleConfiguration::XPATH_CONFIGURATION_MODE);
+        $class = 'mode_off';
+        if (array_key_exists($mode, $this->classNames)) {
+            $class = $this->classNames[$mode];
+        }
+        return parent::_getFrontendClass($element) . ' ' . $class;
+    }
+}
