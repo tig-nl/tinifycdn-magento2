@@ -50,6 +50,7 @@
             <resource>TIG_TinyCDN::configuration</resource>
             <include path="TIG_TinyCDN::system/support.xml" />
             <include path="TIG_TinyCDN::system/general.xml" />
+            <include path="TIG_TinyCDN::system/cdn.xml" />
         </section>
     </system>
 </config>

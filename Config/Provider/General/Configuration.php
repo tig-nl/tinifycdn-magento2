@@ -30,40 +30,13 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Config\Provider;
+namespace TIG\TinyCDN\Config\Provider\General;
 
-class ModuleConfiguration extends AbstractConfigProvider
+use TIG\TinyCDN\Config\Provider\AbstractConfigProvider;
+
+class Configuration extends AbstractConfigProvider
 {
     const XPATH_CONFIGURATION_MODE        = 'tig_tinycdn/general/mode';
-    
-    const XPATH_SUPPORTED_MAGENTO_VERSION = 'tig_tinycdn/supported_magento_version';
-    
-    /**
-     * Should return one of these values
-     *  '1' => live ||
-     *  '2' => test ||
-     *  '0' => off
-     *
-     * @param null|int $store
-     *
-     * @return mixed
-     */
-    public function getMode($store = null)
-    {
-        if (!$this->isModuleOutputEnabled()) {
-            return '0';
-        }
-        
-        return $this->getConfigFromXpath(static::XPATH_CONFIGURATION_MODE, $store);
-    }
-    
-    /**
-     * @return bool
-     */
-    private function isModuleOutputEnabled()
-    {
-        return $this->getModuleManager()->isOutputEnabled('TIG_TinyCDN');
-    }
     
     /**
      * Checks if the extension is on status live
@@ -114,12 +87,29 @@ class ModuleConfiguration extends AbstractConfigProvider
     }
     
     /**
-     * @param null $store
+     * Should return one of these values
+     *  '1' => live ||
+     *  '2' => test ||
+     *  '0' => off
      *
-     * @return string
+     * @param null|int $store
+     *
+     * @return mixed
      */
-    public function getSupportedMagentoVersions($store = null)
+    public function getMode($store = null)
     {
-        return $this->getConfigFromXpath(static::XPATH_SUPPORTED_MAGENTO_VERSION, $store);
+        if (!$this->isModuleOutputEnabled()) {
+            return '0';
+        }
+        
+        return $this->getConfigFromXpath(static::XPATH_CONFIGURATION_MODE, $store);
+    }
+    
+    /**
+     * @return bool
+     */
+    private function isModuleOutputEnabled()
+    {
+        return $this->getModuleManager()->isOutputEnabled('TIG_TinyCDN');
     }
 }

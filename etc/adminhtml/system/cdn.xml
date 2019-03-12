@@ -32,21 +32,13 @@
  */
 -->
 <include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
-    <!-- General Configuration -->
-    <group id="general" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-        <label>General Configuration</label>
-        <field id="mode" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Mode</label>
-            <source_model>TIG\TinyCDN\Config\Source\General\Mode</source_model>
-            <config_path>tig_tinycdn/general/mode</config_path>
-        </field>
-        <field id="api_key" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>API-key</label>
-            <comment><![CDATA[Display text here to explain to client <a href="#">where</a> to obtain their API-key.]]></comment>
-            <config_path>tig_tinycdn/general/api_key</config_path>
-            <depends>
-                <field id="mode">1</field>
-            </depends>
+    <!-- CDN Configuration -->
+    <group id="cdn" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>CDN Configuration</label>
+        <field id="endpoint" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>TinyCDN Endpoint</label>
+            <comment><![CDATA[Display text here to explain to client <a href="#">where</a> to obtain the endpoint.]]></comment>
+            <config_path>tig_tinycdn/cdn/endpoint</config_path>
         </field>
     </group>
 </include>

@@ -35,8 +35,8 @@
  * @copyright Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license   http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-/*browser:true*/
-/*global define*/
-define(['jquery', 'collapsible'], function ($) {
-    $(".collapse-title").collapsible({ active: false });
-});
+/* browser: true */
+/* global define */
+define(['jquery', 'collapsible'], function($) {
+    $('.collapse-title').collapsible({active: false})
+})

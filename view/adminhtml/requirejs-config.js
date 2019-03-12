@@ -9,4 +9,4 @@ var config = {
             tinyConfig: 'TIG_TinyCDN/js/support'
         }
     }
-};
+}

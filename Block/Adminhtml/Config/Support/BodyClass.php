@@ -39,7 +39,7 @@ use Magento\Framework\View\Element\BlockInterface;
 class BodyClass extends Template implements BlockInterface
 {
     /**
-     * @return $this
+     * @return \Magento\Backend\Block\Template
      */
     // @codingStandardsIgnoreLine
     protected function _prepareLayout()
