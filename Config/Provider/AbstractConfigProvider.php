@@ -29,36 +29,22 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 namespace TIG\TinyCDN\Config\Provider;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Encryption\Encryptor;
 use Magento\Framework\Module\Manager;
 use Magento\Store\Model\StoreManagerInterface;
-use Magento\Framework\UrlInterface;
 
 abstract class AbstractConfigProvider
 {
-    /**
-     * @var ScopeConfigInterface
-     */
-    // @codingStandardsIgnoreLine
-    protected $scopeConfig;
-    /**
-     * @var Manager $moduleManager
-     */
-    // @codingStandardsIgnoreLine
-    protected $moduleManager;
-    /**
-     * @var Encryptor
-     */
-    // @codingStandardsIgnoreLine
-    protected $crypt;
-    /**
-     * @var StoreManagerInterface
-     */
-    // @codingStandardsIgnoreLine
-    protected $storeManager;
+    /** @var \Magento\Framework\App\Config\ScopeConfigInterface */
+    private $scopeConfig;
+    
+    /** @var \Magento\Framework\Module\Manager */
+    private $moduleManager;
+    
     /**
      * @param ScopeConfigInterface  $scopeConfig
      * @param Manager               $moduleManager
@@ -67,15 +53,12 @@ abstract class AbstractConfigProvider
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        Manager $moduleManager,
-        Encryptor $crypt,
-        StoreManagerInterface $storeManager
+        Manager $moduleManager
     ) {
-        $this->scopeConfig = $scopeConfig;
+        $this->scopeConfig   = $scopeConfig;
         $this->moduleManager = $moduleManager;
-        $this->crypt = $crypt;
-        $this->storeManager = $storeManager;
     }
+    
     /**
      * Get Config value with xpath
      *
@@ -84,8 +67,7 @@ abstract class AbstractConfigProvider
      *
      * @return mixed
      */
-    // @codingStandardsIgnoreLine
-    protected function getConfigFromXpath($xpath, $store = null)
+    public function getConfigFromXpath($xpath, $store = null)
     {
         return $this->scopeConfig->getValue(
             $xpath,
@@ -93,24 +75,12 @@ abstract class AbstractConfigProvider
             $store
         );
     }
+    
     /**
-     * @return bool
+     * @return \Magento\Framework\Module\Manager
      */
-    // @codingStandardsIgnoreLine
-    protected function isModuleOutputEnabled()
+    public function getModuleManager()
     {
-        return $this->moduleManager->isOutputEnabled('TIG_TinyCDN');
-    }
-    /**
-     * @param $type
-     *
-     * @return mixed
-     */
-    // @codingStandardsIgnoreLine
-    protected function getBaseUrl($type = UrlInterface::URL_TYPE_WEB)
-    {
-        /** @var \Magento\Store\Model\Store $store */
-        $store = $this->storeManager->getStore();
-        return $store->getBaseUrl($type);
+        return $this->moduleManager;
     }
 }

@@ -29,21 +29,23 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 namespace TIG\TinyCDN\Config\Provider;
+
 class ModuleConfiguration extends AbstractConfigProvider
 {
-    const XPATH_CONFIGURATION_MODE       = 'tig_tinycdn/configuration/mode';
-    const XPATH_CHECKOUT_COMPATIBILITY    = 'tig_tinycdn/configuration/checkout_compatible';
-    const XPATH_MODULE_STABILITY          = 'tig_tinycdn/stability';
+    const XPATH_CONFIGURATION_MODE        = 'tig_tinycdn/general/mode';
+    
     const XPATH_SUPPORTED_MAGENTO_VERSION = 'tig_tinycdn/supported_magento_version';
-
+    
     /**
-     * Should return on of these values
+     * Should return one of these values
      *  '1' => live ||
      *  '2' => test ||
      *  '0' => off
      *
      * @param null|int $store
+     *
      * @return mixed
      */
     public function getMode($store = null)
@@ -51,11 +53,23 @@ class ModuleConfiguration extends AbstractConfigProvider
         if (!$this->isModuleOutputEnabled()) {
             return '0';
         }
+        
         return $this->getConfigFromXpath(static::XPATH_CONFIGURATION_MODE, $store);
     }
+    
+    /**
+     * @return bool
+     */
+    private function isModuleOutputEnabled()
+    {
+        return $this->getModuleManager()->isOutputEnabled('TIG_TinyCDN');
+    }
+    
     /**
      * Checks if the extension is on status live
+     *
      * @param null|int $store
+     *
      * @return bool
      */
     public function isModeLive($store = null)
@@ -63,11 +77,15 @@ class ModuleConfiguration extends AbstractConfigProvider
         if ($this->getMode($store) == '1') {
             return true;
         }
+        
         return false;
     }
+    
     /**
      * Checks if the extension is on status test
+     *
      * @param null|int $store
+     *
      * @return bool
      */
     public function isModeTest($store = null)
@@ -75,11 +93,15 @@ class ModuleConfiguration extends AbstractConfigProvider
         if ($this->getMode($store) == '2') {
             return true;
         }
+        
         return false;
     }
+    
     /**
      * Checks if the extension is on status off.
+     *
      * @param null|int $store
+     *
      * @return bool
      */
     public function isModeOff($store = null)
@@ -87,17 +109,10 @@ class ModuleConfiguration extends AbstractConfigProvider
         if ($this->getMode($store) == '0' || false == $this->getMode()) {
             return true;
         }
+        
         return false;
     }
-    /**
-     * @param null $store
-     *
-     * @return string
-     */
-    public function getStability($store = null)
-    {
-        return $this->getConfigFromXpath(static::XPATH_MODULE_STABILITY, $store);
-    }
+    
     /**
      * @param null $store
      *

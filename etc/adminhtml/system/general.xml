@@ -40,5 +40,21 @@
             <source_model>TIG\TinyCDN\Config\Source\General\Mode</source_model>
             <config_path>tig_tinycdn/general/mode</config_path>
         </field>
+        <field id="api_key" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>API-key</label>
+            <comment><![CDATA[Display text here to explain to client <a href="#">where</a> to obtain their API-key.]]></comment>
+            <config_path>tig_tinycdn/general/api_key</config_path>
+            <depends>
+                <field id="mode">1</field>
+            </depends>
+        </field>
+    </group>
+    <group id="cdn" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>CDN Configuration</label>
+        <field id="endpoint" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>TinyCDN Endpoint</label>
+            <comment><![CDATA[Display text here to explain to client <a href="#">where</a> to obtain the endpoint.]]></comment>
+            <config_path>tig_tinycdn/cdn/endpoint</config_path>
+        </field>
     </group>
 </include>
