@@ -34,7 +34,7 @@ namespace TIG\TinyCDN\Config\Provider;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Encryption\Encryptor;
-use Magento\Framework\Module\Manager;
+use Magento\Framework\Module\Manager as ModuleManager;
 use Magento\Store\Model\StoreManagerInterface;
 
 abstract class AbstractConfigProvider
@@ -47,13 +47,13 @@ abstract class AbstractConfigProvider
     
     /**
      * @param ScopeConfigInterface  $scopeConfig
-     * @param Manager               $moduleManager
+     * @param ModuleManager         $moduleManager
      * @param Encryptor             $crypt
      * @param StoreManagerInterface $storeManager
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        Manager $moduleManager
+        ModuleManager $moduleManager
     ) {
         $this->scopeConfig   = $scopeConfig;
         $this->moduleManager = $moduleManager;
