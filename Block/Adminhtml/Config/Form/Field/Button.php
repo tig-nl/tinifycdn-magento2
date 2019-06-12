@@ -40,7 +40,7 @@ class Button extends Field
 {
     const BUTTON_ID = 'tig_tinycdn_connect';
     
-    /** @var string $_template */
+    // @codingStandardsIgnoreLine
     protected $_template = 'TIG_TinyCDN::config/button/button.phtml';
     
     /**
@@ -49,6 +49,7 @@ class Button extends Field
      * @param Context $context
      * @param array   $data
      */
+    // @codingStandardsIgnoreLine
     public function __construct(
         Context $context,
         array $data = []
@@ -75,6 +76,7 @@ class Button extends Field
      *
      * @return string
      */
+    // @codingStandardsIgnoreLine
     public function _getElementHtml(AbstractElement $element)
     {
         return $this->_toHtml();
