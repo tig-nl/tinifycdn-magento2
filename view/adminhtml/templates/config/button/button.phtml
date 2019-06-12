@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
+<?php
 /**
  *
  *          ..::..
@@ -28,17 +27,41 @@
  * needs please contact servicedesk@tig.nl for more information.
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
- * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ * @license       http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
--->
-<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
-    <!-- CDN Configuration -->
-    <group id="cdn" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-        <label>CDN Configuration</label>
-        <field id="connect" translate="label comment" type="button" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>TinyCDN account</label>
-            <comment><![CDATA[Connect your Tinify account to your Magento 2 store.]]></comment>
-            <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button</frontend_model>
-        </field>
-    </group>
-</include>
+
+/** @var $block TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button */
+?>
+
+<?php echo $block->getButtonHtml(); ?>
+
+<script>
+    require(
+        [
+            'jquery',
+            'prototype'
+        ], function(jQuery)
+        {
+            function tinifyConnect()
+            {
+                params = {};
+                
+                new Ajax.Request('<?php echo $block->getConnectUrl(); ?>',
+                    {
+                        loaderArea:   false,
+                        asynchronous: true,
+                        parameters:   params,
+                        onSuccess:    function (response) {
+                            // Do something.
+                        }
+                    }
+                );
+            }
+            
+            jQuery('#<?php echo $block->getButtonId(); ?>').click(function ()
+            {
+                tinifyConnect();
+            });
+        }
+    )
+</script>
