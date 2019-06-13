@@ -29,36 +29,29 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+ 
+namespace TIG\TinyCDN\Model;
 
-namespace TIG\TinyCDN\Controller\Adminhtml\Cdn;
+use Magento\Framework\Model\AbstractModel as CoreAbstractModel;
 
-use Magento\Backend\App\Action;
-use Magento\Framework\Controller\ResultFactory;
-use TIG\TinyCDN\Model\Config;
-
-class Connect extends Action
+class AbstractModel extends CoreAbstractModel
 {
-    private $config;
-    
     /**
-     * Connect constructor.
+     * AbstractModel constructor.
      *
-     * @param Config         $config
-     * @param Action\Context $context
+     * @param \Magento\Framework\Model\Context                             $context
+     * @param \Magento\Framework\Registry                                  $registry
+     * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
+     * @param \Magento\Framework\Data\Collection\AbstractDb|null           $resourceCollection
+     * @param array                                                        $data
      */
-    // @codingStandardsIgnoreLine
     public function __construct(
-        Config $config,
-        Action\Context $context
+        \Magento\Framework\Model\Context $context,
+        \Magento\Framework\Registry $registry,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
+        array $data = []
     ) {
-        $this->config = $config;
-        parent::__construct(
-            $context
-        );
-    }
-    
-    public function execute()
-    {
-        // Do something.
+        parent::__construct($context, $registry, $resource, $resourceCollection);
     }
 }

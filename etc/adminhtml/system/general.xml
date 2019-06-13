@@ -40,13 +40,5 @@
             <source_model>TIG\TinyCDN\Config\Source\General\Mode</source_model>
             <config_path>tig_tinycdn/general/mode</config_path>
         </field>
-        <field id="api_key" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>API-key</label>
-            <comment><![CDATA[Display text here to explain to client <a href="#">where</a> to obtain their API-key.]]></comment>
-            <config_path>tig_tinycdn/general/api_key</config_path>
-            <depends>
-                <field id="mode">1</field>
-            </depends>
-        </field>
     </group>
 </include>
