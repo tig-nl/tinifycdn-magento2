@@ -38,7 +38,9 @@ use \Magento\Framework\Data\Form\Element\AbstractElement;
 
 class Button extends Field
 {
-    const BUTTON_ID = 'tig_tinycdn_connect';
+    const BUTTON_ID  = 'tinify_cdn_connect';
+    
+    const BUTTON_URL = 'tinify/cdn/connect';
     
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_TinyCDN::config/button/button.phtml';
@@ -67,7 +69,7 @@ class Button extends Field
         $element->unsScope();
         $element->unsCanUseWebsiteValue();
         $element->unsCanUseDefaultValue();
-        
+    
         return parent::render($element);
     }
     
@@ -89,18 +91,18 @@ class Button extends Field
     public function getButtonHtml()
     {
         $layout = $this->getLayout();
-        
+    
         $button = $layout->createBlock(
             'Magento\Backend\Block\Widget\Button'
         );
-        
+    
         $button->setData(
             [
-                'id'    => static::BUTTON_ID,
-                'label' => __('Connect to your Tinify account')
+                'id'      => static::BUTTON_ID,
+                'label'   => __('Connect to your Tinify account')
             ]
         );
-        
+    
         return $button->toHtml();
     }
     
@@ -109,7 +111,7 @@ class Button extends Field
      */
     public function getConnectUrl()
     {
-        return $this->getUrl('*/tinycdn/connect');
+        return $this->getUrl(static::BUTTON_URL);
     }
     
     /**

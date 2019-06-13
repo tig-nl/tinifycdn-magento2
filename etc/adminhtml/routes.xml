@@ -1,4 +1,5 @@
-<?php
+<?xml version="1.0"?>
+<!--
 /**
  *
  *          ..::..
@@ -27,40 +28,13 @@
  * needs please contact servicedesk@tig.nl for more information.
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
- * @license       http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-
-/** @var $block TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button */
-?>
-
-<?php echo $block->getButtonHtml(); ?>
-
-<script>
-    require(
-        [
-            'jquery',
-            'prototype'
-        ], function(jQuery)
-        {
-            function tinifyConnect()
-            {
-                params = {};
-                
-                new Ajax.Request('<?php echo $block->getConnectUrl(); ?>',
-                    {
-                        loaderArea:   false,
-                        asynchronous: true,
-                        parameters:   params,
-                        onSuccess:    function (response) {
-                            console.log(response);
-                        }
-                    }
-                );
-            }
-            
-            jQuery('#<?php echo $block->getButtonId(); ?>').on('click', function() {
-                tinifyConnect();
-            })
-        }
-    )
-</script>
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="tinify" frontName="tinify">
+            <module before="Magento_Backend" name="TIG_TinyCDN" />
+        </route>
+    </router>
+</config>
