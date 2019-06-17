@@ -92,16 +92,15 @@ class Button extends Field
     {
         $layout = $this->getLayout();
         
-        $button = $layout->createBlock(
+        $button     = $layout->createBlock(
             'Magento\Backend\Block\Widget\Button'
         );
         $connectUrl = $this->getConnectUrl();
         
         $button->setData(
             [
-                'id'    => static::BUTTON_ID,
-                'label' => __('Connect to your Tinify account'),
-                'onclick' => "javascript: window.location.href = '$connectUrl'; return false;"
+                'id'      => static::BUTTON_ID,
+                'label'   => __('Connect to your Tinify account')
             ]
         );
         

@@ -34,12 +34,16 @@ namespace TIG\TinyCDN\Controller\Adminhtml\Cdn;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Session\SessionManagerInterface as SessionManager;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
 use Tinify\OAuth2\Client\Provider\TinifyProvider;
 use Tinify\OAuth2\Client\Provider\TinifyProviderFactory;
 
 class Connect extends Action
 {
+    /** @var SessionManager $session */
+    private $session;
+    
     /** @var Configuration */
     private $config;
     
@@ -54,10 +58,12 @@ class Connect extends Action
      */
     // @codingStandardsIgnoreLine
     public function __construct(
+        SessionManager $sessionManager,
         Configuration $config,
         TinifyProviderFactory $tinifyFactory,
         Action\Context $context
     ) {
+        $this->session       = $sessionManager;
         $this->config        = $config;
         $this->tinifyFactory = $tinifyFactory;
         parent::__construct(
@@ -69,8 +75,15 @@ class Connect extends Action
     {
         $credentials = $this->config->formatCredentials();
         $provider    = $this->tinifyFactory->create(['options' => $credentials]);
+        
+        // Fetch the authorization URL from the provider; this returns the
+        // urlAuthorize option and generates and applies any necessary parameters
+        // (e.g. state).
         $authUrl     = $provider->getAuthorizationUrl();
         $redirect    = $this->resultRedirectFactory->create();
+        
+        // Get the state generated for you and store it to the session.
+        $this->session->setData('oauth2state', $provider->getState());
         $redirect->setPath($authUrl);
         
         return $redirect;

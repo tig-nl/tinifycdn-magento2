@@ -33,4 +33,6 @@
 /** @var $block TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button */
 ?>
 
-<?php echo $block->getButtonHtml(); ?>
+<a href="<?php echo $block->getConnectUrl(); ?>">
+    <?php echo $block->getButtonHtml(); ?>
+</a>
