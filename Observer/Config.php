@@ -38,6 +38,9 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use TIG\TinyCDN\Config\Provider\General\Configuration as GeneralConfiguration;
 
+/**
+ * TODO: Replace this class with Plugins as mentioned in the Functional Design.
+ */
 class Config implements ObserverInterface
 {
     /** @var string */
@@ -46,9 +49,7 @@ class Config implements ObserverInterface
     /** @var array */
     private $baseUrlConfigPaths = [
         "web/unsecure/base_static_url",
-        "web/unsecure/base_media_url",
-//        "web/secure/base_static_url",
-//        "web/secure/base_media_url"
+        "web/unsecure/base_media_url"
     ];
     
     /**

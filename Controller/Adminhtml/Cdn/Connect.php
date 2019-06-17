@@ -71,6 +71,12 @@ class Connect extends Action
         );
     }
     
+    /**
+     * TODO: Check given state against previously stored one to mitigate CSRF attack.
+     *       Try to get an access token using the authorization code grant.
+     *
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
         $credentials = $this->config->formatCredentials();
@@ -79,8 +85,8 @@ class Connect extends Action
         // Fetch the authorization URL from the provider; this returns the
         // urlAuthorize option and generates and applies any necessary parameters
         // (e.g. state).
-        $authUrl     = $provider->getAuthorizationUrl();
-        $redirect    = $this->resultRedirectFactory->create();
+        $authUrl  = $provider->getAuthorizationUrl();
+        $redirect = $this->resultRedirectFactory->create();
         
         // Get the state generated for you and store it to the session.
         $this->session->setData('oauth2state', $provider->getState());

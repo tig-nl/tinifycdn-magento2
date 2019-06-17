@@ -36,7 +36,7 @@ use TIG\TinyCDN\Model\AbstractConfigProvider;
 
 class Configuration extends AbstractConfigProvider
 {
-    const TINYCDN_GENERAL_MODE        = 'tig_tinycdn/general/mode';
+    const TINYCDN_GENERAL_MODE = 'tig_tinycdn/general/mode';
     
     /**
      * @return mixed
