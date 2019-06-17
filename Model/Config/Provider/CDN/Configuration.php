@@ -43,7 +43,7 @@ class Configuration extends AbstractConfigProvider
     
     const TINYCDN_CDN_LIVE         = 'tig_tinycdn/cdn/live';
     
-    const TINYCDN_CDN_REDIRECT_URI = 'admin/tinify/cdn/authorize';
+    const TINYCDN_CDN_REDIRECT_URI = 'tinify/cdn/authorize';
     
     /** @var UrlInterface $urlBuilder */
     private $urlBuilder;
