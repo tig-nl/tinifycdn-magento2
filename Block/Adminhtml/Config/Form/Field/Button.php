@@ -32,15 +32,14 @@
 
 namespace TIG\TinyCDN\Block\Adminhtml\Config\Form\Field;
 
-use \Magento\Backend\Block\Template\Context;
-use \Magento\Config\Block\System\Config\Form\Field;
-use \Magento\Framework\Data\Form\Element\AbstractElement;
+use Magento\Backend\Block\Template\Context;
+use Magento\Config\Block\System\Config\Form\Field;
+use Magento\Framework\Data\Form\Element\AbstractElement;
+use TIG\TinyCDN\Model\Config\Source\Url;
 
 class Button extends Field
 {
     const BUTTON_ID  = 'tinify_cdn_connect';
-    
-    const BUTTON_URL = 'tinify/cdn/connect';
     
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_TinyCDN::config/button/button.phtml';
@@ -95,7 +94,6 @@ class Button extends Field
         $button     = $layout->createBlock(
             'Magento\Backend\Block\Widget\Button'
         );
-        $connectUrl = $this->getConnectUrl();
         
         $button->setData(
             [
@@ -112,14 +110,6 @@ class Button extends Field
      */
     public function getConnectUrl()
     {
-        return $this->getUrl(static::BUTTON_URL);
-    }
-    
-    /**
-     * @return string
-     */
-    public function getButtonId()
-    {
-        return static::BUTTON_ID;
+        return $this->getUrl(Url::TINYCDN_CDN_CONNECT_URL);
     }
 }

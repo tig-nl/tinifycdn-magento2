@@ -32,10 +32,10 @@
 
 namespace TIG\TinyCDN\Model\Config\Provider\CDN;
 
-use Magento\Framework\UrlInterface;
 use TIG\TinyCDN\Model\AbstractConfigProvider;
 use TIG\TinyCDN\Model\Challenge;
 use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
+use TIG\TinyCDN\Model\Config\Source\Url;
 
 class Configuration extends AbstractConfigProvider
 {
@@ -43,16 +43,14 @@ class Configuration extends AbstractConfigProvider
     
     const TINYCDN_CDN_LIVE         = 'tig_tinycdn/cdn/live';
     
-    const TINYCDN_CDN_REDIRECT_URI = 'tinify/cdn/authorize';
-    
-    /** @var UrlInterface $urlBuilder */
-    private $urlBuilder;
-    
     /** @var Challenge $generate */
     private $challenge;
     
     /** @var GeneralConfiguration $generalConfig */
     private $generalConfig;
+    
+    /** @var Url $urlBuilder */
+    private $urlBuilder;
     
     /**
      * Configuration constructor.
@@ -60,7 +58,6 @@ class Configuration extends AbstractConfigProvider
      * @param \Magento\Framework\Model\Context                             $context
      * @param \Magento\Framework\Registry                                  $registry
      * @param \Magento\Framework\App\Config\ScopeConfigInterface           $scopeConfig
-     * @param UrlInterface                                                 $urlBuilder
      * @param Challenge                                                    $challenge
      * @param GeneralConfiguration                                         $generalConfig
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
@@ -70,9 +67,9 @@ class Configuration extends AbstractConfigProvider
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        UrlInterface $urlBuilder,
         Challenge $challenge,
         GeneralConfiguration $generalConfig,
+        Url $urlBuilder,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null
     ) {
@@ -96,7 +93,7 @@ class Configuration extends AbstractConfigProvider
             'codeChallenge'  => $this->challenge->generateChallenge($verifier),
             'codeVerifier'   => $verifier,
             'scopes'         => $credentials['scopes'],
-            'redirectUri'    => $this->createRedirectUrl(),
+            'redirectUri'    => $this->urlBuilder->createRedirectUrl(),
             'urlAuthorize'   => $credentials['url_authorize'],
             'urlAccessToken' => $credentials['url_access_token']
         ];
@@ -131,13 +128,5 @@ class Configuration extends AbstractConfigProvider
     public function getLiveCredentials()
     {
         return $this->getConfigValue(static::TINYCDN_CDN_LIVE);
-    }
-    
-    /**
-     * @return string
-     */
-    private function createRedirectUrl()
-    {
-        return $this->urlBuilder->getUrl(static::TINYCDN_CDN_REDIRECT_URI);
     }
 }
