@@ -34,33 +34,3 @@
 ?>
 
 <?php echo $block->getButtonHtml(); ?>
-
-<script>
-    require(
-        [
-            'jquery',
-            'prototype'
-        ], function(jQuery)
-        {
-            function tinifyConnect()
-            {
-                params = {};
-                
-                new Ajax.Request('<?php echo $block->getConnectUrl(); ?>',
-                    {
-                        loaderArea:   false,
-                        asynchronous: true,
-                        parameters:   params,
-                        onSuccess:    function (response) {
-                            console.log(response);
-                        }
-                    }
-                );
-            }
-            
-            jQuery('#<?php echo $block->getButtonId(); ?>').on('click', function() {
-                tinifyConnect();
-            })
-        }
-    )
-</script>

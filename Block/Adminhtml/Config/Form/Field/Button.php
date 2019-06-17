@@ -69,7 +69,7 @@ class Button extends Field
         $element->unsScope();
         $element->unsCanUseWebsiteValue();
         $element->unsCanUseDefaultValue();
-    
+        
         return parent::render($element);
     }
     
@@ -91,18 +91,20 @@ class Button extends Field
     public function getButtonHtml()
     {
         $layout = $this->getLayout();
-    
+        
         $button = $layout->createBlock(
             'Magento\Backend\Block\Widget\Button'
         );
-    
+        $connectUrl = $this->getConnectUrl();
+        
         $button->setData(
             [
-                'id'      => static::BUTTON_ID,
-                'label'   => __('Connect to your Tinify account')
+                'id'    => static::BUTTON_ID,
+                'label' => __('Connect to your Tinify account'),
+                'onclick' => "javascript: window.location.href = '$connectUrl'; return false;"
             ]
         );
-    
+        
         return $button->toHtml();
     }
     

@@ -35,11 +35,16 @@ namespace TIG\TinyCDN\Controller\Adminhtml\Cdn;
 use Magento\Backend\App\Action;
 use Magento\Framework\Controller\ResultFactory;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
+use Tinify\OAuth2\Client\Provider\TinifyProvider;
+use Tinify\OAuth2\Client\Provider\TinifyProviderFactory;
 
 class Connect extends Action
 {
     /** @var Configuration */
     private $config;
+    
+    /** @var TinifyProviderFactory */
+    private $tinifyFactory;
     
     /**
      * Connect constructor.
@@ -50,9 +55,11 @@ class Connect extends Action
     // @codingStandardsIgnoreLine
     public function __construct(
         Configuration $config,
+        TinifyProviderFactory $tinifyFactory,
         Action\Context $context
     ) {
-        $this->config = $config;
+        $this->config        = $config;
+        $this->tinifyFactory = $tinifyFactory;
         parent::__construct(
             $context
         );
@@ -61,7 +68,11 @@ class Connect extends Action
     public function execute()
     {
         $credentials = $this->config->formatCredentials();
+        $provider    = $this->tinifyFactory->create(['options' => $credentials]);
+        $authUrl     = $provider->getAuthorizationUrl();
+        $redirect    = $this->resultRedirectFactory->create();
+        $redirect->setPath($authUrl);
         
-        // Establish authorization using credentials.
+        return $redirect;
     }
 }
