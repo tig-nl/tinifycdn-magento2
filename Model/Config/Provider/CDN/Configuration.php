@@ -32,6 +32,7 @@
 
 namespace TIG\TinyCDN\Model\Config\Provider\CDN;
 
+use Magento\Framework\UrlInterface;
 use TIG\TinyCDN\Model\AbstractConfigProvider;
 use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
 
@@ -40,6 +41,11 @@ class Configuration extends AbstractConfigProvider
     const TINYCDN_CDN_TEST     = 'tig_tinycdn/cdn/test';
     
     const TINYCDN_CDN_LIVE     = 'tig_tinycdn/cdn/live';
+    
+    const TINYCDN_CDN_REDIRECT_URI = 'admin/tinify/cdn/authorize';
+    
+    /** @var UrlInterface $urlBuilder */
+    private $urlBuilder;
     
     /** @var GeneralConfiguration $generalConfig */
     private $generalConfig;
@@ -50,6 +56,7 @@ class Configuration extends AbstractConfigProvider
      * @param \Magento\Framework\Model\Context                             $context
      * @param \Magento\Framework\Registry                                  $registry
      * @param \Magento\Framework\App\Config\ScopeConfigInterface           $scopeConfig
+     * @param UrlInterface                                                 $urlBuilder
      * @param GeneralConfiguration                                         $generalConfig
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb|null           $resourceCollection
@@ -58,10 +65,12 @@ class Configuration extends AbstractConfigProvider
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        UrlInterface $urlBuilder,
         GeneralConfiguration $generalConfig,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null
     ) {
+        $this->urlBuilder    = $urlBuilder;
         $this->generalConfig = $generalConfig;
         parent::__construct($context, $registry, $scopeConfig, $resource, $resourceCollection);
     }
@@ -75,7 +84,7 @@ class Configuration extends AbstractConfigProvider
             'codeChallenge'           => '',
             'codeVerifier'            => '',
             'scopes'                  => $credentials['scopes'],
-            'redirectUri'             => $this->createRedirectUri(),
+            'redirectUri'             => $this->createRedirectUrl(),
             'urlAuthorize'            => $credentials['url_authorize'],
             'urlAccessToken'          => $credentials['url_access_token']
         ];
@@ -112,9 +121,11 @@ class Configuration extends AbstractConfigProvider
         return $this->getConfigValue(static::TINYCDN_CDN_LIVE);
     }
     
-    // todo: create function.
+    /**
+     * @return string
+     */
     private function createRedirectUrl()
     {
-        return '';
+        return $this->urlBuilder->getUrl(static::TINYCDN_CDN_REDIRECT_URI);
     }
 }
