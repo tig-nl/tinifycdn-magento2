@@ -29,28 +29,44 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
- 
+
 namespace TIG\TinyCDN\Model;
 
-use Magento\Framework\Model\AbstractModel as CoreAbstractModel;
+use Magento\Framework\App\Config\ScopeConfigInterface as ScopeConfig;
+use Magento\Store\Model\ScopeInterface;
 
-abstract class AbstractModel extends CoreAbstractModel
+abstract class AbstractConfigProvider extends AbstractModel
 {
+    /** @var ScopeConfig ScopeConfig */
+    private $scopeConfig;
+    
     /**
-     * AbstractModel constructor.
+     * Config constructor.
      *
      * @param \Magento\Framework\Model\Context                             $context
      * @param \Magento\Framework\Registry                                  $registry
+     * @param ScopeConfig                                                  $scopeConfig
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb|null           $resourceCollection
-     * @param array                                                        $data
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
+        ScopeConfig $scopeConfig,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null
     ) {
+        $this->scopeConfig = $scopeConfig;
         parent::__construct($context, $registry, $resource, $resourceCollection);
+    }
+    
+    /**
+     * @param $path
+     *
+     * @return mixed
+     */
+    public function getConfigValue($path)
+    {
+        return $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE);
     }
 }

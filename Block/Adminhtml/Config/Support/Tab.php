@@ -36,8 +36,8 @@ use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use TIG\TinyCDN\Config\Provider\General\Configuration as GeneralConfiguration;
-use TIG\TinyCDN\Config\Provider\Support\Tab as SupportTab;
+use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
+use TIG\TinyCDN\Model\Config\Provider\Support\Tab as SupportTab;
 
 class Tab extends Template implements RendererInterface
 {
@@ -49,21 +49,17 @@ class Tab extends Template implements RendererInterface
     protected $_template = 'TIG_TinyCDN::config/support/tab.phtml';
     
     /** @var array */
-    protected $phpVersionSupport = [
+    private $phpVersionSupport = [
         '2.0' => ['5.5' => ['22', '+'], '5.6' => ['+'], '7.0' => ['2', '6', '+']],
         '2.1' => ['5.6' => ['5', '+'], '7.0' => ['2', '5', '6', '+']],
         '2.2' => ['7.0' => ['2', '5', '6', '+'], '7.1' => ['+']],
         '2.3' => ['7.0' => ['2', '5', '6', '+'], '7.1' => ['+']]
     ];
     
-    /**
-     * @var \TIG\TinyCDN\Config\Provider\General\Configuration
-     */
+    /** @var GeneralConfiguration */
     private $generalConfiguration;
     
-    /**
-     * @var \TIG\TinyCDN\Config\Provider\Support\Tab
-     */
+    /** @var SupportTab */
     private $supportTab;
     
     /**

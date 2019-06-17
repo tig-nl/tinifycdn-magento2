@@ -30,111 +30,74 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Model;
+namespace TIG\TinyCDN\Model\Config\Provider\CDN;
 
-use Magento\Framework\App\Config\ScopeConfigInterface as ScopeConfig;
-use Magento\Store\Model\ScopeInterface;
+use TIG\TinyCDN\Model\AbstractConfigProvider;
+use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
 
-class Config extends AbstractModel
+class Configuration extends AbstractConfigProvider
 {
-    const TINYCDN_GENERAL_MODE = 'tig_tinycdn/general/mode';
-    
     const TINYCDN_CDN_TEST     = 'tig_tinycdn/cdn/test';
     
     const TINYCDN_CDN_LIVE     = 'tig_tinycdn/cdn/live';
     
-    private $scopeConfig;
+    /** @var GeneralConfiguration $generalConfig */
+    private $generalConfig;
     
     /**
-     * Config constructor.
+     * Configuration constructor.
      *
      * @param \Magento\Framework\Model\Context                             $context
      * @param \Magento\Framework\Registry                                  $registry
-     * @param ScopeConfig                                                  $scopeConfig
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface           $scopeConfig
+     * @param GeneralConfiguration                                         $generalConfig
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb|null           $resourceCollection
-     * @param array                                                        $data
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
-        ScopeConfig $scopeConfig,
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        GeneralConfiguration $generalConfig,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
-        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null,
-        array $data = []
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null
     ) {
-        $this->scopeConfig = $scopeConfig;
-        parent::__construct($context, $registry, $resource, $resourceCollection);
+        $this->generalConfig = $generalConfig;
+        parent::__construct($context, $registry, $scopeConfig, $resource, $resourceCollection);
+    }
+    
+    public function formatCredentials()
+    {
+        $credentials = $this->retrieveCredentialsForCurrentMode();
+        
+        return [
+            'clientId'                => $credentials['client_id'],
+            'codeChallenge'           => '',
+            'codeVerifier'            => '',
+            'scopes'                  => $credentials['scopes'],
+            'redirectUri'             => $this->createRedirectUri(),
+            'urlAuthorize'            => $credentials['url_authorize'],
+            'urlAccessToken'          => $credentials['url_access_token']
+        ];
     }
     
     /**
-     * @param $path
+     * Retrieves credentials for the currently enabled mode. If module is disabled
+     * test credentials are returned.
      *
-     * @return mixed
+     * @return array
      */
-    private function getConfigValue($path)
+    public function retrieveCredentialsForCurrentMode()
     {
-        return $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE);
-    }
-    
-    /**
-     * @return mixed
-     */
-    public function getMode()
-    {
-        return $this->getConfigValue(static::TINYCDN_GENERAL_MODE);
-    }
-    
-    /**
-     * @return bool
-     */
-    public function liveModeEnabled()
-    {
-        if ($this->getMode() == 1) {
-            return true;
+        if ($this->generalConfig->liveModeEnabled()) {
+            return $this->getLiveCredentials();
         }
         
-        return false;
+        return $this->getTestCredentials();
     }
     
     /**
-     * @return bool
-     */
-    public function testModeEnabled()
-    {
-        if ($this->getMode() == 2) {
-            return true;
-        }
-        
-        return false;
-    }
-    
-    /**
-     * @return bool
-     */
-    public function isEnabled()
-    {
-        if ($this->testModeEnabled() || $this->liveModeEnabled()) {
-            return true;
-        }
-        
-        return false;
-    }
-    
-    /**
-     * @return mixed
-     */
-    public function getCredentialsForCurrentMode()
-    {
-        if ($this->testModeEnabled()) {
-            return $this->getTestCredentials();
-        }
-        
-        return $this->getLiveCredentials();
-    }
-    
-    /**
-     * @return mixed
+     * @return array
      */
     public function getTestCredentials()
     {
@@ -142,10 +105,16 @@ class Config extends AbstractModel
     }
     
     /**
-     * @return mixed
+     * @return array
      */
     public function getLiveCredentials()
     {
         return $this->getConfigValue(static::TINYCDN_CDN_LIVE);
+    }
+    
+    // todo: create function.
+    private function createRedirectUrl()
+    {
+        return '';
     }
 }

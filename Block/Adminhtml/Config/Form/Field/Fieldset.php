@@ -32,7 +32,7 @@
 namespace TIG\TinyCDN\Block\Adminhtml\Config\Form\Field;
 
 use Magento\Config\Block\System\Config\Form\Fieldset as MagentoFieldset;
-use TIG\TinyCDN\Config\Provider\General\Configuration as GeneralConfiguration;
+use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
 
 class Fieldset extends MagentoFieldset
 {
@@ -50,7 +50,7 @@ class Fieldset extends MagentoFieldset
     // @codingStandardsIgnoreLine
     protected function _getFrontendClass($element)
     {
-        $mode = $this->_scopeConfig->getValue(GeneralConfiguration::XPATH_CONFIGURATION_MODE);
+        $mode = $this->_scopeConfig->getValue(GeneralConfiguration::TINYCDN_GENERAL_MODE);
         $class = 'mode_off';
         if (array_key_exists($mode, $this->classNames)) {
             $class = $this->classNames[$mode];

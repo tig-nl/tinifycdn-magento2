@@ -34,21 +34,22 @@ namespace TIG\TinyCDN\Controller\Adminhtml\Cdn;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\Controller\ResultFactory;
-use TIG\TinyCDN\Model\Config;
+use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
 
 class Connect extends Action
 {
+    /** @var Configuration */
     private $config;
     
     /**
      * Connect constructor.
      *
-     * @param Config         $config
+     * @param Configuration  $config
      * @param Action\Context $context
      */
     // @codingStandardsIgnoreLine
     public function __construct(
-        Config $config,
+        Configuration $config,
         Action\Context $context
     ) {
         $this->config = $config;
@@ -59,6 +60,8 @@ class Connect extends Action
     
     public function execute()
     {
-        // Do something.
+        $credentials = $this->config->formatCredentials();
+        
+        // Establish authorization using credentials.
     }
 }

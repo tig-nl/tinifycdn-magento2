@@ -30,21 +30,55 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Config\Provider\Support;
+namespace TIG\TinyCDN\Model\Config\Provider\General;
 
-use TIG\TinyCDN\Config\Provider\AbstractConfigProvider;
+use TIG\TinyCDN\Model\AbstractConfigProvider;
 
-class Tab extends AbstractConfigProvider
+class Configuration extends AbstractConfigProvider
 {
-    const XPATH_SUPPORTED_MAGENTO_VERSION = 'tig_tinycdn/supported_magento_version';
+    const TINYCDN_GENERAL_MODE        = 'tig_tinycdn/general/mode';
     
     /**
-     * @param null $store
-     *
-     * @return string
+     * @return mixed
      */
-    public function getSupportedMagentoVersions($store = null)
+    public function getMode()
     {
-        return $this->getConfigFromXpath(static::XPATH_SUPPORTED_MAGENTO_VERSION, $store);
+        return $this->getConfigValue(static::TINYCDN_GENERAL_MODE);
+    }
+    
+    /**
+     * @return bool
+     */
+    public function liveModeEnabled()
+    {
+        if ($this->getMode() == 1) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function testModeEnabled()
+    {
+        if ($this->getMode() == 2) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        if ($this->testModeEnabled() || $this->liveModeEnabled()) {
+            return true;
+        }
+        
+        return false;
     }
 }

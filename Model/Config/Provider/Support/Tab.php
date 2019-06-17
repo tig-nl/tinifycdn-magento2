@@ -30,11 +30,21 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace Config\Provider\CDN;
+namespace TIG\TinyCDN\Model\Config\Provider\Support;
 
-use TIG\TinyCDN\Config\Provider\AbstractConfigProvider;
+use TIG\TinyCDN\Model\AbstractConfigProvider;
 
-class Configuration extends AbstractConfigProvider
+class Tab extends AbstractConfigProvider
 {
-
+    const TINYCDN_SUPPORTED_MAGENTO_VERSION = 'tig_tinycdn/supported_magento_version';
+    
+    /**
+     * @param null $store
+     *
+     * @return string
+     */
+    public function getSupportedMagentoVersions()
+    {
+        return $this->getConfigValue(static::TINYCDN_SUPPORTED_MAGENTO_VERSION);
+    }
 }
