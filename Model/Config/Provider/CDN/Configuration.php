@@ -43,6 +43,8 @@ class Configuration extends AbstractConfigProvider
     
     const TINYCDN_CDN_LIVE         = 'tig_tinycdn/cdn/live';
     
+    const TINYCDN_CDN_ACCESS_TOKEN = 'tig_tinycdn/cdn/access_token';
+    
     /** @var Challenge $generate */
     private $challenge;
     
@@ -73,9 +75,9 @@ class Configuration extends AbstractConfigProvider
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null
     ) {
-        $this->urlBuilder    = $urlBuilder;
         $this->challenge     = $challenge;
         $this->generalConfig = $generalConfig;
+        $this->urlBuilder    = $urlBuilder;
         parent::__construct($context, $registry, $scopeConfig, $resource, $resourceCollection);
     }
     

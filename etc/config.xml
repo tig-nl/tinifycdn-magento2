@@ -51,6 +51,7 @@
                     <url_authorize>https://tinify.com/auth</url_authorize>
                     <url_access_token>https://api.tinify.com/token</url_access_token>
                 </live>
+                <access_token>0</access_token>
             </cdn>
         </tig_tinycdn>
     </default>
