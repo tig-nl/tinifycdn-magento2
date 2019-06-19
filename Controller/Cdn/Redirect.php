@@ -49,8 +49,9 @@ class Redirect extends Action
     /**
      * Redirect constructor.
      *
-     * @param Context $context
-     * @param Url     $urlBuilder
+     * @param Context   $context
+     * @param Exception $exception
+     * @param Url       $urlBuilder
      */
     public function __construct(
         Context $context,
