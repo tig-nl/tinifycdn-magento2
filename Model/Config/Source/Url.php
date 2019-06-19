@@ -32,46 +32,96 @@
 
 namespace TIG\TinyCDN\Model\Config\Source;
 
-use Magento\Framework\UrlInterface;
+use Magento\Backend\Model\UrlInterface as BackendUrlInterface;
+use Magento\Framework\UrlInterface as StandardUrlInterface;
 use TIG\TinyCDN\Model\AbstractConfigSource;
 
 class Url extends AbstractConfigSource
 {
-    const TINYCDN_CDN_AUTHORIZE_URI = 'tinify/cdn/authorize';
+    const TINYCDN_CDN_AUTHORIZE_URL = 'tinify/cdn/authorize';
+    
+    const TINYCDN_CDN_REDIRECT_URL  = 'tinify/cdn/redirect';
     
     const TINYCDN_CDN_CONNECT_URL   = 'tinify/cdn/connect';
     
-    /** @var UrlInterface $urlBuilder */
-    private $urlBuilder;
+    /** @var BackendUrlInterface $backendUrlBuilder */
+    private $backendUrlBuilder;
+    
+    /** @var StandardUrlInterface $standardUrlBuilder */
+    private $standardUrlBuilder;
     
     /**
      * Url constructor.
      *
      * @param \Magento\Framework\Model\Context                             $context
      * @param \Magento\Framework\Registry                                  $registry
-     * @param UrlInterface                                                 $urlBuilder
+     * @param BackendUrlInterface                                          $backendUrlBuilder
+     * @param StandardUrlInterface                                         $standardUrlBuilder
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb|null           $resourceCollection
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
-        UrlInterface $urlBuilder,
+        BackendUrlInterface $backendUrlBuilder,
+        StandardUrlInterface $standardUrlBuilder,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null
     ) {
-        $this->urlBuilder = $urlBuilder;
+        $this->backendUrlBuilder  = $backendUrlBuilder;
+        $this->standardUrlBuilder = $standardUrlBuilder;
         parent::__construct($context, $registry, $resource, $resourceCollection);
     }
     
     /**
-     * @param $uri
+     * getUrl() includes the form-key and admin-uri. getDirectUrl() does not.
+     * The backendUrlBuilder-class always follows the admin-structure when
+     * building URLs.
+     *
+     * @param      $uri
+     * @param bool $admin
      *
      * @return string
      */
-    private function buildUrl($uri)
+    private function buildUrl($uri, $admin = true)
     {
-        return $this->urlBuilder->getUrl($uri);
+        if ($admin) {
+            return $this->backendUrlBuilder->getUrl($uri);
+        }
+        
+        return $this->standardUrlBuilder->getDirectUrl($uri);
+    }
+    
+    /**
+     * Since Magento 2 doesn't allow returning an Admin URL without the form-key
+     * we strip the key manually when needed.
+     *
+     * @param $url
+     *
+     * @return bool|string
+     */
+    private function stripKey($url)
+    {
+        return substr($url, 0, strpos($url, BackendUrlInterface::SECRET_KEY_PARAM_NAME));
+    }
+    
+    /**
+     * @param $url
+     *
+     * @return bool|string
+     */
+    public function grabKeyFromUrl($url)
+    {
+        $keyParamName = '/' . BackendUrlInterface::SECRET_KEY_PARAM_NAME . '/';
+        
+        if (strpos($url, $keyParamName) === false) {
+            return '';
+        }
+        
+        $url = rtrim($url, '/');
+        $key = explode($keyParamName, $url)[1];
+        
+        return $key;
     }
     
     /**
@@ -79,7 +129,23 @@ class Url extends AbstractConfigSource
      */
     public function createRedirectUrl()
     {
-        return $this->buildUrl(static::TINYCDN_CDN_AUTHORIZE_URI);
+        return $this->buildUrl(static::TINYCDN_CDN_REDIRECT_URL, false);
+    }
+    
+    /**
+     * @param bool $stripKey
+     *
+     * @return bool|string
+     */
+    public function createAuthorizeUrl($stripKey = false)
+    {
+        $url = $this->buildUrl(static::TINYCDN_CDN_AUTHORIZE_URL);
+        
+        if ($stripKey) {
+            $url = $this->stripKey($url);
+        }
+        
+        return $url;
     }
     
     /**

@@ -95,7 +95,8 @@ class Configuration extends AbstractConfigProvider
             'scopes'         => $credentials['scopes'],
             'redirectUri'    => $this->urlBuilder->createRedirectUrl(),
             'urlAuthorize'   => $credentials['url_authorize'],
-            'urlAccessToken' => $credentials['url_access_token']
+            'urlAccessToken' => $credentials['url_access_token'],
+            'key'            => $this->urlBuilder->grabKeyFromUrl($this->urlBuilder->createAuthorizeUrl(false))
         ];
     }
     
