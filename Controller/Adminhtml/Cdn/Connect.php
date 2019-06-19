@@ -33,7 +33,6 @@
 namespace TIG\TinyCDN\Controller\Adminhtml\Cdn;
 
 use Magento\Backend\App\Action;
-use Magento\Framework\Session\SessionManagerInterface as SessionManager;
 use TIG\TinyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
 use TIG\TinyCDN\Model\Config\Source\Url;
@@ -41,29 +40,23 @@ use Tinify\OAuth2\Client\Provider\TinifyProviderFactory;
 
 class Connect extends AbstractAdminhtmlController
 {
-    /** @var SessionManager $session */
-    private $session;
-    
     /** @var Url $urlBuilder */
     private $urlBuilder;
     
     /**
      * Connect constructor.
      *
-     * @param SessionManager        $sessionManager
      * @param Configuration         $config
      * @param Url                   $urlBuilder
      * @param TinifyProviderFactory $tinifyFactory
      * @param Action\Context        $context
      */
     public function __construct(
-        SessionManager $sessionManager,
+        Action\Context $context,
         Configuration $config,
-        Url $urlBuilder,
         TinifyProviderFactory $tinifyFactory,
-        Action\Context $context
+        Url $urlBuilder
     ) {
-        $this->session    = $sessionManager;
         $this->urlBuilder = $urlBuilder;
         parent::__construct(
             $context,
@@ -80,14 +73,12 @@ class Connect extends AbstractAdminhtmlController
         $provider = $this->createTinifyFactory();
         /**
          * We need to grab the Key from the current URL, because otherwise Magento 2 will auto-
-         * generate a wrong key later on.
+         * generate a wrong key later on which will not pass validation.
          */
-        $formKey  = $this->urlBuilder->grabKeyFromUrl($this->urlBuilder->createAuthorizeUrl());
-        $authUrl  = $provider->getAuthorizationUrl(['state' => $formKey]);
-        $redirect = $this->resultRedirectFactory->create();
+        $formKey = $this->urlBuilder->grabKeyFromUrl($this->urlBuilder->createAuthorizeUrl());
+        $authUrl = $provider->getAuthorizationUrl(['state' => $formKey]);
         
-        // Get the state generated for you and store it to the session.
-        $this->session->setData('oauth2state', $provider->getState());
+        $redirect = $this->resultRedirectFactory->create();
         $redirect->setPath($authUrl);
         
         return $redirect;
