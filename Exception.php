@@ -36,7 +36,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Phrase;
 use Magento\Framework\PhraseFactory;
 
-class Exception extends LocalizedException
+class Exception
 {
     /**
      * Exception constructor.
@@ -44,13 +44,9 @@ class Exception extends LocalizedException
      * @param PhraseFactory $phraseFactory
      */
     public function __construct(
-        Phrase $phrase,
         PhraseFactory $phraseFactory
     ) {
         $this->phrase = $phraseFactory;
-        parent::__construct(
-            $phrase
-        );
     }
     
     /**
