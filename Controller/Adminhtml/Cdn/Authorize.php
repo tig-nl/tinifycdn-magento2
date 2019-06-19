@@ -78,7 +78,7 @@ class Authorize extends AbstractAdminhtmlController
     }
     
     /**
-     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|void
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface|void
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function execute()
@@ -98,10 +98,9 @@ class Authorize extends AbstractAdminhtmlController
                 'authorization_code',
                 ['code' => $authCode]
             );
-            
             $this->configWriter->saveConfig(Configuration::TINYCDN_CDN_ACCESS_TOKEN, $accessToken);
-        } catch (IdentityProviderException $e) {
-            $this->messageManager->addErrorMessage('An error occurred: ' . $e->getMessage());
+        } catch (IdentityProviderException $error) {
+            $this->messageManager->addErrorMessage('An error occurred: ' . $error->getMessage());
             
             return $redirect;
         }
