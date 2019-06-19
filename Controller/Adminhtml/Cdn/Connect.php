@@ -34,60 +34,55 @@ namespace TIG\TinyCDN\Controller\Adminhtml\Cdn;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\Session\SessionManagerInterface as SessionManager;
+use TIG\TinyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
-use Tinify\OAuth2\Client\Provider\TinifyProvider;
+use TIG\TinyCDN\Model\Config\Source\Url;
 use Tinify\OAuth2\Client\Provider\TinifyProviderFactory;
 
-class Connect extends Action
+class Connect extends AbstractAdminhtmlController
 {
     /** @var SessionManager $session */
     private $session;
     
-    /** @var Configuration */
-    private $config;
-    
-    /** @var TinifyProviderFactory */
-    private $tinifyFactory;
+    /** @var Url $urlBuilder */
+    private $urlBuilder;
     
     /**
      * Connect constructor.
      *
-     * @param Configuration  $config
-     * @param Action\Context $context
+     * @param SessionManager        $sessionManager
+     * @param Configuration         $config
+     * @param Url                   $urlBuilder
+     * @param TinifyProviderFactory $tinifyFactory
+     * @param Action\Context        $context
      */
-    // @codingStandardsIgnoreLine
     public function __construct(
         SessionManager $sessionManager,
         Configuration $config,
+        Url $urlBuilder,
         TinifyProviderFactory $tinifyFactory,
         Action\Context $context
     ) {
-        $this->session       = $sessionManager;
-        $this->config        = $config;
-        $this->tinifyFactory = $tinifyFactory;
+        $this->session    = $sessionManager;
+        $this->urlBuilder = $urlBuilder;
         parent::__construct(
-            $context
+            $context,
+            $config,
+            $tinifyFactory
         );
     }
     
     /**
-     * TODO: Check given state against previously stored one to mitigate CSRF attack.
-     *       Try to get an access token using the authorization code grant.
-     *
      * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
      */
     public function execute()
     {
-        $credentials = $this->config->formatCredentials();
-        $provider    = $this->tinifyFactory->create(['options' => $credentials]);
-        $formKey     = $credentials['key'];
-        
-        // Unset key-element, because otherwise request will fail.
-        unset($credentials['key']);
-        
-        // Fetch the authorization URL from the provider; this returns the
-        // urlAuthorize option and generates and applies any necessary parameters
-        // (e.g. state).
+        $provider = $this->createTinifyFactory();
+        /**
+         * We need to grab the Key from the current URL, because otherwise Magento 2 will auto-
+         * generate a wrong key later on.
+         */
+        $formKey  = $this->urlBuilder->grabKeyFromUrl($this->urlBuilder->createAuthorizeUrl());
         $authUrl  = $provider->getAuthorizationUrl(['state' => $formKey]);
         $redirect = $this->resultRedirectFactory->create();
         

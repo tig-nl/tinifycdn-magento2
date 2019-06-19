@@ -35,10 +35,14 @@ namespace TIG\TinyCDN\Controller\Cdn;
 use Magento\Backend\Model\UrlInterface;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
+use TIG\TinyCDN\Exception;
 use TIG\TinyCDN\Model\Config\Source\Url;
 
 class Redirect extends Action
 {
+    /** @var Exception $exception */
+    private $exception;
+    
     /** @var Url $urlBuilder */
     private $urlBuilder;
     
@@ -50,8 +54,10 @@ class Redirect extends Action
      */
     public function __construct(
         Context $context,
+        Exception $exception,
         Url $urlBuilder
     ) {
+        $this->exception  = $exception;
         $this->urlBuilder = $urlBuilder;
         parent::__construct($context);
     }
@@ -62,22 +68,26 @@ class Redirect extends Action
      * redirected to the login-page (if no admin-session is active) or the dashboard (if an active
      * admin-session is available).
      *
-     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|void
-     * @throws \Exception
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function execute()
     {
         $params = $this->getRequest()->getParams();
         
         if (!$params['code'] && !$params['state']) {
-            throw new \Exception($this->__('Invalid request. No direct access allowed.'));
+            return $this->exception->throwException('Invalid request. No direct access allowed.');
         }
         
         $formKey  = $params['state'];
         $redirect = $this->resultRedirectFactory->create();
         
-        // Strip the key from the Admin-URL and replace it with the saved key generated earlier.
-        $authUrl = $this->urlBuilder->createAuthorizeUrl(true) . UrlInterface::SECRET_KEY_PARAM_NAME . '/' . $formKey;
+        $authUrl = $this->urlBuilder->createAuthorizeUrl(
+            [
+                UrlInterface::SECRET_KEY_PARAM_NAME => $formKey,
+                'code'                              => $params['code']
+            ]
+        );
         
         $redirect->setPath($authUrl);
         

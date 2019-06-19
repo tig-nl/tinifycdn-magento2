@@ -83,26 +83,13 @@ class Url extends AbstractConfigSource
      *
      * @return string
      */
-    private function buildUrl($uri, $admin = true)
+    private function buildUrl($uri, $admin = true, $params = null)
     {
         if ($admin) {
-            return $this->backendUrlBuilder->getUrl($uri);
+            return $this->backendUrlBuilder->getUrl($uri, $params);
         }
         
-        return $this->standardUrlBuilder->getDirectUrl($uri);
-    }
-    
-    /**
-     * Since Magento 2 doesn't allow returning an Admin URL without the form-key
-     * we strip the key manually when needed.
-     *
-     * @param $url
-     *
-     * @return bool|string
-     */
-    private function stripKey($url)
-    {
-        return substr($url, 0, strpos($url, BackendUrlInterface::SECRET_KEY_PARAM_NAME));
+        return $this->standardUrlBuilder->getDirectUrl($uri, $params);
     }
     
     /**
@@ -133,19 +120,13 @@ class Url extends AbstractConfigSource
     }
     
     /**
-     * @param bool $stripKey
+     * @param array|null $params
      *
-     * @return bool|string
+     * @return string
      */
-    public function createAuthorizeUrl($stripKey = false)
+    public function createAuthorizeUrl(array $params = null)
     {
-        $url = $this->buildUrl(static::TINYCDN_CDN_AUTHORIZE_URL);
-        
-        if ($stripKey) {
-            $url = $this->stripKey($url);
-        }
-        
-        return $url;
+        return $this->buildUrl(static::TINYCDN_CDN_AUTHORIZE_URL, true, $params);
     }
     
     /**
