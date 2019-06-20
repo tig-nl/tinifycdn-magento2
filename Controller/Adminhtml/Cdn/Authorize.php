@@ -36,6 +36,7 @@ use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Magento\Config\Model\ResourceModel\Config as ConfigWriter;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Message\ManagerInterface;
+use Magento\Framework\Session\SessionManagerInterface;
 use TIG\TinyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
 use TIG\TinyCDN\Exception;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
@@ -61,6 +62,7 @@ class Authorize extends AbstractAdminhtmlController
      */
     public function __construct(
         Context $context,
+        SessionManagerInterface $session,
         ManagerInterface $messageManager,
         Configuration $config,
         TinifyProviderFactory $tinifyFactory,
@@ -72,6 +74,7 @@ class Authorize extends AbstractAdminhtmlController
         $this->exception      = $exception;
         parent::__construct(
             $context,
+            $session,
             $config,
             $tinifyFactory
         );
@@ -104,6 +107,9 @@ class Authorize extends AbstractAdminhtmlController
             
             return $redirect;
         }
+        
+        // If Authorization is successful, remove oAuth Credentials from session.
+        $this->unsetOAuthCredentials();
         
         $this->messageManager->addSuccessMessage('Your access token was saved successfully.');
         

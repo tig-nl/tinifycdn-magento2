@@ -34,12 +34,16 @@ namespace TIG\TinyCDN\Controller\Adminhtml;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
+use Magento\Framework\Session\SessionManagerInterface;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
 use Tinify\OAuth2\Client\Provider\TinifyProvider;
 use Tinify\OAuth2\Client\Provider\TinifyProviderFactory;
 
 abstract class AbstractAdminhtmlController extends Action
 {
+    /** @var SessionManagerInterface $session */
+    private $session;
+    
     /** @var Configuration $config */
     private $config;
     
@@ -52,10 +56,12 @@ abstract class AbstractAdminhtmlController extends Action
      */
     public function __construct(
         Context $context,
+        SessionManagerInterface $session,
         Configuration $config,
         TinifyProviderFactory $tinifyFactory
     ) {
-        $this->config = $config;
+        $this->session       = $session;
+        $this->config        = $config;
         $this->tinifyFactory = $tinifyFactory;
         parent::__construct($context);
     }
@@ -65,8 +71,32 @@ abstract class AbstractAdminhtmlController extends Action
      */
     public function createTinifyFactory()
     {
-        $credentials = $this->config->formatCredentials();
+        return $this->tinifyFactory->create($this->retrieveOAuthCredentials());
+    }
+    
+    /**
+     * Credentials are stored in the session, so they can be used later on. They
+     * are unset after authorization is completed.
+     *
+     * @return array
+     */
+    private function retrieveOAuthCredentials()
+    {
+        $oAuthCredentials = $this->session->getOAuthCredentials();
         
-        return $this->tinifyFactory->create(['options' => $credentials]);
+        if (!$oAuthCredentials) {
+            $oAuthCredentials = $this->config->formatCredentials();
+            $this->session->setOAuthCredentials($oAuthCredentials);
+        }
+        
+        return ['options' => $oAuthCredentials];
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function unsetOAuthCredentials()
+    {
+        return $this->session->unsOAuthCredentials();
     }
 }

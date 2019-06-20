@@ -75,8 +75,8 @@ class Url extends AbstractConfigSource
     
     /**
      * getUrl() includes the form-key and admin-uri. getDirectUrl() does not.
-     * The backendUrlBuilder-class always follows the admin-structure when
-     * building URLs.
+     * The backendUrlBuilder-class always includes the admin-URI and needed
+     * parameters when building URLs.
      *
      * @param      $uri
      * @param bool $admin
