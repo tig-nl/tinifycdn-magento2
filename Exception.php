@@ -33,22 +33,32 @@
 namespace TIG\TinyCDN;
 
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\LocalizedExceptionFactory;
 use Magento\Framework\Phrase;
 use Magento\Framework\PhraseFactory;
 
 class Exception
 {
+    /** @var LocalizedExceptionFactory $exception */
+    private $exception;
+
+    /** @var PhraseFactory $phrase */
+    private $phrase;
+
     /**
      * Exception constructor.
      *
-     * @param PhraseFactory $phraseFactory
+     * @param LocalizedExceptionFactory $exceptionFactory
+     * @param PhraseFactory             $phraseFactory
      */
     public function __construct(
+        LocalizedExceptionFactory $exceptionFactory,
         PhraseFactory $phraseFactory
     ) {
+        $this->exception = $exceptionFactory;
         $this->phrase = $phraseFactory;
     }
-    
+
     /**
      * @param $message
      *
@@ -58,16 +68,16 @@ class Exception
     {
         return $this->phrase->create($message);
     }
-    
+
     /**
      * @param string $message
      *
-     * @throws LocalizedException
+     * @return LocalizedException
      */
     public function throwException(string $message)
     {
         $exception = $this->createPhrase($message);
-        
-        throw new LocalizedException($exception);
+
+        return $this->exception->create($exception);
     }
 }
