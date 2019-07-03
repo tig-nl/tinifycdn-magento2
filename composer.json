@@ -4,6 +4,7 @@
   "require": {
     "magento/framework": ">=101.0.0,<=101.0.8|>=102.0.0,<=102.0.1",
     "php": "~7.0.0|~7.1.0|~7.2.0",
+    "ext-json": "*",
     "tinify/oauth2-tinify": "*"
   },
   "type": "magento2-module",
