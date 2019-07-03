@@ -115,10 +115,7 @@ class Authorize extends AbstractAdminhtmlController
         $redirect->setPath('adminhtml/system_config/edit/section/tig_tinycdn');
 
         try {
-            $accessToken = $provider->getAccessToken(
-                'authorization_code',
-                ['code' => $authCode]
-            );
+            $accessToken = $provider->getAccessToken('authorization_code', ['code' => $authCode]);
             $this->configWriter->saveConfig(Configuration::TINYCDN_CDN_ACCESS_TOKEN, $accessToken);
             $this->writeEndpoint();
         } catch (IdentityProviderException $error) {
