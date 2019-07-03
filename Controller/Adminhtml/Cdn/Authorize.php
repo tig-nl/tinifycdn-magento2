@@ -35,10 +35,10 @@ namespace TIG\TinyCDN\Controller\Adminhtml\Cdn;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Magento\Config\Model\ResourceModel\Config as ConfigWriter;
 use Magento\Framework\App\Action\Context;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\Session\SessionManagerInterface;
 use TIG\TinyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
-use TIG\TinyCDN\Exception;
 use TIG\TinyCDN\Model\Api\Endpoints;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
 use Tinify\OAuth2\Client\Provider\TinifyProvider;
@@ -52,9 +52,6 @@ class Authorize extends AbstractAdminhtmlController
     /** @var Endpoints $endpoints */
     private $endpoints;
 
-    /** @var Exception $exception */
-    private $exception;
-
     /**
      * Authorize constructor.
      *
@@ -63,7 +60,6 @@ class Authorize extends AbstractAdminhtmlController
      * @param Configuration         $config
      * @param TinifyProviderFactory $tinifyFactory
      * @param ConfigWriter          $configWriter
-     * @param Exception             $exception
      */
     public function __construct(
         Context $context,
@@ -72,13 +68,11 @@ class Authorize extends AbstractAdminhtmlController
         Configuration $config,
         TinifyProviderFactory $tinifyFactory,
         ConfigWriter $configWriter,
-        Endpoints $endpoints,
-        Exception $exception
+        Endpoints $endpoints
     ) {
         $this->messageManager = $messageManager;
         $this->configWriter   = $configWriter;
         $this->endpoints      = $endpoints;
-        $this->exception      = $exception;
         parent::__construct(
             $context,
             $session,
@@ -89,47 +83,51 @@ class Authorize extends AbstractAdminhtmlController
 
     /**
      * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface|void
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedException
      */
     public function execute()
     {
         $provider = $this->createTinifyFactory();
         $authCode = $this->getRequest()->getParam('code');
 
+        $redirect = $this->resultRedirectFactory->create();
+        $redirect->setPath('adminhtml/system_config/edit/section/tig_tinycdn');
+
         if (!$authCode) {
-            return $this->exception->throwException('No authorization code provided. Direct access not allowed.');
+            $this->messageManager->addErrorMessage(
+                __('No authorization code provided. Direct access not allowed.')
+            );
+
+            return $redirect;
         }
 
-        return $this->writeAccessToken($provider, $authCode);
+        try {
+            $this->saveAccessToken($provider, $authCode);
+            $this->saveEndpoint();
+        } catch (\Exception $error) {
+            $this->messageManager->addErrorMessage($error->getMessage());
+        }
+
+        return $redirect;
     }
 
     /**
      * @param TinifyProvider $provider
      * @param                $authCode
      *
-     * @return \Magento\Framework\Controller\Result\Redirect
+     * @return ManagerInterface
      */
-    private function writeAccessToken(TinifyProvider $provider, $authCode)
+    private function saveAccessToken(TinifyProvider $provider, $authCode)
     {
-        $redirect = $this->resultRedirectFactory->create();
-        $redirect->setPath('adminhtml/system_config/edit/section/tig_tinycdn');
-
         try {
             $accessToken = $provider->getAccessToken('authorization_code', ['code' => $authCode]);
             $this->configWriter->saveConfig(Configuration::TINYCDN_CDN_ACCESS_TOKEN, $accessToken);
-            $this->writeEndpoint();
         } catch (IdentityProviderException $error) {
-            $this->messageManager->addErrorMessage('An error occurred: ' . $error->getMessage());
-
-            return $redirect;
+            return $this->messageManager->addErrorMessage($error->getMessage());
         }
 
         // If Authorization is successful, remove oAuth Credentials from session.
         $this->unsetOAuthCredentials();
-
-        $this->messageManager->addSuccessMessage('Your TinyCDN endpoint was successfully set.');
-
-        return $redirect;
     }
 
     /**
@@ -141,10 +139,15 @@ class Authorize extends AbstractAdminhtmlController
     }
 
     /**
-     * @return ConfigWriter
+     * @return ManagerInterface
      */
-    private function writeEndpoint()
+    private function saveEndpoint()
     {
-        return $this->configWriter->saveConfig(Configuration::TINYCDN_CDN_ENDPOINT, $this->retrieveEndpoint());
+        try {
+            $this->configWriter->saveConfig(Configuration::TINYCDN_CDN_ENDPOINT, $this->retrieveEndpoint());
+        } catch (\Exception $error) {
+            return $this->messageManager->addErrorMessage($error->getMessage());
+        }
+        return $this->messageManager->addSuccessMessage(__('Your TinyCDN endpoint was successfully set.'));
     }
 }
