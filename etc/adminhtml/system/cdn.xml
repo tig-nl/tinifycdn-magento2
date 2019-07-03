@@ -40,5 +40,10 @@
             <comment><![CDATA[Connect your Tinify account to your Magento 2 store.]]></comment>
             <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button</frontend_model>
         </field>
+        <field id="endpoint" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Endpoint</label>
+            <comment><![CDATA[The endpoint used by the currently selected Magento 2 store.]]></comment>
+            <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Disabled</frontend_model>
+        </field>
     </group>
 </include>

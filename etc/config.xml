@@ -39,17 +39,18 @@
                 <mode>0</mode>
             </general>
             <cdn>
+                <endpoint>Not connected.</endpoint>
                 <test>
                     <client_id>5c656667-64e7-4dd6-a40f-438d5ba8ecbe</client_id>
                     <scopes>cdn_site:default:read cdn_site:default:purge</scopes>
                     <url_authorize>https://acceptance.tinify.com/auth</url_authorize>
-                    <url_access_token>https://acceptance.api.tinify.com/token</url_access_token>
+                    <url_api>https://acceptance.api.tinify.com/</url_api>
                 </test>
                 <live>
                     <client_id>5c656667-64e7-4dd6-a40f-438d5ba8ecbe</client_id>
                     <scopes>cdn_site:default:read cdn_site:default:purge</scopes>
                     <url_authorize>https://tinify.com/auth</url_authorize>
-                    <url_access_token>https://api.tinify.com/token</url_access_token>
+                    <url_api>https://api.tinify.com/</url_api>
                 </live>
                 <access_token>0</access_token>
             </cdn>

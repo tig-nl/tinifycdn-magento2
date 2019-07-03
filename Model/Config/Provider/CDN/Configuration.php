@@ -40,20 +40,26 @@ use TIG\TinyCDN\Model\Config\Source\Url;
 class Configuration extends AbstractConfigProvider
 {
     const TINYCDN_CDN_TEST         = 'tig_tinycdn/cdn/test';
-    
+
     const TINYCDN_CDN_LIVE         = 'tig_tinycdn/cdn/live';
-    
+
     const TINYCDN_CDN_ACCESS_TOKEN = 'tig_tinycdn/cdn/access_token';
-    
+
+    const TINYCDN_CDN_ENDPOINT     = 'tig_tinycdn/cdn/endpoint';
+
+    const TINYCDN_CDN_TOKEN_PARAM  = 'token';
+
+    const TINYCDN_CDN_AUTH_PARAM   = 'authorization';
+
     /** @var Challenge $generate */
     private $challenge;
-    
+
     /** @var GeneralConfiguration $generalConfig */
     private $generalConfig;
-    
+
     /** @var Url $urlBuilder */
     private $urlBuilder;
-    
+
     /**
      * Configuration constructor.
      *
@@ -80,7 +86,7 @@ class Configuration extends AbstractConfigProvider
         $this->urlBuilder    = $urlBuilder;
         parent::__construct($context, $registry, $scopeConfig, $resource, $resourceCollection);
     }
-    
+
     /**
      * @return array
      */
@@ -89,7 +95,7 @@ class Configuration extends AbstractConfigProvider
         $credentials = $this->retrieveCredentialsForCurrentMode();
         $randomValue = $this->challenge->generateRandomValue();
         $verifier    = $this->challenge->generateVerifier($randomValue);
-        
+
         return [
             'clientId'       => $credentials['client_id'],
             'codeChallenge'  => $this->challenge->generateChallenge($verifier),
@@ -97,10 +103,10 @@ class Configuration extends AbstractConfigProvider
             'scopes'         => $credentials['scopes'],
             'redirectUri'    => $this->urlBuilder->createRedirectUrl(),
             'urlAuthorize'   => $credentials['url_authorize'],
-            'urlAccessToken' => $credentials['url_access_token']
+            'urlAccessToken' => $this->getApiUrl(self::TINYCDN_CDN_TOKEN_PARAM)
         ];
     }
-    
+
     /**
      * Retrieves credentials for the currently enabled mode. If module is disabled
      * test credentials are returned.
@@ -112,10 +118,22 @@ class Configuration extends AbstractConfigProvider
         if ($this->generalConfig->liveModeEnabled()) {
             return $this->getLiveCredentials();
         }
-        
+
         return $this->getTestCredentials();
     }
-    
+
+    /**
+     * @param string $uri
+     *
+     * @return string
+     */
+    public function getApiUrl(string $uri = '')
+    {
+        $credentials = $this->retrieveCredentialsForCurrentMode();
+
+        return $credentials['url_api'] . $uri;
+    }
+
     /**
      * @return array
      */
@@ -123,12 +141,28 @@ class Configuration extends AbstractConfigProvider
     {
         return $this->getConfigValue(static::TINYCDN_CDN_TEST);
     }
-    
+
     /**
      * @return array
      */
     public function getLiveCredentials()
     {
         return $this->getConfigValue(static::TINYCDN_CDN_LIVE);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAccessToken()
+    {
+        return $this->getConfigValue(static::TINYCDN_CDN_ACCESS_TOKEN);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCdnEndpoint()
+    {
+        return $this->getConfigValue(static::TINYCDN_CDN_ENDPOINT);
     }
 }
