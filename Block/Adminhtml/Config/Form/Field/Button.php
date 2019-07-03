@@ -40,10 +40,10 @@ use TIG\TinyCDN\Model\Config\Source\Url;
 class Button extends Field
 {
     const BUTTON_ID  = 'tinify_cdn_connect';
-    
+
     // @codingStandardsIgnoreLine
-    protected $_template = 'TIG_TinyCDN::config/button/button.phtml';
-    
+    protected $_template = 'TIG_TinyCDN::config/form/button.phtml';
+
     /**
      * Button constructor.
      *
@@ -57,7 +57,7 @@ class Button extends Field
     ) {
         parent::__construct($context, $data);
     }
-    
+
     /**
      * @param AbstractElement $element
      *
@@ -68,10 +68,10 @@ class Button extends Field
         $element->unsScope();
         $element->unsCanUseWebsiteValue();
         $element->unsCanUseDefaultValue();
-        
+
         return parent::render($element);
     }
-    
+
     /**
      * @param AbstractElement $element
      *
@@ -82,7 +82,7 @@ class Button extends Field
     {
         return $this->_toHtml();
     }
-    
+
     /**
      * @return string
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -90,21 +90,22 @@ class Button extends Field
     public function getButtonHtml()
     {
         $layout = $this->getLayout();
-        
+
+        /** @var Magento\Backend\Block\Widget\Button $button */
         $button     = $layout->createBlock(
             'Magento\Backend\Block\Widget\Button'
         );
-        
+
         $button->setData(
             [
                 'id'      => static::BUTTON_ID,
                 'label'   => __('Connect to your Tinify account')
             ]
         );
-        
+
         return $button->toHtml();
     }
-    
+
     /**
      * @return string
      */
