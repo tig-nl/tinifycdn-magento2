@@ -29,32 +29,48 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-namespace TIG\TinyCDN\Block\Adminhtml\Config\Form\Field;
 
-use Magento\Config\Block\System\Config\Form\Fieldset as MagentoFieldset;
-use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
+namespace TIG\TinyCDN\Model;
 
-class Fieldset extends MagentoFieldset
+class Challenge extends AbstractModel
 {
-    private $classNames = [
-        '1' => 'mode_live',
-        '2' => 'mode_test',
-        '0' => 'mode_off'
-    ];
+    /**
+     * @return string
+     */
+    public function generateChallenge($verifier)
+    {
+        return $this->encode(pack('H*', hash('sha256', $verifier)));
+    }
     
     /**
-     * @param \Magento\Framework\Data\Form\Element\AbstractElement $element
+     * @param $randomValue
      *
      * @return string
      */
-    // @codingStandardsIgnoreLine
-    protected function _getFrontendClass($element)
+    public function generateVerifier($randomValue)
     {
-        $mode = $this->_scopeConfig->getValue(GeneralConfiguration::TINYCDN_GENERAL_MODE);
-        $class = 'mode_off';
-        if (array_key_exists($mode, $this->classNames)) {
-            $class = $this->classNames[$mode];
-        }
-        return parent::_getFrontendClass($element) . ' ' . $class;
+        return $this->encode(pack('H*', $randomValue));
+    }
+    
+    /**
+     * @return string
+     */
+    public function generateRandomValue()
+    {
+        return bin2hex(openssl_random_pseudo_bytes(32));
+    }
+    
+    /**
+     * @param $value
+     *
+     * @return string
+     */
+    private function encode($value)
+    {
+        $base64    = base64_encode($value);
+        $base64    = trim($base64, "=");
+        $base64url = strtr($base64, '+/', '-_');
+        
+        return ($base64url);
     }
 }

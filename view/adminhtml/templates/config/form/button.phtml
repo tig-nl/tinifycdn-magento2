@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
+<?php
 /**
  *
  *          ..::..
@@ -28,18 +27,12 @@
  * needs please contact servicedesk@tig.nl for more information.
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
- * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ * @license       http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
--->
-<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
-    <!-- General Configuration -->
-    <group id="general" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-        <label>General Configuration</label>
-        <field id="mode" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Mode</label>
-            <comment>Make sure to save your configuration when you make changes to these settings, before (re)connecting to your Tinify account.</comment>
-            <source_model>TIG\TinyCDN\Model\Config\Source\General\Mode</source_model>
-            <config_path>tig_tinycdn/general/mode</config_path>
-        </field>
-    </group>
-</include>
+
+/** @var $block TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button */
+?>
+
+<a href="<?php echo $block->getConnectUrl(); ?>">
+    <?php echo $block->getButtonHtml(); ?>
+</a>

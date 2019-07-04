@@ -1,0 +1,31 @@
+"Connect to your Tinify account","Connect to your Tinify account"
+"No authorization code provided. Direct access not allowed.","No authorization code provided. Direct access not allowed."
+"Do not forget to save your configuration!","Do not forget to save your configuration!"
+"Your TinyCDN endpoint was successfully set.","Your TinyCDN endpoint was successfully set."
+Off,Off
+Live,Live
+Test,Test
+Legend,Legend
+"Extension status","Extension status"
+Disabled,Disabled
+"Test Mode","Test Mode"
+"Live Mode","Live Mode"
+"Magento version compatibility","Magento version compatibility"
+"Supported Magento versions","Supported Magento versions"
+"TinyCDN version","TinyCDN version"
+"Your PHP version","Your PHP version"
+Support,Support
+"This extension is developed by <a href=""https://tig.nl"" target=""_BLANK"">TIG</a>","This extension is developed by <a href=""https://tig.nl"" target=""_BLANK"">TIG</a>"
+"Extension basic configuration and account information","Extension basic configuration and account information"
+"Please contact:","Please contact:"
+TinyCDN,TinyCDN
+Configuration,Configuration
+"CDN Configuration","CDN Configuration"
+"TinyCDN account","TinyCDN account"
+"Connect your Tinify account to your Magento 2 store.","Connect your Tinify account to your Magento 2 store."
+Endpoint,Endpoint
+"The endpoint used by the currently selected Magento 2 store.","The endpoint used by the currently selected Magento 2 store."
+"General Configuration","General Configuration"
+Mode,Mode
+"Make sure to save your configuration when you make changes to these settings, before (re)connecting to your Tinify account.","Make sure to save your configuration when you make changes to these settings, before (re)connecting to your Tinify account."
+"Version & Support","Version & Support"

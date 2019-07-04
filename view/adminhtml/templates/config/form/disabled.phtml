@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
+<?php
 /**
  *
  *          ..::..
@@ -28,11 +27,9 @@
  * needs please contact servicedesk@tig.nl for more information.
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
- * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ * @license       http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
-    <event name="admin_system_config_changed_section_tig_tinycdn">
-        <observer name="tig_tinycdn_config_save" instance="TIG\TinyCDN\Observer\Config" />
-    </event>
-</config>
+
+/** @var $block TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Disabled */
+?>
+<input type="text" disabled value="<?php echo $block->getFieldHtml(); ?>" />

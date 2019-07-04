@@ -30,21 +30,21 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Config\Provider\Support;
+namespace TIG\TinyCDN\Model\Config\Provider\Support;
 
-use TIG\TinyCDN\Config\Provider\AbstractConfigProvider;
+use TIG\TinyCDN\Model\AbstractConfigProvider;
 
 class Tab extends AbstractConfigProvider
 {
-    const XPATH_SUPPORTED_MAGENTO_VERSION = 'tig_tinycdn/supported_magento_version';
+    const TINYCDN_SUPPORTED_MAGENTO_VERSION = 'tig_tinycdn/supported_magento_version';
     
     /**
      * @param null $store
      *
      * @return string
      */
-    public function getSupportedMagentoVersions($store = null)
+    public function getSupportedMagentoVersions()
     {
-        return $this->getConfigFromXpath(static::XPATH_SUPPORTED_MAGENTO_VERSION, $store);
+        return $this->getConfigValue(static::TINYCDN_SUPPORTED_MAGENTO_VERSION);
     }
 }

@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<!--
+<?php
 /**
  *
  *          ..::..
@@ -30,7 +29,27 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
- -->
 
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-</config>
+namespace TIG\TinyCDN\Model\Config\Source\General;
+
+use Magento\Framework\Option\ArrayInterface;
+
+class Mode implements ArrayInterface
+{
+    /**
+     * Return option array for the extension mode.
+     * @return array
+     */
+    public function toOptionArray()
+    {
+        // @codingStandardsIgnoreStart
+        $options = [
+            ['value' => '0', 'label' => __('Off')],
+            ['value' => '1', 'label' => __('Live')],
+            ['value' => '2', 'label' => __('Test')]
+        ];
+        
+        // @codingStandardsIgnoreEnd
+        return $options;
+    }
+}

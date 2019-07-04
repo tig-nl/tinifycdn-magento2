@@ -35,10 +35,15 @@
     <!-- CDN Configuration -->
     <group id="cdn" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
         <label>CDN Configuration</label>
-        <field id="endpoint" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>TinyCDN Endpoint</label>
-            <comment><![CDATA[Display text here to explain to client <a href="#">where</a> to obtain the endpoint.]]></comment>
-            <config_path>tig_tinycdn/cdn/endpoint</config_path>
+        <field id="connect" translate="label comment" type="button" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>TinyCDN account</label>
+            <comment><![CDATA[Connect your Tinify account to your Magento 2 store.]]></comment>
+            <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button</frontend_model>
+        </field>
+        <field id="endpoint" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Endpoint</label>
+            <comment><![CDATA[The endpoint used by the currently selected Magento 2 store.]]></comment>
+            <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Disabled</frontend_model>
         </field>
     </group>
 </include>

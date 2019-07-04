@@ -29,32 +29,28 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-namespace TIG\TinyCDN\Block\Adminhtml\Config\Form\Field;
 
-use Magento\Config\Block\System\Config\Form\Fieldset as MagentoFieldset;
-use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
+namespace TIG\TinyCDN\Model;
 
-class Fieldset extends MagentoFieldset
+use Magento\Framework\Model\AbstractModel as CoreAbstractModel;
+
+abstract class AbstractModel extends CoreAbstractModel
 {
-    private $classNames = [
-        '1' => 'mode_live',
-        '2' => 'mode_test',
-        '0' => 'mode_off'
-    ];
-    
     /**
-     * @param \Magento\Framework\Data\Form\Element\AbstractElement $element
+     * AbstractModel constructor.
      *
-     * @return string
+     * @param \Magento\Framework\Model\Context                             $context
+     * @param \Magento\Framework\Registry                                  $registry
+     * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
+     * @param \Magento\Framework\Data\Collection\AbstractDb|null           $resourceCollection
+     * @param array                                                        $data
      */
-    // @codingStandardsIgnoreLine
-    protected function _getFrontendClass($element)
-    {
-        $mode = $this->_scopeConfig->getValue(GeneralConfiguration::TINYCDN_GENERAL_MODE);
-        $class = 'mode_off';
-        if (array_key_exists($mode, $this->classNames)) {
-            $class = $this->classNames[$mode];
-        }
-        return parent::_getFrontendClass($element) . ' ' . $class;
+    public function __construct(
+        \Magento\Framework\Model\Context $context,
+        \Magento\Framework\Registry $registry,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null
+    ) {
+        parent::__construct($context, $registry, $resource, $resourceCollection);
     }
 }

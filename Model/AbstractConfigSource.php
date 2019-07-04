@@ -30,11 +30,24 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace Config\Provider\CDN;
+namespace TIG\TinyCDN\Model;
 
-use TIG\TinyCDN\Config\Provider\AbstractConfigProvider;
-
-class Configuration extends AbstractConfigProvider
+abstract class AbstractConfigSource extends AbstractModel
 {
-
+    /**
+     * AbstractConfigSource constructor.
+     *
+     * @param \Magento\Framework\Model\Context                             $context
+     * @param \Magento\Framework\Registry                                  $registry
+     * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
+     * @param \Magento\Framework\Data\Collection\AbstractDb|null           $resourceCollection
+     */
+    public function __construct(
+        \Magento\Framework\Model\Context $context,
+        \Magento\Framework\Registry $registry,
+        \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
+        \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null
+    ) {
+        parent::__construct($context, $registry, $resource, $resourceCollection);
+    }
 }
