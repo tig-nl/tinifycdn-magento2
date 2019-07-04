@@ -71,7 +71,8 @@ class Endpoints extends AbstractApi
         foreach ($results as $index => $properties) {
             $originUrl = is_object($properties) ? $properties->origin_url : $properties['origin_url'];
             if (is_object($properties) && $originUrl == $baseUrl) {
-                return $results[$index]->key . '.tinify.com';
+                // TODO: Change to actual input. Not available through API yet.
+                return 'https://' . $results[$index]->key . '.tinify.com/';
             }
         }
 
