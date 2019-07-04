@@ -70,7 +70,6 @@ class Disabled extends Field
      */
     public function render(AbstractElement $element)
     {
-        $element->unsScope();
         $element->unsCanUseWebsiteValue();
         $element->unsCanUseDefaultValue();
         $element->unsCanRestoreToDefault();
