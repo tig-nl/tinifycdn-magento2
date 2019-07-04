@@ -39,17 +39,17 @@ use TIG\TinyCDN\Model\AbstractConfigSource;
 class Url extends AbstractConfigSource
 {
     const TINYCDN_CDN_AUTHORIZE_URL = 'tinify/cdn/authorize';
-    
+
     const TINYCDN_CDN_REDIRECT_URL  = 'tinify/cdn/redirect';
-    
+
     const TINYCDN_CDN_CONNECT_URL   = 'tinify/cdn/connect';
-    
+
     /** @var BackendUrlInterface $backendUrlBuilder */
     private $backendUrlBuilder;
-    
+
     /** @var StandardUrlInterface $standardUrlBuilder */
     private $standardUrlBuilder;
-    
+
     /**
      * Url constructor.
      *
@@ -72,7 +72,7 @@ class Url extends AbstractConfigSource
         $this->standardUrlBuilder = $standardUrlBuilder;
         parent::__construct($context, $registry, $resource, $resourceCollection);
     }
-    
+
     /**
      * getUrl() includes the form-key and admin-uri. getDirectUrl() does not.
      * The backendUrlBuilder-class always includes the admin-URI and needed
@@ -88,11 +88,15 @@ class Url extends AbstractConfigSource
         if ($admin) {
             return $this->backendUrlBuilder->getUrl($uri, $params);
         }
-        
+
         return $this->standardUrlBuilder->getDirectUrl($uri, $params);
     }
-    
+
     /**
+     * Custom function to grab the key from the referring URL. Magento creates a
+     * new form key upon each request. But TinyCDN needs the key to stay intact
+     * until after referral.
+     *
      * @param $url
      *
      * @return bool|string
@@ -100,17 +104,17 @@ class Url extends AbstractConfigSource
     public function grabKeyFromUrl($url)
     {
         $keyParamName = '/' . BackendUrlInterface::SECRET_KEY_PARAM_NAME . '/';
-        
+
         if (strpos($url, $keyParamName) === false) {
             return '';
         }
-        
+
         $url = rtrim($url, '/');
         $key = explode($keyParamName, $url)[1];
-        
+
         return $key;
     }
-    
+
     /**
      * @return string
      */
@@ -118,7 +122,7 @@ class Url extends AbstractConfigSource
     {
         return $this->buildUrl(static::TINYCDN_CDN_REDIRECT_URL, false);
     }
-    
+
     /**
      * @param array|null $params
      *
@@ -128,7 +132,7 @@ class Url extends AbstractConfigSource
     {
         return $this->buildUrl(static::TINYCDN_CDN_AUTHORIZE_URL, true, $params);
     }
-    
+
     /**
      * @return string
      */
