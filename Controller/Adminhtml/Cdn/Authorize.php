@@ -52,6 +52,12 @@ class Authorize extends AbstractAdminhtmlController
     /** @var Endpoints $endpoints */
     private $endpoints;
 
+    /** @var string */
+    private $scope;
+
+    /** @var int */
+    private $storeId;
+
     /**
      * Authorize constructor.
      *
@@ -87,11 +93,13 @@ class Authorize extends AbstractAdminhtmlController
      */
     public function execute()
     {
-        $provider = $this->createTinifyFactory();
-        $authCode = $this->getRequest()->getParam('code');
+        $provider      = $this->createTinifyFactory();
+        $authCode      = $this->getRequest()->getParam('code');
+        $this->storeId = $this->getSessionData('id');
+        $this->scope   = $this->getSessionData('scope');
 
         $redirect = $this->resultRedirectFactory->create();
-        $redirect->setPath('adminhtml/system_config/edit/section/tig_tinycdn');
+        $redirect->setPath('adminhtml/system_config/edit/section/tig_tinycdn', [$this->scope => $this->storeId]);
 
         if (!$authCode) {
             $this->messageManager->addErrorMessage(
@@ -108,6 +116,9 @@ class Authorize extends AbstractAdminhtmlController
             $this->messageManager->addErrorMessage($error->getMessage());
         }
 
+        $this->unsetSessionData('id');
+        $this->unsetSessionData('scope');
+
         return $redirect;
     }
 
@@ -121,13 +132,18 @@ class Authorize extends AbstractAdminhtmlController
     {
         try {
             $accessToken = $provider->getAccessToken('authorization_code', ['code' => $authCode]);
-            $this->configWriter->saveConfig(Configuration::TINYCDN_CDN_ACCESS_TOKEN, $accessToken);
+            $this->configWriter->saveConfig(
+                Configuration::TINYCDN_CDN_ACCESS_TOKEN,
+                $accessToken,
+                $this->scope,
+                $this->storeId
+            );
         } catch (IdentityProviderException $error) {
             return $this->messageManager->addErrorMessage($error->getMessage());
         }
 
         // If Authorization is successful, remove oAuth Credentials from session.
-        $this->unsetOAuthCredentials();
+        $this->unsetSessionData('o_auth_credentials');
     }
 
     /**
@@ -135,7 +151,7 @@ class Authorize extends AbstractAdminhtmlController
      */
     private function retrieveEndpoint()
     {
-        return $this->endpoints->retrieve();
+        return $this->endpoints->retrieveForCurrentStore();
     }
 
     /**
@@ -144,10 +160,18 @@ class Authorize extends AbstractAdminhtmlController
     private function saveEndpoint()
     {
         try {
-            $this->configWriter->saveConfig(Configuration::TINYCDN_CDN_ENDPOINT, $this->retrieveEndpoint());
+            $this->configWriter->saveConfig(
+                Configuration::TINYCDN_CDN_ENDPOINT,
+                $this->retrieveEndpoint(),
+                $this->scope,
+                $this->storeId
+            );
         } catch (\Exception $error) {
             return $this->messageManager->addErrorMessage($error->getMessage());
         }
+
+        $this->messageManager->addNoticeMessage(__('Do not forget to save your configuration!'));
+
         return $this->messageManager->addSuccessMessage(__('Your TinyCDN endpoint was successfully set.'));
     }
 }

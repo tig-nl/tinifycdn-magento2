@@ -43,7 +43,7 @@ class Connect extends AbstractAdminhtmlController
 {
     /** @var Url $urlBuilder */
     private $urlBuilder;
-    
+
     /**
      * Connect constructor.
      *
@@ -67,7 +67,7 @@ class Connect extends AbstractAdminhtmlController
             $tinifyFactory
         );
     }
-    
+
     /**
      * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
      */
@@ -79,11 +79,16 @@ class Connect extends AbstractAdminhtmlController
          * generate a wrong key later on which will not pass validation.
          */
         $formKey = $this->urlBuilder->grabKeyFromUrl($this->urlBuilder->createAuthorizeUrl());
+        $scopeId = $this->getRequest()->getParam('id');
+        $scope   = $this->getRequest()->getParam('scope');
+
+        $this->setSessionData('id', $scopeId);
+        $this->setSessionData('scope', $scope);
         $authUrl = $provider->getAuthorizationUrl(['state' => $formKey]);
-        
+
         $redirect = $this->resultRedirectFactory->create();
         $redirect->setPath($authUrl);
-        
+
         return $redirect;
     }
 }

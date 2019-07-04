@@ -41,12 +41,14 @@ use Tinify\OAuth2\Client\Provider\TinifyProviderFactory;
 
 abstract class AbstractAdminhtmlController extends Action
 {
+    const TINYCDN_OAUTH_CREDENTIALS_PARAM = 'o_auth_credentials';
+
     /** @var SessionManagerInterface $session */
     private $session;
-    
+
     /** @var Configuration $config */
     private $config;
-    
+
     /**
      * AbstractAdminhtmlController constructor.
      *
@@ -65,7 +67,7 @@ abstract class AbstractAdminhtmlController extends Action
         $this->tinifyFactory = $tinifyFactory;
         parent::__construct($context);
     }
-    
+
     /**
      * @return TinifyProvider;
      */
@@ -73,7 +75,7 @@ abstract class AbstractAdminhtmlController extends Action
     {
         return $this->tinifyFactory->create($this->retrieveOAuthCredentials());
     }
-    
+
     /**
      * Credentials are stored in the session, so they can be used later on. They
      * are unset after authorization is completed.
@@ -82,21 +84,44 @@ abstract class AbstractAdminhtmlController extends Action
      */
     private function retrieveOAuthCredentials()
     {
-        $oAuthCredentials = $this->session->getOAuthCredentials();
-        
+        $oAuthCredentials = $this->getSessionData(static::TINYCDN_OAUTH_CREDENTIALS_PARAM);
+
         if (!$oAuthCredentials) {
             $oAuthCredentials = $this->config->formatCredentials();
-            $this->session->setOAuthCredentials($oAuthCredentials);
+            $this->setSessionData(static::TINYCDN_OAUTH_CREDENTIALS_PARAM, $oAuthCredentials);
         }
-        
+
         return ['options' => $oAuthCredentials];
     }
-    
+
     /**
+     * @param $name
+     *
      * @return mixed
      */
-    public function unsetOAuthCredentials()
+    public function getSessionData($name)
     {
-        return $this->session->unsOAuthCredentials();
+        return $this->session->getData($name);
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     *
+     * @return mixed
+     */
+    public function setSessionData($name, $value)
+    {
+        return $this->session->setData($name, $value);
+    }
+
+    /**
+     * @param $name
+     *
+     * @return mixed
+     */
+    public function unsetSessionData($name)
+    {
+        return $this->session->unsData($name);
     }
 }

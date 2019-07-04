@@ -39,7 +39,7 @@ use TIG\TinyCDN\Model\Config\Source\Url;
 
 class Button extends Field
 {
-    const BUTTON_ID  = 'tinify_cdn_connect';
+    const BUTTON_ID = 'tinify_cdn_connect';
 
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_TinyCDN::config/form/button.phtml';
@@ -65,9 +65,9 @@ class Button extends Field
      */
     public function render(AbstractElement $element)
     {
-        $element->unsScope();
         $element->unsCanUseWebsiteValue();
         $element->unsCanUseDefaultValue();
+        $element->unsCanRestoreToDefault();
 
         return parent::render($element);
     }
@@ -91,15 +91,15 @@ class Button extends Field
     {
         $layout = $this->getLayout();
 
-        /** @var Magento\Backend\Block\Widget\Button $button */
-        $button     = $layout->createBlock(
+        /** @var \Magento\Backend\Block\Widget\Button $button */
+        $button = $layout->createBlock(
             'Magento\Backend\Block\Widget\Button'
         );
 
         $button->setData(
             [
-                'id'      => static::BUTTON_ID,
-                'label'   => __('Connect to your Tinify account')
+                'id'    => static::BUTTON_ID,
+                'label' => __('Connect to your Tinify account')
             ]
         );
 
@@ -107,10 +107,37 @@ class Button extends Field
     }
 
     /**
+     * Builds URL to Connect controller and adds current scope and id as params.
+     *
      * @return string
      */
     public function getConnectUrl()
     {
-        return $this->getUrl(Url::TINYCDN_CDN_CONNECT_URL);
+        $params      = $this->getRequest()->getParams();
+        $storeParams = $this->createRequiredParams($params);
+
+        return $this->getUrl(Url::TINYCDN_CDN_CONNECT_URL, $storeParams);
+    }
+
+    /**
+     * @param array $params
+     * @param array $requiredKeys
+     *
+     * @return array
+     */
+    private function createRequiredParams(array $params, $requiredKeys = ['website', 'store'])
+    {
+        $requiredParams = ['scope' => 'default', 'id' => 0];
+
+        $available = array_filter($params, function ($key) use ($requiredKeys) {
+            return in_array($key, $requiredKeys);
+        }, ARRAY_FILTER_USE_KEY);
+
+        if ($available) {
+            $requiredParams['scope'] = key($available);
+            $requiredParams['id']    = $available[key($available)];
+        }
+
+        return $requiredParams;
     }
 }
