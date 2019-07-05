@@ -30,22 +30,22 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Plugin\Catalog\Model\View\Asset;
+namespace TIG\TinyCDN\Plugin\Widget\Model\Template;
 
-use Magento\Catalog\Model\View\Asset\Image;
+use Magento\Widget\Model\Template\Filter;
 use TIG\TinyCDN\Plugin\AbstractPlugin;
 
-class ImagePlugin extends AbstractPlugin
+class FilterPlugin extends AbstractPlugin
 {
     /**
-     * @param Image $subject
-     * @param       $result
+     * @param Filter $subject
+     * @param        $result
      *
      * @return mixed
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     // @codingStandardsIgnoreLine
-    public function afterGetUrl(Image $subject, $result)
+    public function afterMediaDirective(Filter $subject, $result)
     {
         return $this->getCdnUrl($result);
     }

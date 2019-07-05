@@ -32,11 +32,20 @@
 
 namespace TIG\TinyCDN\Plugin\Framework\View\Asset;
 
+use Magento\Framework\View\Asset\File;
 use TIG\TinyCDN\Plugin\AbstractPlugin;
 
 class FilePlugin extends AbstractPlugin
 {
-    public function afterGetUrl(\Magento\Framework\View\Asset\File $subject, $result)
+    /**
+     * @param File $subject
+     * @param      $result
+     *
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    // @codingStandardsIgnoreLine
+    public function afterGetUrl(File $subject, $result)
     {
         return $this->getCdnUrl($result);
     }

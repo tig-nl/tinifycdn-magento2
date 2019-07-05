@@ -38,4 +38,7 @@
     <type name="\Magento\Catalog\Model\View\Asset\Image">
         <plugin name="tig_tinycdn_image_after_get_url" type="\TIG\TinyCDN\Plugin\Catalog\Model\View\Asset\ImagePlugin" sortOrder="100" />
     </type>
+    <type name="\Magento\Widget\Model\Template\Filter">
+        <plugin name="tig_tinycdn_filter_after_get_media_directive" type="\TIG\TinyCDN\Plugin\Widget\Model\Template\FilterPlugin" sortOrder="100" />
+    </type>
 </config>

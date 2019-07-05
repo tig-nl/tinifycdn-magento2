@@ -35,12 +35,18 @@ namespace TIG\TinyCDN\Plugin;
 use Magento\Store\Model\StoreManagerInterface;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
 
-class AbstractPlugin
+abstract class AbstractPlugin
 {
     private $storeManager;
 
     private $config;
 
+    /**
+     * AbstractPlugin constructor.
+     *
+     * @param StoreManagerInterface $storeManager
+     * @param Configuration         $config
+     */
     public function __construct(
         StoreManagerInterface $storeManager,
         Configuration $config
@@ -49,6 +55,12 @@ class AbstractPlugin
         $this->config       = $config;
     }
 
+    /**
+     * @param $url
+     *
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     public function getCdnUrl($url)
     {
         $endpoint    = $this->config->getCdnEndpoint();
