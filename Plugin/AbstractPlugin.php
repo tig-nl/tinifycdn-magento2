@@ -33,28 +33,35 @@
 namespace TIG\TinyCDN\Plugin;
 
 use Magento\Store\Model\StoreManagerInterface;
-use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
+use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration as CDNConfiguration;
+use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
 
 abstract class AbstractPlugin
 {
     /** @var StoreManagerInterface $storeManager */
     private $storeManager;
 
-    /** @var Configuration $config */
-    private $config;
+    /** @var CDNConfiguration $cdnConfig */
+    private $cdnConfig;
+
+    /** @var GeneralConfiguration $generalConfig */
+    private $generalConfig;
 
     /**
      * AbstractPlugin constructor.
      *
      * @param StoreManagerInterface $storeManager
-     * @param Configuration         $config
+     * @param CDNConfiguration      $cdnConfig
+     * @param GeneralConfiguration  $generalConfig
      */
     public function __construct(
         StoreManagerInterface $storeManager,
-        Configuration $config
+        CDNConfiguration $cdnConfig,
+        GeneralConfiguration $generalConfig
     ) {
-        $this->storeManager = $storeManager;
-        $this->config       = $config;
+        $this->storeManager  = $storeManager;
+        $this->cdnConfig     = $cdnConfig;
+        $this->generalConfig = $generalConfig;
     }
 
     /**
@@ -65,7 +72,11 @@ abstract class AbstractPlugin
      */
     public function getCdnUrl($url)
     {
-        $endpoint    = $this->config->getCdnEndpoint();
+        if (!$this->generalConfig->isEnabled()) {
+            return $url;
+        }
+
+        $endpoint    = $this->cdnConfig->getCdnEndpoint();
         $store       = $this->storeManager->getStore();
         $baseUrl     = $store->getBaseUrl();
         $modifiedUrl = str_replace($baseUrl, $endpoint, $url);
