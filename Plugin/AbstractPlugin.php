@@ -37,8 +37,10 @@ use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
 
 abstract class AbstractPlugin
 {
+    /** @var StoreManagerInterface $storeManager */
     private $storeManager;
 
+    /** @var Configuration $config */
     private $config;
 
     /**
