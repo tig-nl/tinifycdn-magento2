@@ -39,14 +39,14 @@ class ImagePlugin extends AbstractPlugin
 {
     /**
      * @param Image $subject
-     * @param       $result
+     * @param       $url
      *
      * @return mixed
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     // @codingStandardsIgnoreLine
-    public function afterGetUrl(Image $subject, $result)
+    public function afterGetUrl(Image $subject, $url)
     {
-        return $this->getCdnUrl($result);
+        return $this->getCdnUrl($url);
     }
 }

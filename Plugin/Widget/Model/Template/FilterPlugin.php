@@ -39,14 +39,14 @@ class FilterPlugin extends AbstractPlugin
 {
     /**
      * @param Filter $subject
-     * @param        $result
+     * @param        $url
      *
      * @return mixed
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     // @codingStandardsIgnoreLine
-    public function afterMediaDirective(Filter $subject, $result)
+    public function afterMediaDirective(Filter $subject, $url)
     {
-        return $this->getCdnUrl($result);
+        return $this->getCdnUrl($url);
     }
 }

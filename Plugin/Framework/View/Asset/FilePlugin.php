@@ -39,14 +39,14 @@ class FilePlugin extends AbstractPlugin
 {
     /**
      * @param File $subject
-     * @param      $result
+     * @param      $url
      *
      * @return mixed
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     // @codingStandardsIgnoreLine
-    public function afterGetUrl(File $subject, $result)
+    public function afterGetUrl(File $subject, $url)
     {
-        return $this->getCdnUrl($result);
+        return $this->getCdnUrl($url);
     }
 }
