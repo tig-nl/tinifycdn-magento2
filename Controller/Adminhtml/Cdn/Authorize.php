@@ -143,7 +143,7 @@ class Authorize extends AbstractAdminhtmlController
         }
 
         // If Authorization is successful, remove oAuth Credentials from session.
-        $this->unsetSessionData('o_auth_credentials');
+        $this->unsetSessionData(static::TINYCDN_OAUTH_CREDENTIALS_PARAM);
     }
 
     /**
