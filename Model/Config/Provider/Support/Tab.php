@@ -36,8 +36,8 @@ use TIG\TinyCDN\Model\AbstractConfigProvider;
 
 class Tab extends AbstractConfigProvider
 {
-    const TINYCDN_SUPPORTED_MAGENTO_VERSION = 'tig_tinycdn/supported_magento_version';
-    
+    const XPATH_TINYCDN_SUPPORTED_MAGENTO_VERSION = 'tig_tinycdn/supported_magento_version';
+
     /**
      * @param null $store
      *
@@ -45,6 +45,6 @@ class Tab extends AbstractConfigProvider
      */
     public function getSupportedMagentoVersions()
     {
-        return $this->getConfigValue(static::TINYCDN_SUPPORTED_MAGENTO_VERSION);
+        return $this->getConfigValue(static::XPATH_TINYCDN_SUPPORTED_MAGENTO_VERSION);
     }
 }

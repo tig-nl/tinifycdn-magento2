@@ -84,6 +84,6 @@ class Endpoints extends AbstractApi
      */
     private function doGetRequest()
     {
-        return $this->doApiRequest(static::TINIFY_API_CDN_SITES, 'get', true);
+        return $this->call(static::TINIFY_API_CDN_SITES, 'get', true);
     }
 }

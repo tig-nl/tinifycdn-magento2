@@ -64,7 +64,7 @@ abstract class AbstractApi
      *
      * @return mixed
      */
-    public function doApiRequest(string $uri, string $method, bool $includeToken)
+    public function call(string $uri, string $method, bool $includeToken)
     {
         $url = $this->config->getApiUrl($uri);
 

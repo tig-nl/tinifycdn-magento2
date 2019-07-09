@@ -39,17 +39,17 @@ use TIG\TinyCDN\Model\Config\Source\Url;
 
 class Configuration extends AbstractConfigProvider
 {
-    const TINYCDN_CDN_TEST         = 'tig_tinycdn/cdn/test';
+    const XPATH_TINYCDN_CDN_TEST         = 'tig_tinycdn/cdn/test';
 
-    const TINYCDN_CDN_LIVE         = 'tig_tinycdn/cdn/live';
+    const XPATH_TINYCDN_CDN_LIVE         = 'tig_tinycdn/cdn/live';
 
-    const TINYCDN_CDN_ACCESS_TOKEN = 'tig_tinycdn/cdn/access_token';
+    const XPATH_TINYCDN_CDN_ACCESS_TOKEN = 'tig_tinycdn/cdn/access_token';
 
-    const TINYCDN_CDN_ENDPOINT     = 'tig_tinycdn/cdn/endpoint';
+    const XPATH_TINYCDN_CDN_ENDPOINT     = 'tig_tinycdn/cdn/endpoint';
 
-    const TINYCDN_CDN_TOKEN_PARAM  = 'token';
+    const TINYCDN_CDN_TOKEN_PARAM        = 'token';
 
-    const TINYCDN_CDN_AUTH_PARAM   = 'authorization';
+    const TINYCDN_CDN_AUTH_PARAM         = 'authorization';
 
     /** @var Challenge $generate */
     private $challenge;
@@ -139,7 +139,7 @@ class Configuration extends AbstractConfigProvider
      */
     public function getTestCredentials()
     {
-        return $this->getConfigValue(static::TINYCDN_CDN_TEST);
+        return $this->getConfigValue(static::XPATH_TINYCDN_CDN_TEST);
     }
 
     /**
@@ -147,7 +147,7 @@ class Configuration extends AbstractConfigProvider
      */
     public function getLiveCredentials()
     {
-        return $this->getConfigValue(static::TINYCDN_CDN_LIVE);
+        return $this->getConfigValue(static::XPATH_TINYCDN_CDN_LIVE);
     }
 
     /**
@@ -155,7 +155,7 @@ class Configuration extends AbstractConfigProvider
      */
     public function getAccessToken()
     {
-        return $this->getConfigValue(static::TINYCDN_CDN_ACCESS_TOKEN);
+        return $this->getConfigValue(static::XPATH_TINYCDN_CDN_ACCESS_TOKEN);
     }
 
     /**
@@ -163,6 +163,6 @@ class Configuration extends AbstractConfigProvider
      */
     public function getCdnEndpoint()
     {
-        return $this->getConfigValue(static::TINYCDN_CDN_ENDPOINT);
+        return $this->getConfigValue(static::XPATH_TINYCDN_CDN_ENDPOINT);
     }
 }

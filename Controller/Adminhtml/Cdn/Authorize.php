@@ -133,7 +133,7 @@ class Authorize extends AbstractAdminhtmlController
         try {
             $accessToken = $provider->getAccessToken('authorization_code', ['code' => $authCode]);
             $this->configWriter->saveConfig(
-                Configuration::TINYCDN_CDN_ACCESS_TOKEN,
+                Configuration::XPATH_TINYCDN_CDN_ACCESS_TOKEN,
                 $accessToken,
                 $this->scope,
                 $this->storeId
@@ -161,7 +161,7 @@ class Authorize extends AbstractAdminhtmlController
     {
         try {
             $this->configWriter->saveConfig(
-                Configuration::TINYCDN_CDN_ENDPOINT,
+                Configuration::XPATH_TINYCDN_CDN_ENDPOINT,
                 $this->retrieveEndpoint(),
                 $this->scope,
                 $this->storeId
