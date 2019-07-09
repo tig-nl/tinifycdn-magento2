@@ -46,6 +46,8 @@ use Tinify\OAuth2\Client\Provider\TinifyProviderFactory;
 
 class Authorize extends AbstractAdminhtmlController
 {
+    const SYSTEM_CONFIG_TIG_TINYCDN_SECTION = 'adminhtml/system_config/edit/section/tig_tinycdn';
+
     /** @var ConfigWriter $configWriter */
     private $configWriter;
 
@@ -99,7 +101,7 @@ class Authorize extends AbstractAdminhtmlController
         $this->scope   = $this->getSessionData('scope');
 
         $redirect = $this->resultRedirectFactory->create();
-        $redirect->setPath('adminhtml/system_config/edit/section/tig_tinycdn', [$this->scope => $this->storeId]);
+        $redirect->setPath(static::SYSTEM_CONFIG_TIG_TINYCDN_SECTION, [$this->scope => $this->storeId]);
 
         if (!$authCode) {
             $this->messageManager->addErrorMessage(
@@ -147,11 +149,19 @@ class Authorize extends AbstractAdminhtmlController
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     private function retrieveEndpoint()
     {
-        return $this->endpoints->retrieveForCurrentStore();
+        $endpoint = $this->endpoints->fetchEndpoint();
+
+        if (!$endpoint) {
+            $this->messageManager->addErrorMessage(
+                __('No endpoint found for this store. Are you sure it\'s configured in your TinyCDN account?')
+            );
+        }
+
+        return $endpoint;
     }
 
     /**

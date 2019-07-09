@@ -41,19 +41,19 @@ class Endpoints extends AbstractApi
     /**
      * @return string|null
      */
-    public function retrieveForCurrentStore()
+    public function fetchEndpoint()
     {
-        $result = $this->retrieve();
-
+        $sites = $this->getAvailableSites();
+        // TODO: Retrieve actual base URL to retrieve correct endpoint.
         $baseUrl = 'https://example.com';
-        // TODO: endpoint not yet included in Tinify API.
-        return $this->findEndpointForCurrentStore($result, $baseUrl);
+
+        return $this->filterEndpoints($sites, $baseUrl);
     }
 
     /**
      * @return array
      */
-    public function retrieve()
+    public function getAvailableSites()
     {
         $result = $this->doGetRequest();
 
@@ -61,22 +61,22 @@ class Endpoints extends AbstractApi
     }
 
     /**
-     * @param $results
+     * @param $availableSites
      * @param $baseUrl
      *
      * @return string|null
      */
-    private function findEndpointForCurrentStore($results, $baseUrl)
+    private function filterEndpoints($availableSites, $baseUrl)
     {
-        foreach ($results as $index => $properties) {
-            $originUrl = is_object($properties) ? $properties->origin_url : $properties['origin_url'];
-            if (is_object($properties) && $originUrl == $baseUrl) {
-                // TODO: Change to actual input. Not available through API yet.
-                return 'https://' . $results[$index]->key . '.tinify.com/';
+        $site = array_filter(
+            $availableSites,
+            function ($properties) use ($baseUrl) {
+                return $properties->origin_url == $baseUrl;
             }
-        }
+        );
+        $site = reset($site);
 
-        return null;
+        return $site->endpoint ?: null;
     }
 
     /**
