@@ -34,7 +34,7 @@
     <default>
         <tig_tinycdn>
             <stability />
-            <supported_magento_version>2.1.17, 2.2.8, 2.3.1</supported_magento_version>
+            <supported_magento_version>2.1.18, 2.2.9, 2.3.2</supported_magento_version>
             <general>
                 <mode>0</mode>
             </general>

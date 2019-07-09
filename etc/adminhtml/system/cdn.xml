@@ -44,6 +44,7 @@
             <label>Endpoint</label>
             <comment><![CDATA[The endpoint used by the currently selected Magento 2 store.]]></comment>
             <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Disabled</frontend_model>
+            <config_path>tig_tinycdn/cdn/endpoint</config_path>
         </field>
     </group>
 </include>

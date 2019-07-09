@@ -40,13 +40,13 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <tab id="tig_tinycdn" translate="label" sortOrder="9999">
-            <label>TinyCDN</label>
-            <class>tinycdn-tab</class>
+        <tab id="tinify" translate="label" sortOrder="9999">
+            <label>Tinify</label>
+            <class>tinify-tab</class>
         </tab>
         <section id="tig_tinycdn" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Configuration</label>
-            <tab>tig_tinycdn</tab>
+            <label>TinyCDN</label>
+            <tab>tinify</tab>
             <resource>TIG_TinyCDN::configuration</resource>
             <include path="TIG_TinyCDN::system/support.xml" />
             <include path="TIG_TinyCDN::system/general.xml" />
