@@ -32,6 +32,14 @@
 
 namespace TIG\TinyCDN\Model;
 
+/**
+ * Class Challenge
+ *
+ * This class provides the necessary methods to create a challenge through which TinyCDN and Magento
+ * 2 can verify the validity of an authentication session.
+ *
+ * @package TIG\TinyCDN\Model
+ */
 class Challenge extends AbstractModel
 {
     /**
@@ -41,7 +49,7 @@ class Challenge extends AbstractModel
     {
         return $this->encode(pack('H*', hash('sha256', $verifier)));
     }
-    
+
     /**
      * @param $randomValue
      *
@@ -51,7 +59,7 @@ class Challenge extends AbstractModel
     {
         return $this->encode(pack('H*', $randomValue));
     }
-    
+
     /**
      * @return string
      */
@@ -59,7 +67,7 @@ class Challenge extends AbstractModel
     {
         return bin2hex(openssl_random_pseudo_bytes(32));
     }
-    
+
     /**
      * @param $value
      *
@@ -70,7 +78,7 @@ class Challenge extends AbstractModel
         $base64    = base64_encode($value);
         $base64    = trim($base64, "=");
         $base64url = strtr($base64, '+/', '-_');
-        
+
         return ($base64url);
     }
 }
