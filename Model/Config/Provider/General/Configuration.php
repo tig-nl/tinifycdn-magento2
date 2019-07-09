@@ -36,16 +36,16 @@ use TIG\TinyCDN\Model\AbstractConfigProvider;
 
 class Configuration extends AbstractConfigProvider
 {
-    const TINYCDN_GENERAL_MODE = 'tig_tinycdn/general/mode';
-    
+    const XPATH_TINYCDN_GENERAL_MODE = 'tig_tinycdn/general/mode';
+
     /**
      * @return mixed
      */
     public function getMode()
     {
-        return $this->getConfigValue(static::TINYCDN_GENERAL_MODE);
+        return $this->getConfigValue(static::XPATH_TINYCDN_GENERAL_MODE);
     }
-    
+
     /**
      * @return bool
      */
@@ -54,10 +54,10 @@ class Configuration extends AbstractConfigProvider
         if ($this->getMode() == 1) {
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * @return bool
      */
@@ -66,10 +66,10 @@ class Configuration extends AbstractConfigProvider
         if ($this->getMode() == 2) {
             return true;
         }
-        
+
         return false;
     }
-    
+
     /**
      * @return bool
      */
@@ -78,7 +78,7 @@ class Configuration extends AbstractConfigProvider
         if ($this->testModeEnabled() || $this->liveModeEnabled()) {
             return true;
         }
-        
+
         return false;
     }
 }

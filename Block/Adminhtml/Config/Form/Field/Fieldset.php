@@ -41,7 +41,7 @@ class Fieldset extends MagentoFieldset
         '2' => 'mode_test',
         '0' => 'mode_off'
     ];
-    
+
     /**
      * @param \Magento\Framework\Data\Form\Element\AbstractElement $element
      *
@@ -50,7 +50,7 @@ class Fieldset extends MagentoFieldset
     // @codingStandardsIgnoreLine
     protected function _getFrontendClass($element)
     {
-        $mode = $this->_scopeConfig->getValue(GeneralConfiguration::TINYCDN_GENERAL_MODE);
+        $mode = $this->_scopeConfig->getValue(GeneralConfiguration::XPATH_TINYCDN_GENERAL_MODE);
         $class = 'mode_off';
         if (array_key_exists($mode, $this->classNames)) {
             $class = $this->classNames[$mode];

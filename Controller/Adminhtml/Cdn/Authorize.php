@@ -93,7 +93,7 @@ class Authorize extends AbstractAdminhtmlController
      */
     public function execute()
     {
-        $provider      = $this->createTinifyFactory();
+        $provider      = $this->createTinifyProviderInstance();
         $authCode      = $this->getRequest()->getParam('code');
         $this->storeId = $this->getSessionData('id');
         $this->scope   = $this->getSessionData('scope');
@@ -133,7 +133,7 @@ class Authorize extends AbstractAdminhtmlController
         try {
             $accessToken = $provider->getAccessToken('authorization_code', ['code' => $authCode]);
             $this->configWriter->saveConfig(
-                Configuration::TINYCDN_CDN_ACCESS_TOKEN,
+                Configuration::XPATH_TINYCDN_CDN_ACCESS_TOKEN,
                 $accessToken,
                 $this->scope,
                 $this->storeId
@@ -143,7 +143,7 @@ class Authorize extends AbstractAdminhtmlController
         }
 
         // If Authorization is successful, remove oAuth Credentials from session.
-        $this->unsetSessionData('o_auth_credentials');
+        $this->unsetSessionData(static::TINYCDN_OAUTH_CREDENTIALS_PARAM);
     }
 
     /**
@@ -161,7 +161,7 @@ class Authorize extends AbstractAdminhtmlController
     {
         try {
             $this->configWriter->saveConfig(
-                Configuration::TINYCDN_CDN_ENDPOINT,
+                Configuration::XPATH_TINYCDN_CDN_ENDPOINT,
                 $this->retrieveEndpoint(),
                 $this->scope,
                 $this->storeId

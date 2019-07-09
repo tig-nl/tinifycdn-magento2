@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
- *
+<?php
+/**
  *
  *          ..::..
  *     ..::::::::::::..
@@ -29,17 +28,25 @@
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
- *
--->
-<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
-    <!-- Support section -->
-    <group id="support" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-        <label>Version &amp; Support</label>
-        <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Fieldset</frontend_model>
-        <fieldset_css>tig_tinycdn-section</fieldset_css>
-        <attribute type="expanded">1</attribute>
-        <group id="tab" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
-            <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Support\Tab</frontend_model>
-        </group>
-    </group>
-</include>
+ */
+
+namespace TIG\TinyCDN\Plugin\Framework\View\Asset;
+
+use Magento\Framework\View\Asset\File;
+use TIG\TinyCDN\Plugin\AbstractPlugin;
+
+class FilePlugin extends AbstractPlugin
+{
+    /**
+     * @param File $subject
+     * @param      $url
+     *
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    // @codingStandardsIgnoreLine
+    public function afterGetUrl(File $subject, $url)
+    {
+        return $this->getCdnUrl($url);
+    }
+}

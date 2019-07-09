@@ -71,7 +71,7 @@ abstract class AbstractAdminhtmlController extends Action
     /**
      * @return TinifyProvider;
      */
-    public function createTinifyFactory()
+    public function createTinifyProviderInstance()
     {
         return $this->tinifyFactory->create($this->retrieveOAuthCredentials());
     }
@@ -88,7 +88,7 @@ abstract class AbstractAdminhtmlController extends Action
 
         if (!$oAuthCredentials) {
             $oAuthCredentials = $this->config->formatCredentials();
-            $this->setSessionData(static::TINYCDN_OAUTH_CREDENTIALS_PARAM, $oAuthCredentials);
+            $this->addSessionData(static::TINYCDN_OAUTH_CREDENTIALS_PARAM, $oAuthCredentials);
         }
 
         return ['options' => $oAuthCredentials];
@@ -110,7 +110,7 @@ abstract class AbstractAdminhtmlController extends Action
      *
      * @return mixed
      */
-    public function setSessionData($name, $value)
+    public function addSessionData($name, $value)
     {
         return $this->session->setData($name, $value);
     }
