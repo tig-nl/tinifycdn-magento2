@@ -122,6 +122,6 @@ abstract class AbstractAdminhtmlController extends Action
      */
     public function unsetSessionData($name)
     {
-        return $this->session->unsData($name);
+        return $this->session->unsetData($name);
     }
 }
