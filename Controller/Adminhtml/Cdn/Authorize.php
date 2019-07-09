@@ -93,7 +93,7 @@ class Authorize extends AbstractAdminhtmlController
      */
     public function execute()
     {
-        $provider      = $this->createTinifyFactory();
+        $provider      = $this->createTinifyProviderInstance();
         $authCode      = $this->getRequest()->getParam('code');
         $this->storeId = $this->getSessionData('id');
         $this->scope   = $this->getSessionData('scope');

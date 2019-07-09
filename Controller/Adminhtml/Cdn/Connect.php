@@ -73,7 +73,7 @@ class Connect extends AbstractAdminhtmlController
      */
     public function execute()
     {
-        $provider = $this->createTinifyFactory();
+        $provider = $this->createTinifyProviderInstance();
         /**
          * We need to grab the Key from the current URL, because otherwise Magento 2 will auto-
          * generate a wrong key later on which will not pass validation.
@@ -82,8 +82,8 @@ class Connect extends AbstractAdminhtmlController
         $scopeId = $this->getRequest()->getParam('id');
         $scope   = $this->getRequest()->getParam('scope');
 
-        $this->setSessionData('id', $scopeId);
-        $this->setSessionData('scope', $scope);
+        $this->addSessionData('id', $scopeId);
+        $this->addSessionData('scope', $scope);
         $authUrl = $provider->getAuthorizationUrl(['state' => $formKey]);
 
         $redirect = $this->resultRedirectFactory->create();
