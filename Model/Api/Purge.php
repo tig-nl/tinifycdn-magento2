@@ -34,56 +34,27 @@ namespace TIG\TinyCDN\Model\Api;
 
 use TIG\TinyCDN\Model\AbstractApi;
 
-class Endpoints extends AbstractApi
+class Purge extends AbstractApi
 {
-    const TINIFY_API_CDN_SITES = 'cdn/sites';
+    const TINIFY_API_CDN_PURGE = 'cdn/sites/{id}/purge';
 
     /**
-     * @return string|null
-     */
-    public function fetchEndpoint()
-    {
-        $sites = $this->getAvailableSites();
-        // TODO: Retrieve actual base URL to retrieve correct endpoint.
-        $baseUrl = 'https://example.com';
-
-        return $this->filterEndpoints($sites, $baseUrl);
-    }
-
-    /**
-     * @return array
-     */
-    public function getAvailableSites()
-    {
-        $result = $this->doGetRequest();
-
-        return json_decode($result);
-    }
-
-    /**
-     * @param $availableSites
-     * @param $baseUrl
+     * @param $id
      *
-     * @return string|null
+     * @return mixed
      */
-    private function filterEndpoints($availableSites, $baseUrl)
+    public function purge($id)
     {
-        $site = array_filter(
-            $availableSites,
-            function ($properties) use ($baseUrl) {
-                return $properties->origin_url == $baseUrl;
-            }
-        );
-        $site = reset($site);
-
-        return $site->endpoint ?: null;
+        return $this->doPostRequest($id);
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    private function doGetRequest()
+    private function doPostRequest($id)
     {
-        return $this->call(static::TINIFY_API_CDN_SITES, 'get', true);
+        $uri = str_replace('{id}', $id, self::TINIFY_API_CDN_PURGE);
+
+        return $this->call($uri, 'post', true);
     }
 }

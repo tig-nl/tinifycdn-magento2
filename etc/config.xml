@@ -53,6 +53,7 @@
                     <url_api>https://api.tinify.com/</url_api>
                 </live>
                 <access_token>0</access_token>
+                <site_id>0</site_id>
             </cdn>
         </tig_tinycdn>
     </default>

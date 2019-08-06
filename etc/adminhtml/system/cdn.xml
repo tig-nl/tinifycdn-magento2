@@ -33,18 +33,24 @@
 -->
 <include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
     <!-- CDN Configuration -->
-    <group id="cdn" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+    <group id="cdn" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" >
         <label>CDN Configuration</label>
+        <comment><![CDATA[CDN can only be purged on Store View level.]]></comment>
         <field id="connect" translate="label comment" type="button" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>TinyCDN account</label>
-            <comment><![CDATA[Connect your Tinify account to your Magento 2 store.]]></comment>
-            <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button</frontend_model>
+            <comment><![CDATA[Connect your Tinify account to this Store View.]]></comment>
+            <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button\Connect</frontend_model>
         </field>
         <field id="endpoint" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Endpoint</label>
-            <comment><![CDATA[The endpoint used by the currently selected Magento 2 store.]]></comment>
+            <comment><![CDATA[The endpoint used by this Store View.]]></comment>
             <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Disabled</frontend_model>
             <config_path>tig_tinycdn/cdn/endpoint</config_path>
+        </field>
+        <field id="purge" translate="label comment" type="button" sortOrder="30" showInStore="1">
+            <label>Purge Site</label>
+            <comment><![CDATA[Purges all the CDN's data for this Store View.]]></comment>
+            <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button\Purge</frontend_model>
         </field>
     </group>
 </include>

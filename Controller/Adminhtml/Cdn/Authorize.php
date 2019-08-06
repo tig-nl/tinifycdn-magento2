@@ -35,24 +35,24 @@ namespace TIG\TinyCDN\Controller\Adminhtml\Cdn;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Magento\Config\Model\ResourceModel\Config as ConfigWriter;
 use Magento\Framework\App\Action\Context;
+use Magento\Framework\App\ScopeInterface as FrameworkScopeInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\Session\SessionManagerInterface;
+use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
 use TIG\TinyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
-use TIG\TinyCDN\Model\Api\Endpoints;
+use TIG\TinyCDN\Model\Api\Site;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
 use Tinify\OAuth2\Client\Provider\TinifyProvider;
 use Tinify\OAuth2\Client\Provider\TinifyProviderFactory;
 
 class Authorize extends AbstractAdminhtmlController
 {
-    const SYSTEM_CONFIG_TIG_TINYCDN_SECTION = 'adminhtml/system_config/edit/section/tig_tinycdn';
-
     /** @var ConfigWriter $configWriter */
     private $configWriter;
 
-    /** @var Endpoints $endpoints */
-    private $endpoints;
+    /** @var Site $site */
+    private $site;
 
     /** @var string */
     private $scope;
@@ -76,11 +76,11 @@ class Authorize extends AbstractAdminhtmlController
         Configuration $config,
         TinifyProviderFactory $tinifyFactory,
         ConfigWriter $configWriter,
-        Endpoints $endpoints
+        Site $site
     ) {
         $this->messageManager = $messageManager;
         $this->configWriter   = $configWriter;
-        $this->endpoints      = $endpoints;
+        $this->site           = $site;
         parent::__construct(
             $context,
             $session,
@@ -111,9 +111,13 @@ class Authorize extends AbstractAdminhtmlController
             return $redirect;
         }
 
+        $this->scope = $this->resolveScope($this->scope);
+        $site = $this->site->fetchSite($this->storeId);
+
         try {
             $this->saveAccessToken($provider, $authCode);
-            $this->saveEndpoint();
+            $this->saveEndpoint($site);
+            $this->saveSiteId($site);
         } catch (\Exception $error) {
             $this->messageManager->addErrorMessage($error->getMessage());
         }
@@ -124,11 +128,24 @@ class Authorize extends AbstractAdminhtmlController
         return $redirect;
     }
 
+    private function resolveScope($scope)
+    {
+        if ($scope == 'website') {
+            return StoreScopeInterface::SCOPE_WEBSITES;
+        }
+
+        if ($scope == 'store') {
+            return StoreScopeInterface::SCOPE_STORES;
+        }
+
+        return FrameworkScopeInterface::SCOPE_DEFAULT;
+    }
+
     /**
      * @param TinifyProvider $provider
      * @param                $authCode
      *
-     * @return ManagerInterface
+     * @return void|ManagerInterface
      */
     private function saveAccessToken(TinifyProvider $provider, $authCode)
     {
@@ -149,11 +166,51 @@ class Authorize extends AbstractAdminhtmlController
     }
 
     /**
+     * @return ManagerInterface
+     */
+    private function saveEndpoint($currentSite)
+    {
+        try {
+            $this->configWriter->saveConfig(
+                Configuration::XPATH_TINYCDN_CDN_ENDPOINT,
+                $this->retrieveEndpoint($currentSite),
+                $this->scope,
+                $this->storeId
+            );
+        } catch (\Exception $error) {
+            return $this->messageManager->addErrorMessage($error->getMessage());
+        }
+
+        $this->messageManager->addNoticeMessage(__('Do not forget to save your configuration!'));
+
+        return $this->messageManager->addSuccessMessage(__('Your TinyCDN endpoint was successfully set.'));
+    }
+
+    /**
+     * @param $currentSite
+     *
+     * @return ManagerInterface|void
+     */
+    private function saveSiteId($currentSite)
+    {
+        try {
+            $this->configWriter->saveConfig(
+                Configuration::XPATH_TINYCDN_CDN_SITE_ID,
+                $this->retrieveSiteId($currentSite),
+                $this->scope,
+                $this->storeId
+            );
+        } catch (\Exception $error) {
+            return $this->messageManager->addErrorMessage($error->getMessage());
+        }
+    }
+
+    /**
      * @return string|null
      */
-    private function retrieveEndpoint()
+    private function retrieveEndpoint($site)
     {
-        $endpoint = $this->endpoints->fetchEndpoint();
+        $endpoint = $site->endpoint ?: null;
 
         if (!$endpoint) {
             $this->messageManager->addErrorMessage(
@@ -165,23 +222,18 @@ class Authorize extends AbstractAdminhtmlController
     }
 
     /**
-     * @return ManagerInterface
+     * @return string|null
      */
-    private function saveEndpoint()
+    private function retrieveSiteId($site)
     {
-        try {
-            $this->configWriter->saveConfig(
-                Configuration::XPATH_TINYCDN_CDN_ENDPOINT,
-                $this->retrieveEndpoint(),
-                $this->scope,
-                $this->storeId
+        $siteId = $site->id ?: null;
+
+        if (!$siteId) {
+            $this->messageManager->addErrorMessage(
+                __('No site ID found for this Store View. Are you sure it\'s configured in your TinyCDN account?')
             );
-        } catch (\Exception $error) {
-            return $this->messageManager->addErrorMessage($error->getMessage());
         }
 
-        $this->messageManager->addNoticeMessage(__('Do not forget to save your configuration!'));
-
-        return $this->messageManager->addSuccessMessage(__('Your TinyCDN endpoint was successfully set.'));
+        return $siteId;
     }
 }
