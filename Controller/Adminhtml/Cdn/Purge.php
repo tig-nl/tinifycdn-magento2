@@ -92,10 +92,7 @@ class Purge extends AbstractAdminhtmlController
 
         if ($result['status'] !== 200) {
             $this->messageManager->addErrorMessage(
-                sprintf(
-                    __('Site CDN couldn\'t be purged. Something went wrong. Error-code: %s'),
-                    $result['status']
-                )
+                sprintf(__('Site CDN couldn\'t be purged. Something went wrong. Error-code: %s'), $result['status'])
             );
         }
 
