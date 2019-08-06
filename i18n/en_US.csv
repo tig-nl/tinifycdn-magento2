@@ -1,7 +1,12 @@
 "Connect to your Tinify account","Connect to your Tinify account"
+"Purge this Site","Purge this Site"
 "No authorization code provided. Direct access not allowed.","No authorization code provided. Direct access not allowed."
 "Do not forget to save your configuration!","Do not forget to save your configuration!"
 "Your TinyCDN endpoint was successfully set.","Your TinyCDN endpoint was successfully set."
+"No endpoint found for this store. Are you sure it's configured in your TinyCDN account?","No endpoint found for this store. Are you sure it's configured in your TinyCDN account?"
+"No site ID found for this Store View. Are you sure it's configured in your TinyCDN account?","No site ID found for this Store View. Are you sure it's configured in your TinyCDN account?"
+"Site CDN couldn't be purged. Something went wrong. Error-code: %s","Site CDN couldn't be purged. Something went wrong. Error-code: %s"
+"Site CDN successfully purged.","Site CDN successfully purged."
 Off,Off
 Live,Live
 Test,Test
@@ -18,13 +23,15 @@ Support,Support
 "This extension is developed by <a href=""https://tig.nl"" target=""_BLANK"">TIG</a>","This extension is developed by <a href=""https://tig.nl"" target=""_BLANK"">TIG</a>"
 "Extension basic configuration and account information","Extension basic configuration and account information"
 "Please contact:","Please contact:"
+Tinify,Tinify
 TinyCDN,TinyCDN
-Configuration,Configuration
 "CDN Configuration","CDN Configuration"
 "TinyCDN account","TinyCDN account"
-"Connect your Tinify account to your Magento 2 store.","Connect your Tinify account to your Magento 2 store."
+"Connect your Tinify account to this Store View.","Connect your Tinify account to this Store View."
 Endpoint,Endpoint
-"The endpoint used by the currently selected Magento 2 store.","The endpoint used by the currently selected Magento 2 store."
+"The endpoint used by this Store View.","The endpoint used by this Store View."
+"Purge Site","Purge Site"
+"Purges all the CDN's data for this Store View.","Purges all the CDN's data for this Store View."
 "General Configuration","General Configuration"
 Mode,Mode
 "Make sure to save your configuration when you make changes to these settings, before (re)connecting to your Tinify account.","Make sure to save your configuration when you make changes to these settings, before (re)connecting to your Tinify account."
