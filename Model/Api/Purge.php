@@ -49,7 +49,9 @@ class Purge extends AbstractApi
     }
 
     /**
-     * @return mixed
+     * @param $id
+     *
+     * @return array
      */
     private function doPostRequest($id)
     {

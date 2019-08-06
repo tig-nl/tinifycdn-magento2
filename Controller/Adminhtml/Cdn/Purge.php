@@ -42,10 +42,13 @@ use Tinify\OAuth2\Client\Provider\TinifyProviderFactory;
 
 class Purge extends AbstractAdminhtmlController
 {
+    /** @var Api $api */
     private $api;
 
+    /** @var $scope */
     private $scope;
 
+    /** @var $storeId */
     private $storeId;
 
     /**
@@ -73,6 +76,9 @@ class Purge extends AbstractAdminhtmlController
         );
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
         $this->scope   = $this->getRequest()->getParam('scope');

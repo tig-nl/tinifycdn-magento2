@@ -127,6 +127,9 @@ abstract class AbstractAdminhtmlController extends Action
         return $this->session->unsetData($name);
     }
 
+    /**
+     * @return Configuration
+     */
     public function getConfig()
     {
         return $this->config;

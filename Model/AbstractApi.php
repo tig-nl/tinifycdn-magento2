@@ -70,7 +70,6 @@ abstract class AbstractApi
 
         if ($includeToken) {
             $token = $this->config->getAccessToken();
-
             $this->curl->addHeader(Configuration::TINYCDN_CDN_AUTH_PARAM, 'Bearer ' . $token);
         }
 

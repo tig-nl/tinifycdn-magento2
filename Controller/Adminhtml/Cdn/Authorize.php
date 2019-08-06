@@ -90,8 +90,7 @@ class Authorize extends AbstractAdminhtmlController
     }
 
     /**
-     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface|void
-     * @throws LocalizedException
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
      */
     public function execute()
     {
@@ -128,6 +127,11 @@ class Authorize extends AbstractAdminhtmlController
         return $redirect;
     }
 
+    /**
+     * @param $scope
+     *
+     * @return string
+     */
     private function resolveScope($scope)
     {
         if ($scope == 'website') {
