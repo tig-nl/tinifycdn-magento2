@@ -134,15 +134,14 @@ class Authorize extends AbstractAdminhtmlController
      */
     private function resolveScope($scope)
     {
-        if ($scope == 'website') {
-            return StoreScopeInterface::SCOPE_WEBSITES;
+        switch ($scope) {
+            case 'website':
+                return StoreScopeInterface::SCOPE_WEBSITES;
+            case 'store':
+                return StoreScopeInterface::SCOPE_STORES;
+            default:
+                return FrameworkScopeInterface::SCOPE_DEFAULT;
         }
-
-        if ($scope == 'store') {
-            return StoreScopeInterface::SCOPE_STORES;
-        }
-
-        return FrameworkScopeInterface::SCOPE_DEFAULT;
     }
 
     /**
@@ -214,7 +213,7 @@ class Authorize extends AbstractAdminhtmlController
      */
     private function retrieveEndpoint($site)
     {
-        $endpoint = $site->endpoint ?: null;
+        $endpoint = isset($site) ? $site->endpoint : null;
 
         if (!$endpoint) {
             $this->messageManager->addErrorMessage(
