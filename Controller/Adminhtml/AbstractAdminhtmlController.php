@@ -43,6 +43,8 @@ abstract class AbstractAdminhtmlController extends Action
 {
     const TINYCDN_OAUTH_CREDENTIALS_PARAM = 'o_auth_credentials';
 
+    const SYSTEM_CONFIG_TIG_TINYCDN_SECTION = 'adminhtml/system_config/edit/section/tig_tinycdn';
+
     /** @var SessionManagerInterface $session */
     private $session;
 
@@ -123,5 +125,13 @@ abstract class AbstractAdminhtmlController extends Action
     public function unsetSessionData($name)
     {
         return $this->session->unsetData($name);
+    }
+
+    /**
+     * @return Configuration
+     */
+    public function getConfig()
+    {
+        return $this->config;
     }
 }

@@ -35,15 +35,9 @@ namespace TIG\TinyCDN\Block\Adminhtml\Config\Form\Field;
 use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use TIG\TinyCDN\Model\Config\Source\Url;
 
-class Button extends Field
+abstract class AbstractButton extends Field
 {
-    const BUTTON_ID = 'tinify_cdn_connect';
-
-    // @codingStandardsIgnoreLine
-    protected $_template = 'TIG_TinyCDN::config/form/button.phtml';
-
     /**
      * Button constructor.
      *
@@ -57,6 +51,11 @@ class Button extends Field
     ) {
         parent::__construct($context, $data);
     }
+
+    /**
+     * @return mixed
+     */
+    abstract public function getButtonHtml();
 
     /**
      * @param AbstractElement $element
@@ -84,48 +83,12 @@ class Button extends Field
     }
 
     /**
-     * @return string
-     * @throws \Magento\Framework\Exception\LocalizedException
-     */
-    public function getButtonHtml()
-    {
-        $layout = $this->getLayout();
-
-        /** @var \Magento\Backend\Block\Widget\Button $button */
-        $button = $layout->createBlock(
-            'Magento\Backend\Block\Widget\Button'
-        );
-
-        $button->setData(
-            [
-                'id'    => static::BUTTON_ID,
-                'label' => __('Connect to your Tinify account')
-            ]
-        );
-
-        return $button->toHtml();
-    }
-
-    /**
-     * Builds URL to Connect controller and adds current scope and id as params.
-     *
-     * @return string
-     */
-    public function getConnectUrl()
-    {
-        $params      = $this->getRequest()->getParams();
-        $storeParams = $this->createRequiredParams($params);
-
-        return $this->getUrl(Url::TINYCDN_CDN_CONNECT_URL, $storeParams);
-    }
-
-    /**
      * @param array $params
      * @param array $requiredKeys
      *
      * @return array
      */
-    private function createRequiredParams(array $params, $requiredKeys = ['website', 'store'])
+    public function createRequiredParams(array $params, $requiredKeys = ['website', 'store'])
     {
         $requiredParams = ['scope' => 'default', 'id' => 0];
 

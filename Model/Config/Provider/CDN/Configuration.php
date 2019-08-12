@@ -45,6 +45,8 @@ class Configuration extends AbstractConfigProvider
 
     const XPATH_TINYCDN_CDN_ACCESS_TOKEN = 'tig_tinycdn/cdn/access_token';
 
+    const XPATH_TINYCDN_CDN_SITE_ID      = 'tig_tinycdn/cdn/site_id';
+
     const XPATH_TINYCDN_CDN_ENDPOINT     = 'tig_tinycdn/cdn/endpoint';
 
     const TINYCDN_CDN_TOKEN_PARAM        = 'token';
@@ -75,6 +77,7 @@ class Configuration extends AbstractConfigProvider
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magento\Framework\App\RequestInterface $request,
         Challenge $challenge,
         GeneralConfiguration $generalConfig,
         Url $urlBuilder,
@@ -84,7 +87,7 @@ class Configuration extends AbstractConfigProvider
         $this->challenge     = $challenge;
         $this->generalConfig = $generalConfig;
         $this->urlBuilder    = $urlBuilder;
-        parent::__construct($context, $registry, $scopeConfig, $resource, $resourceCollection);
+        parent::__construct($context, $registry, $scopeConfig, $request, $resource, $resourceCollection);
     }
 
     /**
@@ -153,16 +156,24 @@ class Configuration extends AbstractConfigProvider
     /**
      * @return string
      */
-    public function getAccessToken()
+    public function getAccessToken($storeId = null)
     {
-        return $this->getConfigValue(static::XPATH_TINYCDN_CDN_ACCESS_TOKEN);
+        return $this->getConfigValue(static::XPATH_TINYCDN_CDN_ACCESS_TOKEN. $storeId);
     }
 
     /**
      * @return string
      */
-    public function getCdnEndpoint()
+    public function getCdnEndpoint($storeId = null)
     {
-        return $this->getConfigValue(static::XPATH_TINYCDN_CDN_ENDPOINT);
+        return $this->getConfigValue(static::XPATH_TINYCDN_CDN_ENDPOINT, $storeId);
+    }
+
+    /**
+     * @return string
+     */
+    public function getSiteId($storeId = null)
+    {
+        return $this->getConfigValue(static::XPATH_TINYCDN_CDN_SITE_ID, $storeId);
     }
 }

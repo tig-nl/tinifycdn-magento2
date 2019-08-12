@@ -32,20 +32,25 @@
 
 namespace TIG\TinyCDN\Model;
 
+use Magento\Framework\App\ScopeInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface as ScopeConfig;
-use Magento\Store\Model\ScopeInterface;
+use Magento\Framework\App\RequestInterface;
 
 abstract class AbstractConfigProvider extends AbstractModel
 {
-    /** @var ScopeConfig ScopeConfig */
+    /** @var ScopeConfig $scopeConfig */
     private $scopeConfig;
-    
+
+    /** @var RequestInterface $request */
+    private $request;
+
     /**
-     * Config constructor.
+     * AbstractConfigProvider constructor.
      *
      * @param \Magento\Framework\Model\Context                             $context
      * @param \Magento\Framework\Registry                                  $registry
      * @param ScopeConfig                                                  $scopeConfig
+     * @param RequestInterface                                             $request
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
      * @param \Magento\Framework\Data\Collection\AbstractDb|null           $resourceCollection
      */
@@ -53,20 +58,46 @@ abstract class AbstractConfigProvider extends AbstractModel
         \Magento\Framework\Model\Context $context,
         \Magento\Framework\Registry $registry,
         ScopeConfig $scopeConfig,
+        RequestInterface $request,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
         \Magento\Framework\Data\Collection\AbstractDb $resourceCollection = null
     ) {
         $this->scopeConfig = $scopeConfig;
+        $this->request     = $request;
         parent::__construct($context, $registry, $resource, $resourceCollection);
     }
-    
+
     /**
      * @param $path
      *
      * @return mixed
      */
-    public function getConfigValue($path)
+    public function getConfigValue($path, $storeId = null)
     {
-        return $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->getValue($path, $this->resolveScope(), $storeId);
+    }
+
+    /**
+     * Since configuration values use the plural form of a scope (e.g. 'websites' instead of
+     * 'website') we use the request's params to resolve the singular form to a plural form.
+     *
+     * @return string
+     */
+    private function resolveScope()
+    {
+        $scopes = ['store', 'website'];
+        $params = $this->request->getParams();
+
+        $scope = array_filter($params, function ($key) use ($scopes) {
+            return in_array($key, $scopes);
+        }, ARRAY_FILTER_USE_KEY);
+
+        if (empty($scope)) {
+            return ScopeInterface::SCOPE_DEFAULT;
+        }
+
+        $scope = key($scope) . 's'; // Make string plural.
+
+        return $scope;
     }
 }

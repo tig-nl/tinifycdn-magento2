@@ -44,6 +44,8 @@ class Url extends AbstractConfigSource
 
     const TINYCDN_CDN_CONNECT_URL   = 'tinify/cdn/connect';
 
+    const TINYCDN_CDN_PURGE_URL     = 'tinify/cdn/purge';
+
     /** @var BackendUrlInterface $backendUrlBuilder */
     private $backendUrlBuilder;
 
@@ -139,5 +141,15 @@ class Url extends AbstractConfigSource
     public function createConnectUrl()
     {
         return $this->buildUrl(static::TINYCDN_CDN_CONNECT_URL);
+    }
+
+    /**
+     * @param array|null $params
+     *
+     * @return string
+     */
+    public function createPurgeUrl(array $params = null)
+    {
+        return $this->buildUrl(static::TINYCDN_CDN_PURGE_URL, true, $params);
     }
 }

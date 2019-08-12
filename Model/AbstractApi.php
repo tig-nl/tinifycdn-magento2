@@ -59,10 +59,10 @@ abstract class AbstractApi
 
     /**
      * @param string $uri
-     * @param string $method Can be either 'get' or 'post'
+     * @param string $method
      * @param bool   $includeToken
      *
-     * @return mixed
+     * @return array
      */
     public function call(string $uri, string $method, bool $includeToken)
     {
@@ -70,13 +70,20 @@ abstract class AbstractApi
 
         if ($includeToken) {
             $token = $this->config->getAccessToken();
-
             $this->curl->addHeader(Configuration::TINYCDN_CDN_AUTH_PARAM, 'Bearer ' . $token);
         }
 
-        $this->curl->$method($url);
-        $body = $this->curl->getBody();
+        if ($method == 'post') {
+            $this->curl->addHeader('Content-Type', 'application/json');
+        }
 
-        return $body;
+        $this->curl->$method($url, []); // The empty 2nd parameter is needed for POST calls.
+        $body = $this->curl->getBody();
+        $status = $this->curl->getStatus();
+
+        return [
+            'status' => $status,
+            'body'   => $body
+        ];
     }
 }
