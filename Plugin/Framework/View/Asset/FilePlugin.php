@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<!--
+<?php
 /**
  *
  *          ..::..
@@ -30,10 +29,24 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="TIG_TinyCDN" setup_version="1.0.0">
-        <sequence>
-        </sequence>
-    </module>
-</config>
+
+namespace TIG\TinyCDN\Plugin\Framework\View\Asset;
+
+use Magento\Framework\View\Asset\File;
+use TIG\TinyCDN\Plugin\AbstractPlugin;
+
+class FilePlugin extends AbstractPlugin
+{
+    /**
+     * @param File $subject
+     * @param      $url
+     *
+     * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    // @codingStandardsIgnoreLine
+    public function afterGetUrl(File $subject, $url)
+    {
+        return $this->getCdnUrl($url);
+    }
+}

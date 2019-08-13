@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<!--
+<?php
 /**
  *
  *          ..::..
@@ -30,10 +29,56 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="TIG_TinyCDN" setup_version="1.0.0">
-        <sequence>
-        </sequence>
-    </module>
-</config>
+
+namespace TIG\TinyCDN\Model\Config\Provider\General;
+
+use TIG\TinyCDN\Model\AbstractConfigProvider;
+
+class Configuration extends AbstractConfigProvider
+{
+    const XPATH_TINYCDN_GENERAL_MODE = 'tig_tinycdn/general/mode';
+
+    /**
+     * @return mixed
+     */
+    public function getMode()
+    {
+        return $this->getConfigValue(static::XPATH_TINYCDN_GENERAL_MODE);
+    }
+
+    /**
+     * @return bool
+     */
+    public function liveModeEnabled()
+    {
+        if ($this->getMode() == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function testModeEnabled()
+    {
+        if ($this->getMode() == 2) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        if ($this->testModeEnabled() || $this->liveModeEnabled()) {
+            return true;
+        }
+
+        return false;
+    }
+}

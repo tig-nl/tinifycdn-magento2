@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<!--
+<?php
 /**
  *
  *          ..::..
@@ -30,10 +29,22 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="TIG_TinyCDN" setup_version="1.0.0">
-        <sequence>
-        </sequence>
-    </module>
-</config>
+
+namespace TIG\TinyCDN\Model\Config\Provider\Support;
+
+use TIG\TinyCDN\Model\AbstractConfigProvider;
+
+class Tab extends AbstractConfigProvider
+{
+    const XPATH_TINYCDN_SUPPORTED_MAGENTO_VERSION = 'tig_tinycdn/supported_magento_version';
+
+    /**
+     * @param null $store
+     *
+     * @return string
+     */
+    public function getSupportedMagentoVersions()
+    {
+        return $this->getConfigValue(static::XPATH_TINYCDN_SUPPORTED_MAGENTO_VERSION);
+    }
+}

@@ -1,3 +1,60 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?><!--
+ *
+ *
+ *          ..::..
+ *     ..::::::::::::..
+ *   ::'''''':''::'''''::
+ *   ::..  ..:  :  ....::
+ *   ::::  :::  :  :   ::
+ *   ::::  :::  :  ''' ::
+ *   ::::..:::..::.....::
+ *     ''::::::::::::''
+ *          ''::''
+ *
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Creative Commons License.
+ * It is available through the world-wide-web at this URL:
+ * http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ * If you are unable to obtain it through the world-wide-web, please send an email
+ * to servicedesk@tig.nl so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this module to newer
+ * versions in the future. If you wish to customize this module for your
+ * needs please contact servicedesk@tig.nl for more information.
+ *
+ * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
+ * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ *
+-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <tig_tinycdn>
+            <stability />
+            <supported_magento_version>2.1.18, 2.2.9, 2.3.2</supported_magento_version>
+            <general>
+                <mode>0</mode>
+            </general>
+            <cdn>
+                <endpoint>Not connected.</endpoint>
+                <test>
+                    <client_id>5c656667-64e7-4dd6-a40f-438d5ba8ecbe</client_id>
+                    <scopes>cdn_site:default:read cdn_site:default:purge</scopes>
+                    <url_authorize>https://acceptance.tinify.com/auth</url_authorize>
+                    <url_api>https://acceptance.api.tinify.com/</url_api>
+                </test>
+                <live>
+                    <client_id>5c656667-64e7-4dd6-a40f-438d5ba8ecbe</client_id>
+                    <scopes>cdn_site:default:read cdn_site:default:purge</scopes>
+                    <url_authorize>https://tinify.com/auth</url_authorize>
+                    <url_api>https://api.tinify.com/</url_api>
+                </live>
+                <access_token>0</access_token>
+                <site_id>0</site_id>
+            </cdn>
+        </tig_tinycdn>
+    </default>
 </config>

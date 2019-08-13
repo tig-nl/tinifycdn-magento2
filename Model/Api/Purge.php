@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<!--
+<?php
 /**
  *
  *          ..::..
@@ -30,10 +29,34 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="TIG_TinyCDN" setup_version="1.0.0">
-        <sequence>
-        </sequence>
-    </module>
-</config>
+
+namespace TIG\TinyCDN\Model\Api;
+
+use TIG\TinyCDN\Model\AbstractApi;
+
+class Purge extends AbstractApi
+{
+    const TINIFY_API_CDN_PURGE = 'cdn/sites/{id}/purge';
+
+    /**
+     * @param $id
+     *
+     * @return mixed
+     */
+    public function purge($id)
+    {
+        return $this->doPostRequest($id);
+    }
+
+    /**
+     * @param $id
+     *
+     * @return array
+     */
+    private function doPostRequest($id)
+    {
+        $uri = str_replace('{id}', $id, self::TINIFY_API_CDN_PURGE);
+
+        return $this->call($uri, 'post', true);
+    }
+}
