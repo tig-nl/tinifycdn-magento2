@@ -110,11 +110,11 @@ class Authorize extends AbstractAdminhtmlController
             return $redirect;
         }
 
+        $this->saveAccessToken($provider, $authCode);
         $this->scope = $this->resolveScope($this->scope);
-        $site = $this->site->fetchSite($this->storeId);
 
         try {
-            $this->saveAccessToken($provider, $authCode);
+            $site = $this->site->fetchSite($this->storeId);
             $this->saveEndpoint($site);
             $this->saveSiteId($site);
         } catch (\Exception $error) {
