@@ -34,7 +34,7 @@ namespace TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button;
 
 use Magento\Backend\Block\Template\Context;
 use TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\AbstractButton;
-use TIG\TinyCDN\Model\Config\Source\Url;
+use TIG\TinyCDN\Model\Config\Source\Cdn\Url;
 
 class Purge extends AbstractButton
 {

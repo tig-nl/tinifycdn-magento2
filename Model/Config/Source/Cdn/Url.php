@@ -30,7 +30,7 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Model\Config\Source;
+namespace TIG\TinyCDN\Model\Config\Source\Cdn;
 
 use Magento\Backend\Model\UrlInterface as BackendUrlInterface;
 use Magento\Framework\UrlInterface as StandardUrlInterface;
