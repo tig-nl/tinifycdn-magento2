@@ -39,13 +39,17 @@ class Site extends AbstractApi
     const TINIFY_API_CDN_SITES = 'cdn/sites';
 
     /**
+     * @param null $storeId
+     *
      * @return array|mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function fetchSite($storeId = null)
     {
         $sites = $this->getAvailableSites();
-        // TODO: Retrieve actual base URL based on Store ID.
-        $baseUrl = 'https://example.com';
+        /** @var \Magento\Store\Model\Store $store */
+        $store   = $this->getStore($storeId);
+        $baseUrl = $store->getBaseUrl();
 
         $site = array_filter(
             $sites,
