@@ -33,12 +33,16 @@
 namespace TIG\TinyCDN\Model;
 
 use Magento\Framework\HTTP\Client\Curl;
+use Magento\Store\Model\StoreManagerInterface;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
 
 abstract class AbstractApi
 {
     /** @var Curl $curl */
     private $curl;
+
+    /** @var StoreManagerInterface $storeManager */
+    private $storeManager;
 
     /** @var Configuration $config */
     private $config;
@@ -51,10 +55,12 @@ abstract class AbstractApi
      */
     public function __construct(
         Curl $curl,
+        StoreManagerInterface $storeManager,
         Configuration $config
     ) {
-        $this->curl   = $curl;
-        $this->config = $config;
+        $this->curl         = $curl;
+        $this->storeManager = $storeManager;
+        $this->config       = $config;
     }
 
     /**
@@ -78,12 +84,23 @@ abstract class AbstractApi
         }
 
         $this->curl->$method($url, []); // The empty 2nd parameter is needed for POST calls.
-        $body = $this->curl->getBody();
+        $body   = $this->curl->getBody();
         $status = $this->curl->getStatus();
 
         return [
             'status' => $status,
             'body'   => $body
         ];
+    }
+
+    /**
+     * @param null $storeId
+     *
+     * @return \Magento\Store\Api\Data\StoreInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getStore($storeId = null)
+    {
+        return $this->storeManager->getStore($storeId);
     }
 }

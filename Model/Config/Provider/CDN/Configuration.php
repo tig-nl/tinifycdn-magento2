@@ -35,7 +35,7 @@ namespace TIG\TinyCDN\Model\Config\Provider\CDN;
 use TIG\TinyCDN\Model\AbstractConfigProvider;
 use TIG\TinyCDN\Model\Challenge;
 use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
-use TIG\TinyCDN\Model\Config\Source\Url;
+use TIG\TinyCDN\Model\Config\Source\Cdn\Url;
 
 class Configuration extends AbstractConfigProvider
 {

@@ -36,7 +36,7 @@ use Magento\Backend\App\Action;
 use Magento\Framework\Session\SessionManagerInterface;
 use TIG\TinyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
-use TIG\TinyCDN\Model\Config\Source\Url;
+use TIG\TinyCDN\Model\Config\Source\Cdn\Url;
 use Tinify\OAuth2\Client\Provider\TinifyProviderFactory;
 
 class Connect extends AbstractAdminhtmlController
