@@ -32,8 +32,7 @@
 
 namespace TIG\TinyCDN\Controller\Adminhtml;
 
-use Magento\Framework\App\Action\Action;
-use Magento\Framework\App\Action\Context;
+use Magento\Backend\App\Action;
 use Magento\Framework\Session\SessionManagerInterface;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
 use Tinify\OAuth2\Client\Provider\TinifyProvider;
@@ -51,15 +50,19 @@ abstract class AbstractAdminhtmlController extends Action
     /** @var Configuration $config */
     private $config;
 
+    /** @var TinifyProviderFactory $tinifyFactory */
+    private $tinifyFactory;
+
     /**
      * AbstractAdminhtmlController constructor.
      *
-     * @param Context               $context
-     * @param Configuration         $config
-     * @param TinifyProviderFactory $tinifyFactory
+     * @param Action\Context          $context
+     * @param SessionManagerInterface $session
+     * @param Configuration           $config
+     * @param TinifyProviderFactory   $tinifyFactory
      */
     public function __construct(
-        Context $context,
+        Action\Context $context,
         SessionManagerInterface $session,
         Configuration $config,
         TinifyProviderFactory $tinifyFactory

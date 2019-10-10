@@ -33,8 +33,8 @@
 namespace TIG\TinyCDN\Controller\Adminhtml\Cdn;
 
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use Magento\Backend\App\Action\Context;
 use Magento\Config\Model\ResourceModel\Config as ConfigWriter;
-use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ScopeInterface as FrameworkScopeInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Message\ManagerInterface;
@@ -63,11 +63,13 @@ class Authorize extends AbstractAdminhtmlController
     /**
      * Authorize constructor.
      *
-     * @param Context               $context
-     * @param ManagerInterface      $messageManager
-     * @param Configuration         $config
-     * @param TinifyProviderFactory $tinifyFactory
-     * @param ConfigWriter          $configWriter
+     * @param Context                 $context
+     * @param SessionManagerInterface $session
+     * @param ManagerInterface        $messageManager
+     * @param Configuration           $config
+     * @param TinifyProviderFactory   $tinifyFactory
+     * @param ConfigWriter            $configWriter
+     * @param Site                    $site
      */
     public function __construct(
         Context $context,
@@ -229,7 +231,7 @@ class Authorize extends AbstractAdminhtmlController
      */
     private function retrieveSiteId($site)
     {
-        $siteId = $site->id ?: null;
+        $siteId = isset($site) ? $site->id : null;
 
         if (!$siteId) {
             $this->messageManager->addErrorMessage(
