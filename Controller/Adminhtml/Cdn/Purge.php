@@ -32,7 +32,7 @@
 
 namespace TIG\TinyCDN\Controller\Adminhtml\Cdn;
 
-use Magento\Framework\App\Action\Context;
+use Magento\Backend\App\Action\Context;
 use Magento\Framework\Session\SessionManagerInterface;
 use TIG\TinyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
 use TIG\TinyCDN\Model\Api\Purge as Api;

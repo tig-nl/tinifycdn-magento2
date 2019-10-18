@@ -37,6 +37,7 @@ use Magento\Framework\Session\SessionManagerInterface;
 use TIG\TinyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
 use TIG\TinyCDN\Model\Config\Source\Cdn\Url;
+use Tinify\OAuth2\Client\Provider\TinifyProvider;
 use Tinify\OAuth2\Client\Provider\TinifyProviderFactory;
 
 class Connect extends AbstractAdminhtmlController
@@ -47,10 +48,11 @@ class Connect extends AbstractAdminhtmlController
     /**
      * Connect constructor.
      *
-     * @param Configuration         $config
-     * @param Url                   $urlBuilder
-     * @param TinifyProviderFactory $tinifyFactory
-     * @param Action\Context        $context
+     * @param Action\Context          $context
+     * @param SessionManagerInterface $session
+     * @param Configuration           $config
+     * @param TinifyProviderFactory   $tinifyFactory
+     * @param Url                     $urlBuilder
      */
     public function __construct(
         Action\Context $context,
