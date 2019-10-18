@@ -38,7 +38,7 @@
         <field id="mode" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Mode</label>
             <comment>Make sure to save your configuration after changing this setting, before (re-)connecting to your Tinify account.</comment>
-            <source_model>TIG\TinyCDN\Model\Config\Source\General\Mode</source_model>
+            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
             <config_path>tig_tinycdn/general/mode</config_path>
         </field>
     </group>
