@@ -36,8 +36,6 @@ use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Magento\Backend\App\Action\Context;
 use Magento\Config\Model\ResourceModel\Config as ConfigWriter;
 use Magento\Framework\App\ScopeInterface as FrameworkScopeInterface;
-use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
 use TIG\TinyCDN\Client\Provider\TinifyProvider;
@@ -45,9 +43,13 @@ use TIG\TinyCDN\Client\Provider\TinifyProviderFactory;
 use TIG\TinyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
 use TIG\TinyCDN\Model\Api\Site;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
+use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
 
 class Authorize extends AbstractAdminhtmlController
 {
+    /** @var GeneralConfiguration $generalConfig */
+    private $generalConfig;
+
     /** @var ConfigWriter $configWriter */
     private $configWriter;
 
@@ -65,8 +67,8 @@ class Authorize extends AbstractAdminhtmlController
      *
      * @param Context                 $context
      * @param SessionManagerInterface $session
-     * @param ManagerInterface        $messageManager
      * @param Configuration           $config
+     * @param GeneralConfiguration    $generalConfig
      * @param TinifyProviderFactory   $tinifyFactory
      * @param ConfigWriter            $configWriter
      * @param Site                    $site
@@ -74,13 +76,13 @@ class Authorize extends AbstractAdminhtmlController
     public function __construct(
         Context $context,
         SessionManagerInterface $session,
-        ManagerInterface $messageManager,
         Configuration $config,
+        GeneralConfiguration $generalConfig,
         TinifyProviderFactory $tinifyFactory,
         ConfigWriter $configWriter,
         Site $site
     ) {
-        $this->messageManager = $messageManager;
+        $this->generalConfig  = $generalConfig;
         $this->configWriter   = $configWriter;
         $this->site           = $site;
         parent::__construct(
@@ -93,6 +95,7 @@ class Authorize extends AbstractAdminhtmlController
 
     /**
      * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function execute()
     {
@@ -158,7 +161,7 @@ class Authorize extends AbstractAdminhtmlController
      * @param TinifyProvider $provider
      * @param                $authCode
      *
-     * @return void|ManagerInterface
+     * @return \Magento\Framework\Message\ManagerInterface
      */
     private function saveAccessToken(TinifyProvider $provider, $authCode)
     {
@@ -179,7 +182,9 @@ class Authorize extends AbstractAdminhtmlController
     }
 
     /**
-     * @return ManagerInterface
+     * @param $currentSite
+     *
+     * @return \Magento\Framework\Message\ManagerInterface
      */
     private function saveEndpoint($currentSite)
     {
@@ -194,7 +199,11 @@ class Authorize extends AbstractAdminhtmlController
             return $this->messageManager->addErrorMessage($error->getMessage());
         }
 
-        $this->messageManager->addNoticeMessage(__('Do not forget to save your configuration!'));
+        if (!$this->generalConfig->isEnabled()) {
+            $this->messageManager->addNoticeMessage(__('Extension is currently disabled.'));
+        }
+
+        $this->messageManager->addNoticeMessage(__('Don\'t forget to save your configuration!'));
 
         return $this->messageManager->addSuccessMessage(__('Your TinyCDN endpoint was successfully set.'));
     }
@@ -202,7 +211,7 @@ class Authorize extends AbstractAdminhtmlController
     /**
      * @param $currentSite
      *
-     * @return ManagerInterface|void
+     * @return \Magento\Framework\Message\ManagerInterface
      */
     private function saveSiteId($currentSite)
     {
@@ -219,7 +228,9 @@ class Authorize extends AbstractAdminhtmlController
     }
 
     /**
-     * @return string|null
+     * @param $site
+     *
+     * @return |null
      */
     private function retrieveEndpoint($site)
     {
@@ -235,7 +246,9 @@ class Authorize extends AbstractAdminhtmlController
     }
 
     /**
-     * @return string|null
+     * @param $site
+     *
+     * @return |null
      */
     private function retrieveSiteId($site)
     {

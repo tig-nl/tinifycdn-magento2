@@ -49,33 +49,9 @@ class Configuration extends AbstractConfigProvider
     /**
      * @return bool
      */
-    public function liveModeEnabled()
-    {
-        if ($this->getMode() == 1) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @return bool
-     */
-    public function testModeEnabled()
-    {
-        if ($this->getMode() == 2) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @return bool
-     */
     public function isEnabled()
     {
-        if ($this->testModeEnabled() || $this->liveModeEnabled()) {
+        if ($this->getMode() == 1) {
             return true;
         }
 
