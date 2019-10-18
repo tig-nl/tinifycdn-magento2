@@ -5,7 +5,7 @@
     "magento/framework": ">=101.0.0,<=101.0.10|>=102.0.0,<=102.0.3",
     "php": "~7.0.0|~7.1.0|~7.2.0",
     "ext-json": "*",
-    "tinify/oauth2-tinify": "*"
+    "league/oauth2-client": "^2.4"
   },
   "type": "magento2-module",
   "license": "CC-BY-NC-ND-3.0",

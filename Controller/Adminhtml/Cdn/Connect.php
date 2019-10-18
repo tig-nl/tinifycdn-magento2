@@ -34,11 +34,11 @@ namespace TIG\TinyCDN\Controller\Adminhtml\Cdn;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\Session\SessionManagerInterface;
+use TIG\TinyCDN\Client\Provider\TinifyProvider;
+use TIG\TinyCDN\Client\Provider\TinifyProviderFactory;
 use TIG\TinyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
 use TIG\TinyCDN\Model\Config\Source\Cdn\Url;
-use Tinify\OAuth2\Client\Provider\TinifyProvider;
-use Tinify\OAuth2\Client\Provider\TinifyProviderFactory;
 
 class Connect extends AbstractAdminhtmlController
 {

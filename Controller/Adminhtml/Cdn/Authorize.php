@@ -40,11 +40,11 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
+use TIG\TinyCDN\Client\Provider\TinifyProvider;
+use TIG\TinyCDN\Client\Provider\TinifyProviderFactory;
 use TIG\TinyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
 use TIG\TinyCDN\Model\Api\Site;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
-use Tinify\OAuth2\Client\Provider\TinifyProvider;
-use Tinify\OAuth2\Client\Provider\TinifyProviderFactory;
 
 class Authorize extends AbstractAdminhtmlController
 {
