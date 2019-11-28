@@ -32,13 +32,13 @@
 
 namespace TIG\TinyCDN\Controller\Adminhtml\Cdn;
 
-use Magento\Framework\App\Action\Context;
+use Magento\Backend\App\Action\Context;
 use Magento\Framework\Session\SessionManagerInterface;
+use TIG\TinyCDN\Client\Provider\TinifyProvider;
+use TIG\TinyCDN\Client\Provider\TinifyProviderFactory;
 use TIG\TinyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
 use TIG\TinyCDN\Model\Api\Purge as Api;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
-use Tinify\OAuth2\Client\Provider\TinifyProvider;
-use Tinify\OAuth2\Client\Provider\TinifyProviderFactory;
 
 class Purge extends AbstractAdminhtmlController
 {

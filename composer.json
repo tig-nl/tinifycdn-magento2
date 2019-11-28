@@ -2,10 +2,10 @@
   "name": "tig/tinycdn-magento2",
   "description": "Allows you to easily setup TinyCDN for your Magento 2 store.",
   "require": {
-    "magento/framework": ">=101.0.0,<=101.0.9|>=102.0.0,<=102.0.2",
+    "magento/framework": ">=101.0.0,<=101.0.10|>=102.0.0,<=102.0.3",
     "php": "~7.0.0|~7.1.0|~7.2.0",
     "ext-json": "*",
-    "tinify/oauth2-tinify": "*"
+    "league/oauth2-client": "^2.4"
   },
   "type": "magento2-module",
   "license": "CC-BY-NC-ND-3.0",
@@ -16,8 +16,7 @@
       "homepage": "http://tig.nl"
     }
   ],
-  "version": "v1.0.0",
-  "minimum-stability": "stable",
+  "version": "v1.1.0-alpha",
   "autoload": {
     "files": [
       "registration.php"

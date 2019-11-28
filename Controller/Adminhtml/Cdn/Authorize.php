@@ -33,21 +33,23 @@
 namespace TIG\TinyCDN\Controller\Adminhtml\Cdn;
 
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use Magento\Backend\App\Action\Context;
 use Magento\Config\Model\ResourceModel\Config as ConfigWriter;
-use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ScopeInterface as FrameworkScopeInterface;
-use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
+use TIG\TinyCDN\Client\Provider\TinifyProvider;
+use TIG\TinyCDN\Client\Provider\TinifyProviderFactory;
 use TIG\TinyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
 use TIG\TinyCDN\Model\Api\Site;
 use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
-use Tinify\OAuth2\Client\Provider\TinifyProvider;
-use Tinify\OAuth2\Client\Provider\TinifyProviderFactory;
+use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
 
 class Authorize extends AbstractAdminhtmlController
 {
+    /** @var GeneralConfiguration $generalConfig */
+    private $generalConfig;
+
     /** @var ConfigWriter $configWriter */
     private $configWriter;
 
@@ -63,22 +65,24 @@ class Authorize extends AbstractAdminhtmlController
     /**
      * Authorize constructor.
      *
-     * @param Context               $context
-     * @param ManagerInterface      $messageManager
-     * @param Configuration         $config
-     * @param TinifyProviderFactory $tinifyFactory
-     * @param ConfigWriter          $configWriter
+     * @param Context                 $context
+     * @param SessionManagerInterface $session
+     * @param Configuration           $config
+     * @param GeneralConfiguration    $generalConfig
+     * @param TinifyProviderFactory   $tinifyFactory
+     * @param ConfigWriter            $configWriter
+     * @param Site                    $site
      */
     public function __construct(
         Context $context,
         SessionManagerInterface $session,
-        ManagerInterface $messageManager,
         Configuration $config,
+        GeneralConfiguration $generalConfig,
         TinifyProviderFactory $tinifyFactory,
         ConfigWriter $configWriter,
         Site $site
     ) {
-        $this->messageManager = $messageManager;
+        $this->generalConfig  = $generalConfig;
         $this->configWriter   = $configWriter;
         $this->site           = $site;
         parent::__construct(
@@ -91,6 +95,7 @@ class Authorize extends AbstractAdminhtmlController
 
     /**
      * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function execute()
     {
@@ -112,9 +117,17 @@ class Authorize extends AbstractAdminhtmlController
 
         $this->saveAccessToken($provider, $authCode);
         $this->scope = $this->resolveScope($this->scope);
+        $site = $this->site->fetchSite($this->storeId);
+
+        if (!$site) {
+            $this->messageManager->addErrorMessage(
+                __('Site not found. Did you select the correct Site URL?')
+            );
+
+            return $redirect;
+        }
 
         try {
-            $site = $this->site->fetchSite($this->storeId);
             $this->saveEndpoint($site);
             $this->saveSiteId($site);
         } catch (\Exception $error) {
@@ -148,7 +161,7 @@ class Authorize extends AbstractAdminhtmlController
      * @param TinifyProvider $provider
      * @param                $authCode
      *
-     * @return void|ManagerInterface
+     * @return \Magento\Framework\Message\ManagerInterface
      */
     private function saveAccessToken(TinifyProvider $provider, $authCode)
     {
@@ -169,7 +182,9 @@ class Authorize extends AbstractAdminhtmlController
     }
 
     /**
-     * @return ManagerInterface
+     * @param $currentSite
+     *
+     * @return \Magento\Framework\Message\ManagerInterface
      */
     private function saveEndpoint($currentSite)
     {
@@ -184,7 +199,11 @@ class Authorize extends AbstractAdminhtmlController
             return $this->messageManager->addErrorMessage($error->getMessage());
         }
 
-        $this->messageManager->addNoticeMessage(__('Do not forget to save your configuration!'));
+        if (!$this->generalConfig->isEnabled()) {
+            $this->messageManager->addNoticeMessage(__('Extension is currently disabled.'));
+        }
+
+        $this->messageManager->addNoticeMessage(__('Don\'t forget to save your configuration!'));
 
         return $this->messageManager->addSuccessMessage(__('Your TinyCDN endpoint was successfully set.'));
     }
@@ -192,7 +211,7 @@ class Authorize extends AbstractAdminhtmlController
     /**
      * @param $currentSite
      *
-     * @return ManagerInterface|void
+     * @return \Magento\Framework\Message\ManagerInterface
      */
     private function saveSiteId($currentSite)
     {
@@ -209,7 +228,9 @@ class Authorize extends AbstractAdminhtmlController
     }
 
     /**
-     * @return string|null
+     * @param $site
+     *
+     * @return |null
      */
     private function retrieveEndpoint($site)
     {
@@ -225,11 +246,13 @@ class Authorize extends AbstractAdminhtmlController
     }
 
     /**
-     * @return string|null
+     * @param $site
+     *
+     * @return |null
      */
     private function retrieveSiteId($site)
     {
-        $siteId = $site->id ?: null;
+        $siteId = isset($site) ? $site->id : null;
 
         if (!$siteId) {
             $this->messageManager->addErrorMessage(

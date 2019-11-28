@@ -95,7 +95,7 @@ class Configuration extends AbstractConfigProvider
      */
     public function formatCredentials()
     {
-        $credentials = $this->retrieveCredentialsForCurrentMode();
+        $credentials = $this->retrieveCredentials();
         $randomValue = $this->challenge->generateRandomValue();
         $verifier    = $this->challenge->generateVerifier($randomValue);
 
@@ -116,13 +116,9 @@ class Configuration extends AbstractConfigProvider
      *
      * @return array
      */
-    public function retrieveCredentialsForCurrentMode()
+    public function retrieveCredentials()
     {
-        if ($this->generalConfig->liveModeEnabled()) {
-            return $this->getLiveCredentials();
-        }
-
-        return $this->getTestCredentials();
+        return $this->getLiveCredentials();
     }
 
     /**
@@ -132,17 +128,9 @@ class Configuration extends AbstractConfigProvider
      */
     public function getApiUrl(string $uri = '')
     {
-        $credentials = $this->retrieveCredentialsForCurrentMode();
+        $credentials = $this->retrieveCredentials();
 
         return $credentials['url_api'] . $uri;
-    }
-
-    /**
-     * @return array
-     */
-    public function getTestCredentials()
-    {
-        return $this->getConfigValue(static::XPATH_TINYCDN_CDN_TEST);
     }
 
     /**

@@ -77,6 +77,11 @@ abstract class AbstractPlugin
         }
 
         $endpoint    = $this->cdnConfig->getCdnEndpoint();
+
+        if ($endpoint == 'Not connected.' || !$endpoint) {
+            return $url;
+        }
+
         $store       = $this->storeManager->getStore();
         $baseUrl     = $store->getBaseUrl();
         $modifiedUrl = str_replace($baseUrl, $endpoint, $url);

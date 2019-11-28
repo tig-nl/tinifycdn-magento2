@@ -41,7 +41,7 @@ class Site extends AbstractApi
     /**
      * @param null $storeId
      *
-     * @return array|mixed
+     * @return array|mixed|null
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function fetchSite($storeId = null)
@@ -50,6 +50,10 @@ class Site extends AbstractApi
         /** @var \Magento\Store\Model\Store $store */
         $store   = $this->getStore($storeId);
         $baseUrl = $store->getBaseUrl();
+
+        if (isset($sites->error) && !empty($sites->error)) {
+            return null;
+        }
 
         $site = array_filter(
             $sites,

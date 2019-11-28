@@ -34,20 +34,14 @@
     <default>
         <tig_tinycdn>
             <stability />
-            <supported_magento_version>2.1.18, 2.2.9, 2.3.2</supported_magento_version>
+            <supported_magento_version>2.2.10, 2.3.3</supported_magento_version>
             <general>
                 <mode>0</mode>
             </general>
             <cdn>
                 <endpoint>Not connected.</endpoint>
-                <test>
-                    <client_id>5c656667-64e7-4dd6-a40f-438d5ba8ecbe</client_id>
-                    <scopes>cdn_site:default:read cdn_site:default:purge</scopes>
-                    <url_authorize>https://acceptance.tinify.com/auth</url_authorize>
-                    <url_api>https://acceptance.api.tinify.com/</url_api>
-                </test>
                 <live>
-                    <client_id>5c656667-64e7-4dd6-a40f-438d5ba8ecbe</client_id>
+                    <client_id>41d8314a-5c92-4cb0-967b-0017bb357b90</client_id>
                     <scopes>cdn_site:default:read cdn_site:default:purge</scopes>
                     <url_authorize>https://tinify.com/auth</url_authorize>
                     <url_api>https://api.tinify.com/</url_api>
