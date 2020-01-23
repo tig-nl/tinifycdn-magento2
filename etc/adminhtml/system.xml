@@ -42,7 +42,6 @@
     <system>
         <tab id="tinify" translate="label" sortOrder="9999">
             <label>Tinify</label>
-            <class>tinify-tab</class>
         </tab>
         <section id="tig_tinycdn" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>TinyCDN</label>
