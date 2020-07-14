@@ -37,20 +37,20 @@
         <label>CDN Configuration</label>
         <comment><![CDATA[CDN can only be purged on Store View level.]]></comment>
         <field id="connect" translate="label comment" type="button" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>TinyCDN account</label>
+            <label>TinifyCDN account</label>
             <comment><![CDATA[Connect your Tinify account to this Store View.]]></comment>
-            <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button\Connect</frontend_model>
+            <frontend_model>TIG\TinifyCDN\Block\Adminhtml\Config\Form\Field\Button\Connect</frontend_model>
         </field>
         <field id="endpoint" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Endpoint</label>
             <comment><![CDATA[The endpoint used by this Store View.]]></comment>
-            <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Disabled</frontend_model>
-            <config_path>tig_tinycdn/cdn/endpoint</config_path>
+            <frontend_model>TIG\TinifyCDN\Block\Adminhtml\Config\Form\Field\Disabled</frontend_model>
+            <config_path>tig_tinifycdn/cdn/endpoint</config_path>
         </field>
         <field id="purge" translate="label comment" type="button" sortOrder="30" showInStore="1">
             <label>Purge Site</label>
             <comment><![CDATA[Purges all the CDN's data for this Store View.]]></comment>
-            <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button\Purge</frontend_model>
+            <frontend_model>TIG\TinifyCDN\Block\Adminhtml\Config\Form\Field\Button\Purge</frontend_model>
         </field>
     </group>
 </include>

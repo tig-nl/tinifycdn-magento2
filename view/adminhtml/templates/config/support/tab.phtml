@@ -1,7 +1,7 @@
 <?php
-/** @var \TIG\TinyCDN\Block\Adminhtml\Config\Support\Tab $this */
+/** @var \TIG\TinifyCDN\Block\Adminhtml\Config\Support\Tab $this */
 ?>
-<div id="supporttab" class="tig-tinycdn-supporttab" data-mage-init='{"tinyConfig": true}'>
+<div id="supporttab" class="tig-tinifycdn-supporttab" data-mage-init='{"tinifyConfig": true}'>
     <div class="colset-2">
         <div class="col-1 legend-version">
             <div class="version-compatibility">
@@ -14,7 +14,7 @@
                         <span class="version"><?php echo $block->escapeHtml($this->getSupportedMagentoVersions()); ?></span>
                     </li>
                     <li>
-                        <span class="text"><?php echo $block->escapeHtml(__('TinyCDN version')); ?>:</span>
+                        <span class="text"><?php echo $block->escapeHtml(__('TinifyCDN version')); ?>:</span>
                         <span class="version"><?php echo $block->escapeHtml($this->getVersionNumber()); ?></span>
                     </li>
                     <span class="text"><?php echo $block->escapeHtml(__('Your PHP version')); ?>:</span>
@@ -27,17 +27,17 @@
                         switch ($this->phpVersionCheck()) {
                             case 1:
                                 ?>
-                                <img class="compatible-image" height="16" src="<?= $this->getViewFileUrl('TIG_TinyCDN::images/green-ok.png'); ?>" alt="">
+                                <img class="compatible-image" height="16" src="<?= $this->getViewFileUrl('TIG_TinifyCDN::images/green-ok.png'); ?>" alt="">
                                 <?php
                                 break;
                             case 0:
                                 ?>
-                                <img class="compatible-image" height="16" src="<?= $this->getViewFileUrl('TIG_TinyCDN::images/red-nok.png'); ?>" alt="">
+                                <img class="compatible-image" height="16" src="<?= $this->getViewFileUrl('TIG_TinifyCDN::images/red-nok.png'); ?>" alt="">
                                 <?php
                                 break;
                             default:
                                 ?>
-                                <img class="compatible-image" height="16" src="<?= $this->getViewFileUrl('TIG_TinyCDN::images/orange-unknown.png'); ?>" alt="">
+                                <img class="compatible-image" height="16" src="<?= $this->getViewFileUrl('TIG_TinifyCDN::images/orange-unknown.png'); ?>" alt="">
                                 <?php
                                 break;
                         }
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="col-2 legend-version">
-            <img class="panda-george" src="<?php echo $this->getViewFileUrl('TIG_TinyCDN::images/george-magento@2x_opt.png'); ?>" alt="George the TinyCDN panda"/>
+            <img class="panda-george" src="<?php echo $this->getViewFileUrl('TIG_TinifyCDN::images/george-magento@2x_opt.png'); ?>" alt="George the TinifyCDN panda"/>
         </div>
     </div>
 
@@ -55,13 +55,13 @@
         <div class="collapse-title" data-role="title">
             <h3 data-role="trigger"><?php echo $block->escapeHtml(__('Support')); ?></h3>
         </div>
-        <div class="collapse-content support-tinycdn-tig" data-role="content" style="display:none;">
+        <div class="collapse-content support-tinifycdn-tig" data-role="content" style="display:none;">
             <?php echo __('This extension is developed by <a href="https://tig.nl" target="_BLANK">TIG</a>'); ?>
             <div class="colset-2">
                 <div class="col-1">
                     <h4><?php echo __('Extension basic configuration and account information'); ?></h4>
                     <?php echo __('Please contact:'); ?>
-                    <a href="mailto:support@tinypng.com">support@tinypng.com</a>
+                    <a href="mailto:support@tinify.com">support@tinify.com</a>
                 </div>
             </div>
         </div>

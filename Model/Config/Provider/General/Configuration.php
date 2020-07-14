@@ -30,20 +30,20 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Model\Config\Provider\General;
+namespace TIG\TinifyCDN\Model\Config\Provider\General;
 
-use TIG\TinyCDN\Model\AbstractConfigProvider;
+use TIG\TinifyCDN\Model\AbstractConfigProvider;
 
 class Configuration extends AbstractConfigProvider
 {
-    const XPATH_TINYCDN_GENERAL_MODE = 'tig_tinycdn/general/mode';
+    const XPATH_TINIFYCDN_GENERAL_MODE = 'tig_tinifycdn/general/mode';
 
     /**
      * @return mixed
      */
     public function getMode()
     {
-        return $this->getConfigValue(static::XPATH_TINYCDN_GENERAL_MODE);
+        return $this->getConfigValue(static::XPATH_TINIFYCDN_GENERAL_MODE);
     }
 
     /**

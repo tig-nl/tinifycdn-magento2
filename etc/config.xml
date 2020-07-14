@@ -32,7 +32,7 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
-        <tig_tinycdn>
+        <tig_tinifycdn>
             <stability />
             <supported_magento_version>2.2.10, 2.3.3</supported_magento_version>
             <general>
@@ -49,6 +49,6 @@
                 <access_token>0</access_token>
                 <site_id>0</site_id>
             </cdn>
-        </tig_tinycdn>
+        </tig_tinifycdn>
     </default>
 </config>

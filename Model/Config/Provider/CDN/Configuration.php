@@ -30,28 +30,28 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Model\Config\Provider\CDN;
+namespace TIG\TinifyCDN\Model\Config\Provider\CDN;
 
-use TIG\TinyCDN\Model\AbstractConfigProvider;
-use TIG\TinyCDN\Model\Challenge;
-use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
-use TIG\TinyCDN\Model\Config\Source\Cdn\Url;
+use TIG\TinifyCDN\Model\AbstractConfigProvider;
+use TIG\TinifyCDN\Model\Challenge;
+use TIG\TinifyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
+use TIG\TinifyCDN\Model\Config\Source\Cdn\Url;
 
 class Configuration extends AbstractConfigProvider
 {
-    const XPATH_TINYCDN_CDN_TEST         = 'tig_tinycdn/cdn/test';
+    const XPATH_TINIFYCDN_CDN_TEST         = 'tig_tinifycdn/cdn/test';
 
-    const XPATH_TINYCDN_CDN_LIVE         = 'tig_tinycdn/cdn/live';
+    const XPATH_TINIFYCDN_CDN_LIVE         = 'tig_tinifycdn/cdn/live';
 
-    const XPATH_TINYCDN_CDN_ACCESS_TOKEN = 'tig_tinycdn/cdn/access_token';
+    const XPATH_TINIFYCDN_CDN_ACCESS_TOKEN = 'tig_tinifycdn/cdn/access_token';
 
-    const XPATH_TINYCDN_CDN_SITE_ID      = 'tig_tinycdn/cdn/site_id';
+    const XPATH_TINIFYCDN_CDN_SITE_ID      = 'tig_tinifycdn/cdn/site_id';
 
-    const XPATH_TINYCDN_CDN_ENDPOINT     = 'tig_tinycdn/cdn/endpoint';
+    const XPATH_TINIFYCDN_CDN_ENDPOINT     = 'tig_tinifycdn/cdn/endpoint';
 
-    const TINYCDN_CDN_TOKEN_PARAM        = 'token';
+    const TINIFYCDN_CDN_TOKEN_PARAM        = 'token';
 
-    const TINYCDN_CDN_AUTH_PARAM         = 'authorization';
+    const TINIFYCDN_CDN_AUTH_PARAM         = 'authorization';
 
     /** @var Challenge $generate */
     private $challenge;
@@ -106,7 +106,7 @@ class Configuration extends AbstractConfigProvider
             'scopes'         => $credentials['scopes'],
             'redirectUri'    => $this->urlBuilder->createRedirectUrl(),
             'urlAuthorize'   => $credentials['url_authorize'],
-            'urlAccessToken' => $this->getApiUrl(self::TINYCDN_CDN_TOKEN_PARAM)
+            'urlAccessToken' => $this->getApiUrl(self::TINIFYCDN_CDN_TOKEN_PARAM)
         ];
     }
 
@@ -138,7 +138,7 @@ class Configuration extends AbstractConfigProvider
      */
     public function getLiveCredentials()
     {
-        return $this->getConfigValue(static::XPATH_TINYCDN_CDN_LIVE);
+        return $this->getConfigValue(static::XPATH_TINIFYCDN_CDN_LIVE);
     }
 
     /**
@@ -146,7 +146,7 @@ class Configuration extends AbstractConfigProvider
      */
     public function getAccessToken($storeId = null)
     {
-        return $this->getConfigValue(static::XPATH_TINYCDN_CDN_ACCESS_TOKEN. $storeId);
+        return $this->getConfigValue(static::XPATH_TINIFYCDN_CDN_ACCESS_TOKEN. $storeId);
     }
 
     /**
@@ -154,7 +154,7 @@ class Configuration extends AbstractConfigProvider
      */
     public function getCdnEndpoint($storeId = null)
     {
-        return $this->getConfigValue(static::XPATH_TINYCDN_CDN_ENDPOINT, $storeId);
+        return $this->getConfigValue(static::XPATH_TINIFYCDN_CDN_ENDPOINT, $storeId);
     }
 
     /**
@@ -162,6 +162,6 @@ class Configuration extends AbstractConfigProvider
      */
     public function getSiteId($storeId = null)
     {
-        return $this->getConfigValue(static::XPATH_TINYCDN_CDN_SITE_ID, $storeId);
+        return $this->getConfigValue(static::XPATH_TINIFYCDN_CDN_SITE_ID, $storeId);
     }
 }

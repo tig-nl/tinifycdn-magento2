@@ -30,13 +30,13 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Controller\Cdn;
+namespace TIG\TinifyCDN\Controller\Cdn;
 
 use Magento\Backend\Model\UrlInterface;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
-use TIG\TinyCDN\Exception;
-use TIG\TinyCDN\Model\Config\Source\Cdn\Url;
+use TIG\TinifyCDN\Exception;
+use TIG\TinifyCDN\Model\Config\Source\Cdn\Url;
 
 class Redirect extends Action
 {
