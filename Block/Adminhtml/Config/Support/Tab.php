@@ -30,23 +30,23 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Block\Adminhtml\Config\Support;
+namespace TIG\TinifyCDN\Block\Adminhtml\Config\Support;
 
 use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
-use TIG\TinyCDN\Model\Config\Provider\Support\Tab as SupportTab;
+use TIG\TinifyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
+use TIG\TinifyCDN\Model\Config\Provider\Support\Tab as SupportTab;
 
 class Tab extends Template implements RendererInterface
 {
-    const MODULE_NAME       = 'TIG_TinyCDN';
+    const MODULE_NAME       = 'TIG_TinifyCDN';
 
     const EXTENSION_VERSION = '1.1.0';
 
     // @codingStandardsIgnoreLine
-    protected $_template = 'TIG_TinyCDN::config/support/tab.phtml';
+    protected $_template = 'TIG_TinifyCDN::config/support/tab.phtml';
 
     /** @var array */
     private $phpVersionSupport = [

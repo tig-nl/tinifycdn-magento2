@@ -39,7 +39,7 @@
             <label>Mode</label>
             <comment>Make sure to save your configuration after changing this setting, before (re-)connecting to your Tinify account.</comment>
             <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
-            <config_path>tig_tinycdn/general/mode</config_path>
+            <config_path>tig_tinifycdn/general/mode</config_path>
         </field>
     </group>
 </include>

@@ -1,6 +1,6 @@
 {
-  "name": "tig/tinycdn-magento2",
-  "description": "Allows you to easily setup TinyCDN for your Magento 2 store.",
+  "name": "tig/tinifycdn-magento2",
+  "description": "Allows you to easily setup TinifyCDN for your Magento 2 store.",
   "require": {
     "magento/framework": ">=101.0.0,<=101.0.11|>=102.0.0,<=102.0.5",
     "php": "~7.0.0|~7.1.0|~7.2.0",
@@ -22,7 +22,7 @@
       "registration.php"
     ],
     "psr-4": {
-      "TIG\\TinyCDN\\": ""
+      "TIG\\TinifyCDN\\": ""
     }
   },
   "require-dev": {

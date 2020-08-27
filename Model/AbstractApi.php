@@ -30,11 +30,11 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Model;
+namespace TIG\TinifyCDN\Model;
 
 use Magento\Framework\HTTP\Client\Curl;
 use Magento\Store\Model\StoreManagerInterface;
-use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
+use TIG\TinifyCDN\Model\Config\Provider\CDN\Configuration;
 
 abstract class AbstractApi
 {
@@ -76,7 +76,7 @@ abstract class AbstractApi
 
         if ($includeToken) {
             $token = $this->config->getAccessToken();
-            $this->curl->addHeader(Configuration::TINYCDN_CDN_AUTH_PARAM, 'Bearer ' . $token);
+            $this->curl->addHeader(Configuration::TINIFYCDN_CDN_AUTH_PARAM, 'Bearer ' . $token);
         }
 
         if ($method == 'post') {

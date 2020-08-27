@@ -30,18 +30,18 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button;
+namespace TIG\TinifyCDN\Block\Adminhtml\Config\Form\Field\Button;
 
 use Magento\Backend\Block\Template\Context;
-use TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\AbstractButton;
-use TIG\TinyCDN\Model\Config\Source\Cdn\Url;
+use TIG\TinifyCDN\Block\Adminhtml\Config\Form\Field\AbstractButton;
+use TIG\TinifyCDN\Model\Config\Source\Cdn\Url;
 
 class Purge extends AbstractButton
 {
     const BUTTON_ID = 'tinify_cdn_purge';
 
     // @codingStandardsIgnoreLine
-    protected $_template = 'TIG_TinyCDN::config/form/button/purge.phtml';
+    protected $_template = 'TIG_TinifyCDN::config/form/button/purge.phtml';
 
     /**
      * Button constructor.
@@ -90,6 +90,6 @@ class Purge extends AbstractButton
         $params      = $this->getRequest()->getParams();
         $storeParams = $this->createRequiredParams($params);
 
-        return $this->getUrl(Url::TINYCDN_CDN_PURGE_URL, $storeParams);
+        return $this->getUrl(Url::TINIFYCDN_CDN_PURGE_URL, $storeParams);
     }
 }

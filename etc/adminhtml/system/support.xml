@@ -35,11 +35,11 @@
     <!-- Support section -->
     <group id="support" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
         <label>Version &amp; Support</label>
-        <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Fieldset</frontend_model>
-        <fieldset_css>tig_tinycdn-section</fieldset_css>
+        <frontend_model>TIG\TinifyCDN\Block\Adminhtml\Config\Form\Field\Fieldset</frontend_model>
+        <fieldset_css>tig_tinifycdn-section</fieldset_css>
         <attribute type="expanded">1</attribute>
         <group id="tab" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
-            <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Support\Tab</frontend_model>
+            <frontend_model>TIG\TinifyCDN\Block\Adminhtml\Config\Support\Tab</frontend_model>
         </group>
     </group>
 </include>

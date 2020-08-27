@@ -1,11 +1,11 @@
-# TIG TinyCDN for Magento 2
+# TIG TinifyCDN for Magento 2
 We created this extension to **add immediate image optimization and CDN functionality to Magento 2**. 
 
 ## Installation using Composer
-<pre>composer require tig/tinycdn-magento2</pre>
+<pre>composer require tig/tinifycdn-magento2</pre>
 
 ## Installation without using Composer
-_Clone or download_ the contents of this repository into `app/code/TIG/TinyCDN`.
+_Clone or download_ the contents of this repository into `app/code/TIG/TinifyCDN`.
 
 ### Development Mode
 After installation, run `bin/magento setup:upgrade` to make the needed database changes and remove/empty Magento 2's generated files and folders.
@@ -22,4 +22,4 @@ Done!
 ## Configuration
 
 ### API credentials
-To use this module you need an active TinyCDN account. You can connect to your account using the 'Connect to your Tinify Account' button in _Stores / Configuration / Tinify / TinyCDN_.
+To use this module you need an active TinifyCDN account. You can connect to your account using the 'Connect to your Tinify Account' button in _Stores / Configuration / Tinify / TinifyCDN_.
