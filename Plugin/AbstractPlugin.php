@@ -72,7 +72,7 @@ abstract class AbstractPlugin
      */
     public function getCdnUrl($url)
     {
-        if (strpos('.html', $url) !== false) {
+        if (strpos($url, '.html') !== false) {
             return $url;
         }
 
