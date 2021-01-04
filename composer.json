@@ -3,7 +3,7 @@
     "description": "Allows you to easily setup TinifyCDN for your Magento 2 store.",
     "require": {
         "magento/framework": "~102.0|~103.0",
-        "php": "~7.0|~7.1|~7.2|~7.3|~7.4",
+        "php": "~7.3|~7.4",
         "ext-json": "*",
         "league/oauth2-client": "^2.4"
     },
