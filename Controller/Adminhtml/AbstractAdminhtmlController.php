@@ -30,19 +30,19 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Controller\Adminhtml;
+namespace TIG\TinifyCDN\Controller\Adminhtml;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\Session\SessionManagerInterface;
-use TIG\TinyCDN\Client\Provider\TinifyProvider;
-use TIG\TinyCDN\Client\Provider\TinifyProviderFactory;
-use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
+use TIG\TinifyCDN\Client\Provider\TinifyProvider;
+use TIG\TinifyCDN\Client\Provider\TinifyProviderFactory;
+use TIG\TinifyCDN\Model\Config\Provider\CDN\Configuration;
 
 abstract class AbstractAdminhtmlController extends Action
 {
-    const TINYCDN_OAUTH_CREDENTIALS_PARAM = 'o_auth_credentials';
+    const TINIFYCDN_OAUTH_CREDENTIALS_PARAM = 'o_auth_credentials';
 
-    const SYSTEM_CONFIG_TIG_TINYCDN_SECTION = 'adminhtml/system_config/edit/section/tig_tinycdn';
+    const SYSTEM_CONFIG_TIG_TINIFYCDN_SECTION = 'adminhtml/system_config/edit/section/tig_tinifycdn';
 
     /** @var SessionManagerInterface $session */
     private $session;
@@ -89,11 +89,11 @@ abstract class AbstractAdminhtmlController extends Action
      */
     private function retrieveOAuthCredentials()
     {
-        $oAuthCredentials = $this->getSessionData(static::TINYCDN_OAUTH_CREDENTIALS_PARAM);
+        $oAuthCredentials = $this->getSessionData(static::TINIFYCDN_OAUTH_CREDENTIALS_PARAM);
 
         if (!$oAuthCredentials) {
             $oAuthCredentials = $this->config->formatCredentials();
-            $this->addSessionData(static::TINYCDN_OAUTH_CREDENTIALS_PARAM, $oAuthCredentials);
+            $this->addSessionData(static::TINIFYCDN_OAUTH_CREDENTIALS_PARAM, $oAuthCredentials);
         }
 
         return ['options' => $oAuthCredentials];

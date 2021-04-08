@@ -30,10 +30,10 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Plugin\Catalog\Model\View\Asset;
+namespace TIG\TinifyCDN\Plugin\Catalog\Model\View\Asset;
 
 use Magento\Catalog\Model\View\Asset\Image;
-use TIG\TinyCDN\Plugin\AbstractPlugin;
+use TIG\TinifyCDN\Plugin\AbstractPlugin;
 
 class ImagePlugin extends AbstractPlugin
 {

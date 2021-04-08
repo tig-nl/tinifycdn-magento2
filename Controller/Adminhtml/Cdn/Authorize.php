@@ -30,7 +30,7 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Controller\Adminhtml\Cdn;
+namespace TIG\TinifyCDN\Controller\Adminhtml\Cdn;
 
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Magento\Backend\App\Action\Context;
@@ -38,12 +38,12 @@ use Magento\Config\Model\ResourceModel\Config as ConfigWriter;
 use Magento\Framework\App\ScopeInterface as FrameworkScopeInterface;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
-use TIG\TinyCDN\Client\Provider\TinifyProvider;
-use TIG\TinyCDN\Client\Provider\TinifyProviderFactory;
-use TIG\TinyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
-use TIG\TinyCDN\Model\Api\Site;
-use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration;
-use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
+use TIG\TinifyCDN\Client\Provider\TinifyProvider;
+use TIG\TinifyCDN\Client\Provider\TinifyProviderFactory;
+use TIG\TinifyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
+use TIG\TinifyCDN\Model\Api\Site;
+use TIG\TinifyCDN\Model\Config\Provider\CDN\Configuration;
+use TIG\TinifyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
 
 class Authorize extends AbstractAdminhtmlController
 {
@@ -105,7 +105,7 @@ class Authorize extends AbstractAdminhtmlController
         $this->scope   = $this->getSessionData('scope');
 
         $redirect = $this->resultRedirectFactory->create();
-        $redirect->setPath(static::SYSTEM_CONFIG_TIG_TINYCDN_SECTION, [$this->scope => $this->storeId]);
+        $redirect->setPath(static::SYSTEM_CONFIG_TIG_TINIFYCDN_SECTION, [$this->scope => $this->storeId]);
 
         if (!$authCode) {
             $this->messageManager->addErrorMessage(
@@ -168,7 +168,7 @@ class Authorize extends AbstractAdminhtmlController
         try {
             $accessToken = $provider->getAccessToken('authorization_code', ['code' => $authCode]);
             $this->configWriter->saveConfig(
-                Configuration::XPATH_TINYCDN_CDN_ACCESS_TOKEN,
+                Configuration::XPATH_TINIFYCDN_CDN_ACCESS_TOKEN,
                 $accessToken,
                 $this->scope,
                 $this->storeId
@@ -178,7 +178,7 @@ class Authorize extends AbstractAdminhtmlController
         }
 
         // If Authorization is successful, remove oAuth Credentials from session.
-        $this->unsetSessionData(static::TINYCDN_OAUTH_CREDENTIALS_PARAM);
+        $this->unsetSessionData(static::TINIFYCDN_OAUTH_CREDENTIALS_PARAM);
     }
 
     /**
@@ -190,7 +190,7 @@ class Authorize extends AbstractAdminhtmlController
     {
         try {
             $this->configWriter->saveConfig(
-                Configuration::XPATH_TINYCDN_CDN_ENDPOINT,
+                Configuration::XPATH_TINIFYCDN_CDN_ENDPOINT,
                 $this->retrieveEndpoint($currentSite),
                 $this->scope,
                 $this->storeId
@@ -205,7 +205,7 @@ class Authorize extends AbstractAdminhtmlController
 
         $this->messageManager->addNoticeMessage(__('Don\'t forget to save your configuration!'));
 
-        return $this->messageManager->addSuccessMessage(__('Your TinyCDN endpoint was successfully set.'));
+        return $this->messageManager->addSuccessMessage(__('Your TinifyCDN endpoint was successfully set.'));
     }
 
     /**
@@ -217,7 +217,7 @@ class Authorize extends AbstractAdminhtmlController
     {
         try {
             $this->configWriter->saveConfig(
-                Configuration::XPATH_TINYCDN_CDN_SITE_ID,
+                Configuration::XPATH_TINIFYCDN_CDN_SITE_ID,
                 $this->retrieveSiteId($currentSite),
                 $this->scope,
                 $this->storeId
@@ -238,7 +238,7 @@ class Authorize extends AbstractAdminhtmlController
 
         if (!$endpoint) {
             $this->messageManager->addErrorMessage(
-                __('No endpoint found for this store. Are you sure it\'s configured in your TinyCDN account?')
+                __('No endpoint found for this store. Are you sure it\'s configured in your TinifyCDN account?')
             );
         }
 
@@ -256,7 +256,7 @@ class Authorize extends AbstractAdminhtmlController
 
         if (!$siteId) {
             $this->messageManager->addErrorMessage(
-                __('No site ID found for this Store View. Are you sure it\'s configured in your TinyCDN account?')
+                __('No site ID found for this Store View. Are you sure it\'s configured in your TinifyCDN account?')
             );
         }
 

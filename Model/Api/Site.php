@@ -30,9 +30,9 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Model\Api;
+namespace TIG\TinifyCDN\Model\Api;
 
-use TIG\TinyCDN\Model\AbstractApi;
+use TIG\TinifyCDN\Model\AbstractApi;
 
 class Site extends AbstractApi
 {

@@ -2,9 +2,9 @@
 "Purge this Site","Purge this Site"
 "No authorization code provided. Direct access not allowed.","No authorization code provided. Direct access not allowed."
 "Do not forget to save your configuration!","Do not forget to save your configuration!"
-"Your TinyCDN endpoint was successfully set.","Your TinyCDN endpoint was successfully set."
-"No endpoint found for this store. Are you sure it's configured in your TinyCDN account?","No endpoint found for this store. Are you sure it's configured in your TinyCDN account?"
-"No site ID found for this Store View. Are you sure it's configured in your TinyCDN account?","No site ID found for this Store View. Are you sure it's configured in your TinyCDN account?"
+"Your TinifyCDN endpoint was successfully set.","Your TinifyCDN endpoint was successfully set."
+"No endpoint found for this store. Are you sure it's configured in your TinifyCDN account?","No endpoint found for this store. Are you sure it's configured in your TinifyCDN account?"
+"No site ID found for this Store View. Are you sure it's configured in your TinifyCDN account?","No site ID found for this Store View. Are you sure it's configured in your TinifyCDN account?"
 "Site CDN couldn't be purged. Something went wrong. Error-code: %s","Site CDN couldn't be purged. Something went wrong. Error-code: %s"
 "Site CDN successfully purged.","Site CDN successfully purged."
 Off,Off
@@ -17,16 +17,16 @@ Disabled,Disabled
 "Live Mode","Live Mode"
 "Magento version compatibility","Magento version compatibility"
 "Supported Magento versions","Supported Magento versions"
-"TinyCDN version","TinyCDN version"
+"TinifyCDN version","TinifyCDN version"
 "Your PHP version","Your PHP version"
 Support,Support
 "This extension is developed by <a href=""https://tig.nl"" target=""_BLANK"">TIG</a>","This extension is developed by <a href=""https://tig.nl"" target=""_BLANK"">TIG</a>"
 "Extension basic configuration and account information","Extension basic configuration and account information"
 "Please contact:","Please contact:"
 Tinify,Tinify
-TinyCDN,TinyCDN
+TinifyCDN,TinifyCDN
 "CDN Configuration","CDN Configuration"
-"TinyCDN account","TinyCDN account"
+"TinifyCDN account","TinifyCDN account"
 "Connect your Tinify account to this Store View.","Connect your Tinify account to this Store View."
 Endpoint,Endpoint
 "The endpoint used by this Store View.","The endpoint used by this Store View."

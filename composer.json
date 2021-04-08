@@ -1,36 +1,36 @@
 {
-  "name": "tig/tinycdn-magento2",
-  "description": "Allows you to easily setup TinyCDN for your Magento 2 store.",
-  "require": {
-    "magento/framework": ">=101.0.0,<=101.0.10|>=102.0.0,<=102.0.3",
-    "php": "~7.0.0|~7.1.0|~7.2.0",
-    "ext-json": "*",
-    "league/oauth2-client": "^2.4"
-  },
-  "type": "magento2-module",
-  "license": "CC-BY-NC-ND-3.0",
-  "authors": [
-    {
-      "name": "TIG",
-      "email": "servicedesk@tig.nl",
-      "homepage": "http://tig.nl"
-    }
-  ],
-  "version": "v1.1.0-alpha",
-  "autoload": {
-    "files": [
-      "registration.php"
+    "name": "tig/tinifycdn-magento2",
+    "description": "Allows you to easily setup TinifyCDN for your Magento 2 store.",
+    "require": {
+        "magento/framework": "~102.0|~103.0",
+        "php": "~7.3|~7.4",
+        "ext-json": "*",
+        "league/oauth2-client": "^2.4"
+    },
+    "type": "magento2-module",
+    "license": "CC-BY-NC-ND-3.0",
+    "authors": [
+        {
+            "name": "TIG",
+            "email": "servicedesk@tig.nl",
+            "homepage": "http://tig.nl"
+        }
     ],
-    "psr-4": {
-      "TIG\\TinyCDN\\": ""
+    "version": "v1.1.0-alpha",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "TIG\\TinifyCDN\\": ""
+        }
+    },
+    "require-dev": {
+    },
+    "repositories": {
+        "magento": {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        }
     }
-  },
-  "require-dev": {
-  },
-  "repositories": {
-    "magento": {
-      "type": "composer",
-      "url": "https://repo.magento.com/"
-    }
-  }
 }
