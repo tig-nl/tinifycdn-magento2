@@ -44,7 +44,7 @@
             <label>Tinify</label>
         </tab>
         <section id="tig_tinifycdn" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>TinifyCDN</label>
+            <label>Tinify CDN</label>
             <tab>tinify</tab>
             <resource>TIG_TinifyCDN::configuration</resource>
             <include path="TIG_TinifyCDN::system/support.xml" />

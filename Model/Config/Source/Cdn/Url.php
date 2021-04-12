@@ -96,7 +96,7 @@ class Url extends AbstractConfigSource
 
     /**
      * Custom function to grab the key from the referring URL. Magento creates a
-     * new form key upon each request. But TinifyCDN needs the key to stay intact
+     * new form key upon each request. But Tinify CDN needs the key to stay intact
      * until after referral.
      *
      * @param $url
