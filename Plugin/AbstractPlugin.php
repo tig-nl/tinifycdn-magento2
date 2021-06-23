@@ -72,10 +72,6 @@ abstract class AbstractPlugin
      */
     public function getCdnUrl($url)
     {
-        if (strpos($url, '.html') !== false) {
-            return $url;
-        }
-
         if (!$this->generalConfig->isEnabled()) {
             return $url;
         }

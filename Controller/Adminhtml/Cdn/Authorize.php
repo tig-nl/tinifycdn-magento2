@@ -242,11 +242,6 @@ class Authorize extends AbstractAdminhtmlController
             );
         }
 
-        // The returned endpoint could be missing a trailing slash which is required in the base_url.
-        if (substr($endpoint, -1) !== '/') {
-            $endpoint .= '/';
-        }
-
         return $endpoint;
     }
 
