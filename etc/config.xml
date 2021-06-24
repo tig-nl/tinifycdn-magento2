@@ -34,7 +34,7 @@
     <default>
         <tig_tinifycdn>
             <stability />
-            <supported_magento_version>2.3.6, 2.4.1</supported_magento_version>
+            <supported_magento_version>2.3.7, 2.4.2-p1</supported_magento_version>
             <general>
                 <mode>0</mode>
             </general>
