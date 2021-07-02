@@ -58,6 +58,24 @@ class Site extends AbstractApi
         $site = array_filter(
             $sites,
             function ($properties) use ($baseUrl) {
+                $baseUrlHasTrailingSlash = (substr($baseUrl,-1) == '/');
+                $originUrlHasTrailingSlash = (substr($properties->origin_url,-1) == '/');
+
+                //both true or false
+                if ($baseUrlHasTrailingSlash == $originUrlHasTrailingSlash) {
+                    return strtolower($properties->origin_url) == $baseUrl;
+                }
+
+                //only baseurl has it
+                if ($baseUrlHasTrailingSlash) {
+                    return strtolower($properties->origin_url . '/') == $baseUrl;
+                }
+
+                //only origin_url has it
+                if ($originUrlHasTrailingSlash) {
+                    return strtolower($properties->origin_url) == $baseUrl . '/';
+                }
+
                 return strtolower($properties->origin_url) == $baseUrl;
             }
         );

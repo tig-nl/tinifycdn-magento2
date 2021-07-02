@@ -36,7 +36,7 @@
     <group id="cdn" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" >
         <label>CDN Configuration</label>
         <comment><![CDATA[CDN can only be purged on Store View level.]]></comment>
-        <field id="connect" translate="label comment" type="button" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+        <field id="connect" translate="label comment" type="button" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
             <label>Tinify CDN account</label>
             <comment><![CDATA[Connect your Tinify account to this Store View.]]></comment>
             <frontend_model>TIG\TinifyCDN\Block\Adminhtml\Config\Form\Field\Button\Connect</frontend_model>

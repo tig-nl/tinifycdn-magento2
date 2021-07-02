@@ -33,9 +33,9 @@
 -->
 <include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
     <!-- General Configuration -->
-    <group id="general" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+    <group id="general" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
         <label>General Configuration</label>
-        <field id="mode" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+        <field id="mode" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
             <label>Mode</label>
             <comment>Make sure to save your configuration after changing this setting, before (re-)connecting to your Tinify account.</comment>
             <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
