@@ -35,7 +35,7 @@ namespace TIG\TinifyCDN\Model;
 /**
  * Class Challenge
  *
- * This class provides the necessary methods to create a challenge through which TinifyCDN and Magento
+ * This class provides the necessary methods to create a challenge through which Tinify CDN and Magento
  * 2 can verify the validity of an authentication session.
  *
  * @package TIG\TinifyCDN\Model

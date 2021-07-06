@@ -121,7 +121,7 @@ class Authorize extends AbstractAdminhtmlController
 
         if (!$site) {
             $this->messageManager->addErrorMessage(
-                __('Site not found. Did you select the correct Site URL?')
+                __('Site URL not matched. Did you select the correct Site URL? TIP: Make sure Configuration > General > Web > Search Engine Optimization > Use Web Server Rewrites is set to Yes.')
             );
 
             return $redirect;
@@ -205,7 +205,7 @@ class Authorize extends AbstractAdminhtmlController
 
         $this->messageManager->addNoticeMessage(__('Don\'t forget to save your configuration!'));
 
-        return $this->messageManager->addSuccessMessage(__('Your TinifyCDN endpoint was successfully set.'));
+        return $this->messageManager->addSuccessMessage(__('Your Tinify CDN endpoint was successfully set.'));
     }
 
     /**
@@ -238,8 +238,12 @@ class Authorize extends AbstractAdminhtmlController
 
         if (!$endpoint) {
             $this->messageManager->addErrorMessage(
-                __('No endpoint found for this store. Are you sure it\'s configured in your TinifyCDN account?')
+                __('No endpoint found for this store. Are you sure it\'s configured in your Tinify CDN account?')
             );
+        }
+
+        if (substr($endpoint,-1) != '/') {
+            return $endpoint . '/';
         }
 
         return $endpoint;
@@ -256,7 +260,7 @@ class Authorize extends AbstractAdminhtmlController
 
         if (!$siteId) {
             $this->messageManager->addErrorMessage(
-                __('No site ID found for this Store View. Are you sure it\'s configured in your TinifyCDN account?')
+                __('No site ID found for this Store View. Are you sure it\'s configured in your Tinify CDN account?')
             );
         }
 
