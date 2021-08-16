@@ -18,8 +18,3 @@ After installation, run:
 4. `bin/magento cache:flush`
 
 Done!
-
-## Configuration
-
-### API credentials
-To use this module you need an active Tinify CDN account. You can connect to your account using the 'Connect to your Tinify Account' button in _Stores / Configuration / Tinify / Tinify CDN_.
