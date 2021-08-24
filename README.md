@@ -20,5 +20,4 @@ After installation, run:
 Done!
 
 ## Configuration
-
 To use this module you need an active Tinify CDN account. You can connect to your account using the 'Connect to your Tinify Account' button in Stores / Configuration / Tinify / Tinify CDN.
