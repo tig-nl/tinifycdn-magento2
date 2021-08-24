@@ -30,30 +30,31 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Block\Adminhtml\Config\Support;
+namespace TIG\TinifyCDN\Block\Adminhtml\Config\Support;
 
 use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
-use TIG\TinyCDN\Model\Config\Provider\Support\Tab as SupportTab;
+use TIG\TinifyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
+use TIG\TinifyCDN\Model\Config\Provider\Support\Tab as SupportTab;
 
 class Tab extends Template implements RendererInterface
 {
-    const MODULE_NAME       = 'TIG_TinyCDN';
+    const MODULE_NAME       = 'TIG_TinifyCDN';
 
-    const EXTENSION_VERSION = '1.1.0';
+    const EXTENSION_VERSION = '1.3.0';
 
     // @codingStandardsIgnoreLine
-    protected $_template = 'TIG_TinyCDN::config/support/tab.phtml';
+    protected $_template = 'TIG_TinifyCDN::config/support/tab.phtml';
 
     /** @var array */
     private $phpVersionSupport = [
         '2.0' => ['5.5' => ['22', '+'], '5.6' => ['+'], '7.0' => ['2', '6', '+']],
         '2.1' => ['5.6' => ['5', '+'], '7.0' => ['2', '5', '6', '+']],
         '2.2' => ['7.0' => ['2', '5', '6', '+'], '7.1' => ['+']],
-        '2.3' => ['7.0' => ['2', '5', '6', '+'], '7.1' => ['+'], '7.2' => ['+']]
+        '2.3' => ['7.0' => ['2', '5', '6', '+'], '7.1' => ['+'], '7.2' => ['+'], '7.3' => ['+'], '7.4' => ['+']],
+	'2.4' => ['7.4' => ['+'], '8.1' => ['+']]
     ];
 
     /** @var GeneralConfiguration */

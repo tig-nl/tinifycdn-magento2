@@ -30,21 +30,21 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Model\Config\Source\Cdn;
+namespace TIG\TinifyCDN\Model\Config\Source\Cdn;
 
 use Magento\Backend\Model\UrlInterface as BackendUrlInterface;
 use Magento\Framework\UrlInterface as StandardUrlInterface;
-use TIG\TinyCDN\Model\AbstractConfigSource;
+use TIG\TinifyCDN\Model\AbstractConfigSource;
 
 class Url extends AbstractConfigSource
 {
-    const TINYCDN_CDN_AUTHORIZE_URL = 'tinify/cdn/authorize';
+    const TINIFYCDN_CDN_AUTHORIZE_URL = 'tinify/cdn/authorize';
 
-    const TINYCDN_CDN_REDIRECT_URL  = 'tinify/cdn/redirect';
+    const TINIFYCDN_CDN_REDIRECT_URL  = 'tinify/cdn/redirect';
 
-    const TINYCDN_CDN_CONNECT_URL   = 'tinify/cdn/connect';
+    const TINIFYCDN_CDN_CONNECT_URL   = 'tinify/cdn/connect';
 
-    const TINYCDN_CDN_PURGE_URL     = 'tinify/cdn/purge';
+    const TINIFYCDN_CDN_PURGE_URL     = 'tinify/cdn/purge';
 
     /** @var BackendUrlInterface $backendUrlBuilder */
     private $backendUrlBuilder;
@@ -96,7 +96,7 @@ class Url extends AbstractConfigSource
 
     /**
      * Custom function to grab the key from the referring URL. Magento creates a
-     * new form key upon each request. But TinyCDN needs the key to stay intact
+     * new form key upon each request. But Tinify CDN needs the key to stay intact
      * until after referral.
      *
      * @param $url
@@ -122,7 +122,7 @@ class Url extends AbstractConfigSource
      */
     public function createRedirectUrl()
     {
-        return $this->buildUrl(static::TINYCDN_CDN_REDIRECT_URL, false);
+        return $this->buildUrl(static::TINIFYCDN_CDN_REDIRECT_URL, false);
     }
 
     /**
@@ -132,7 +132,7 @@ class Url extends AbstractConfigSource
      */
     public function createAuthorizeUrl(array $params = null)
     {
-        return $this->buildUrl(static::TINYCDN_CDN_AUTHORIZE_URL, true, $params);
+        return $this->buildUrl(static::TINIFYCDN_CDN_AUTHORIZE_URL, true, $params);
     }
 
     /**
@@ -140,7 +140,7 @@ class Url extends AbstractConfigSource
      */
     public function createConnectUrl()
     {
-        return $this->buildUrl(static::TINYCDN_CDN_CONNECT_URL);
+        return $this->buildUrl(static::TINIFYCDN_CDN_CONNECT_URL);
     }
 
     /**
@@ -150,6 +150,6 @@ class Url extends AbstractConfigSource
      */
     public function createPurgeUrl(array $params = null)
     {
-        return $this->buildUrl(static::TINYCDN_CDN_PURGE_URL, true, $params);
+        return $this->buildUrl(static::TINIFYCDN_CDN_PURGE_URL, true, $params);
     }
 }

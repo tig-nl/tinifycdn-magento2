@@ -29,10 +29,10 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-namespace TIG\TinyCDN\Block\Adminhtml\Config\Form\Field;
+namespace TIG\TinifyCDN\Block\Adminhtml\Config\Form\Field;
 
 use Magento\Config\Block\System\Config\Form\Fieldset as MagentoFieldset;
-use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
+use TIG\TinifyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
 
 class Fieldset extends MagentoFieldset
 {
@@ -50,7 +50,7 @@ class Fieldset extends MagentoFieldset
     // @codingStandardsIgnoreLine
     protected function _getFrontendClass($element)
     {
-        $mode = $this->_scopeConfig->getValue(GeneralConfiguration::XPATH_TINYCDN_GENERAL_MODE);
+        $mode = $this->_scopeConfig->getValue(GeneralConfiguration::XPATH_TINIFYCDN_GENERAL_MODE);
         $class = 'mode_off';
         if (array_key_exists($mode, $this->classNames)) {
             $class = $this->classNames[$mode];

@@ -30,11 +30,11 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Plugin;
+namespace TIG\TinifyCDN\Plugin;
 
 use Magento\Store\Model\StoreManagerInterface;
-use TIG\TinyCDN\Model\Config\Provider\CDN\Configuration as CDNConfiguration;
-use TIG\TinyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
+use TIG\TinifyCDN\Model\Config\Provider\CDN\Configuration as CDNConfiguration;
+use TIG\TinifyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
 
 abstract class AbstractPlugin
 {

@@ -30,15 +30,15 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinyCDN\Model;
+namespace TIG\TinifyCDN\Model;
 
 /**
  * Class Challenge
  *
- * This class provides the necessary methods to create a challenge through which TinyCDN and Magento
+ * This class provides the necessary methods to create a challenge through which Tinify CDN and Magento
  * 2 can verify the validity of an authentication session.
  *
- * @package TIG\TinyCDN\Model
+ * @package TIG\TinifyCDN\Model
  */
 class Challenge extends AbstractModel
 {

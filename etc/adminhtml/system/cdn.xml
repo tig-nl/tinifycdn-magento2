@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-/**
  *
- *          ..::..
- *     ..::::::::::::..
- *   ::'''''':''::'''''::
- *   ::..  ..:  :  ....::
- *   ::::  :::  :  :   ::
- *   ::::  :::  :  ''' ::
- *   ::::..:::..::.....::
- *     ''::::::::::::''
- *          ''::''
+ *
+ *          ..::..
+ *     ..::::::::::::..
+ *   ::'''''':''::'''''::
+ *   ::..  ..:  :  ....::
+ *   ::::  :::  :  :   ::
+ *   ::::  :::  :  ''' ::
+ *   ::::..:::..::.....::
+ *     ''::::::::::::''
+ *          ''::''
  *
  *
  * NOTICE OF LICENSE
@@ -19,7 +19,7 @@
  * It is available through the world-wide-web at this URL:
  * http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  * If you are unable to obtain it through the world-wide-web, please send an email
- * to servicedesk@totalinternetgroup.nl so we can send you a copy immediately.
+ * to servicedesk@tig.nl so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
@@ -27,9 +27,9 @@
  * versions in the future. If you wish to customize this module for your
  * needs please contact servicedesk@tig.nl for more information.
  *
- * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
- * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
- */
+ * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
+ * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ *
 -->
 <include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
     <!-- CDN Configuration -->
@@ -37,20 +37,20 @@
         <label>CDN Configuration</label>
         <comment><![CDATA[CDN can only be purged on Store View level.]]></comment>
         <field id="connect" translate="label comment" type="button" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>TinyCDN account</label>
+            <label>Tinify CDN account</label>
             <comment><![CDATA[Connect your Tinify account to this Store View.]]></comment>
-            <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button\Connect</frontend_model>
+            <frontend_model>TIG\TinifyCDN\Block\Adminhtml\Config\Form\Field\Button\Connect</frontend_model>
         </field>
         <field id="endpoint" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Endpoint</label>
             <comment><![CDATA[The endpoint used by this Store View.]]></comment>
-            <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Disabled</frontend_model>
-            <config_path>tig_tinycdn/cdn/endpoint</config_path>
+            <frontend_model>TIG\TinifyCDN\Block\Adminhtml\Config\Form\Field\Disabled</frontend_model>
+            <config_path>tig_tinifycdn/cdn/endpoint</config_path>
         </field>
         <field id="purge" translate="label comment" type="button" sortOrder="30" showInStore="1">
             <label>Purge Site</label>
             <comment><![CDATA[Purges all the CDN's data for this Store View.]]></comment>
-            <frontend_model>TIG\TinyCDN\Block\Adminhtml\Config\Form\Field\Button\Purge</frontend_model>
+            <frontend_model>TIG\TinifyCDN\Block\Adminhtml\Config\Form\Field\Button\Purge</frontend_model>
         </field>
     </group>
 </include>
