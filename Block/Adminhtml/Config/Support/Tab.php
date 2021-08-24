@@ -43,7 +43,7 @@ class Tab extends Template implements RendererInterface
 {
     const MODULE_NAME       = 'TIG_TinifyCDN';
 
-    const EXTENSION_VERSION = '1.3.0';
+    const EXTENSION_VERSION = '1.3.1';
 
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_TinifyCDN::config/support/tab.phtml';
