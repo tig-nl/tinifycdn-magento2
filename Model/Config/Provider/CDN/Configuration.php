@@ -142,6 +142,8 @@ class Configuration extends AbstractConfigProvider
     }
 
     /**
+     * @param null $storeId
+     *
      * @return string
      */
     public function getAccessToken($storeId = null)
@@ -150,6 +152,8 @@ class Configuration extends AbstractConfigProvider
     }
 
     /**
+     * @param null $storeId
+     *
      * @return string
      */
     public function getCdnEndpoint($storeId = null)
@@ -158,6 +162,8 @@ class Configuration extends AbstractConfigProvider
     }
 
     /**
+     * @param null $storeId
+     * 
      * @return string
      */
     public function getSiteId($storeId = null)

@@ -85,6 +85,8 @@ class Site extends AbstractApi
     }
 
     /**
+     * @param null $storeId
+     *
      * @return array
      */
     private function getAvailableSites($storeId = null)
@@ -95,6 +97,8 @@ class Site extends AbstractApi
     }
 
     /**
+     * @param null $storeId
+     *
      * @return array
      */
     private function doGetRequest($storeId = null)

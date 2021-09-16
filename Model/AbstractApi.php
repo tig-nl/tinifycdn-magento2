@@ -55,6 +55,7 @@ abstract class AbstractApi
      * AbstractApi constructor.
      *
      * @param Curl          $curl
+     * @param StoreManagerInterface $storeManager
      * @param Configuration $config
      * @param CollectionFactory $configCollection
      */
@@ -71,9 +72,9 @@ abstract class AbstractApi
     }
 
     /**
-     * @param string $uri
-     * @param string $method
-     * @param bool   $includeToken
+     * @param string   $uri
+     * @param string   $method
+     * @param bool     $includeToken
      * @param int|null $storeId
      *
      * @return array
@@ -113,6 +114,8 @@ abstract class AbstractApi
     }
 
     /**
+     * @param null $storeId
+     *
      * @return mixed|string|null
      */
     public function getAccessTokenFromConfig($storeId = null)
