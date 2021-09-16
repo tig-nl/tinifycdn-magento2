@@ -34,7 +34,7 @@ namespace TIG\TinifyCDN\Model;
 
 use Magento\Framework\HTTP\Client\Curl;
 use Magento\Store\Model\StoreManagerInterface;
-use Magento\Config\Model\ResourceModel\Config\Data\CollectionF actory;
+use Magento\Config\Model\ResourceModel\Config\Data\CollectionFactory;
 use TIG\TinifyCDN\Model\Config\Provider\CDN\Configuration;
 
 abstract class AbstractApi
