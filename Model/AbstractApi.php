@@ -49,7 +49,7 @@ abstract class AbstractApi
     private $config;
 
     /** @var CollectionFactory */
-    protected $configCollection;
+    private $configCollection;
 
     /**
      * AbstractApi constructor.
