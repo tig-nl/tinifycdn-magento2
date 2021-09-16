@@ -101,13 +101,24 @@ class Authorize extends AbstractAdminhtmlController
     {
         $provider      = $this->createTinifyProviderInstance();
         $authCode      = $this->getRequest()->getParam('code');
+        $errorCode     = $this->getRequest()->getParam('error');
         $this->storeId = $this->getSessionData('id');
         $this->scope   = $this->getSessionData('scope');
 
         $redirect = $this->resultRedirectFactory->create();
         $redirect->setPath(static::SYSTEM_CONFIG_TIG_TINIFYCDN_SECTION, [$this->scope => $this->storeId]);
 
-        if (!$authCode) {
+        // Received error from Tinify CDN
+        if (isset($errorCode)) {
+            $this->messageManager->addErrorMessage(
+                __('Authorization for use of Tinify CDN denied.')
+            );
+
+            return $redirect;
+        }
+
+        // Received no code from Tinify CDN
+        if (!isset($authCode)) {
             $this->messageManager->addErrorMessage(
                 __('No authorization code provided. Direct access not allowed.')
             );
@@ -179,6 +190,7 @@ class Authorize extends AbstractAdminhtmlController
 
         // If Authorization is successful, remove oAuth Credentials from session.
         $this->unsetSessionData(static::TINIFYCDN_OAUTH_CREDENTIALS_PARAM);
+        
     }
 
     /**

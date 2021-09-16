@@ -76,16 +76,26 @@ class Redirect extends Action
     {
         $params = $this->getRequest()->getParams();
 
-        if (!$params['code'] && !$params['state']) {
+        if (!isset($params['code']) && !isset($params['state'])) {
             return $this->exception->throwException('Invalid request. No direct access allowed.');
         }
-
-        $formKey  = $params['state'];
         $redirect = $this->resultRedirectFactory->create();
+
+        // Error handled by authorization controller
+        if (isset($params['error'])) {
+            $authUrl = $this->urlBuilder->createAuthorizeUrl(
+                [
+                    UrlInterface::SECRET_KEY_PARAM_NAME => $params['state'],
+                    'error' => $params['error']
+                ]
+            );
+            $redirect->setPath($authUrl);
+            return $redirect;
+        }
 
         $authUrl = $this->urlBuilder->createAuthorizeUrl(
             [
-                UrlInterface::SECRET_KEY_PARAM_NAME => $formKey,
+                UrlInterface::SECRET_KEY_PARAM_NAME => $params['state'],
                 'code'                              => $params['code']
             ]
         );

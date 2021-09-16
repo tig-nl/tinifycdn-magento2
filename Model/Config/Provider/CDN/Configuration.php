@@ -146,7 +146,7 @@ class Configuration extends AbstractConfigProvider
      */
     public function getAccessToken($storeId = null)
     {
-        return $this->getConfigValue(static::XPATH_TINIFYCDN_CDN_ACCESS_TOKEN. $storeId);
+        return $this->getConfigValue(static::XPATH_TINIFYCDN_CDN_ACCESS_TOKEN, $storeId);
     }
 
     /**
