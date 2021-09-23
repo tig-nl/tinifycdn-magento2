@@ -217,7 +217,7 @@ class Authorize extends AbstractAdminhtmlController
 
         $this->messageManager->addNoticeMessage(__('Don\'t forget to save your configuration!'));
 
-        return $this->messageManager->addSuccessMessage(__('Your Tinify CDN endpoint was successfully set.'));
+        return $this->messageManager->addSuccessMessage(__('Your Tinify CDN endpoint was successfully set and will be visible after you save your configuration.'));
     }
 
     /**

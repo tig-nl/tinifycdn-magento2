@@ -65,13 +65,15 @@ class Configuration extends AbstractConfigProvider
     /**
      * Configuration constructor.
      *
-     * @param \Magento\Framework\Model\Context                             $context
-     * @param \Magento\Framework\Registry                                  $registry
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface           $scopeConfig
-     * @param Challenge                                                    $challenge
-     * @param GeneralConfiguration                                         $generalConfig
+     * @param \Magento\Framework\Model\Context $context
+     * @param \Magento\Framework\Registry $registry
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @param Challenge $challenge
+     * @param GeneralConfiguration $generalConfig
+     * @param Url $urlBuilder
      * @param \Magento\Framework\Model\ResourceModel\AbstractResource|null $resource
-     * @param \Magento\Framework\Data\Collection\AbstractDb|null           $resourceCollection
+     * @param \Magento\Framework\Data\Collection\AbstractDb|null $resourceCollection
      */
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -163,7 +165,7 @@ class Configuration extends AbstractConfigProvider
 
     /**
      * @param null $storeId
-     * 
+     *
      * @return string
      */
     public function getSiteId($storeId = null)
