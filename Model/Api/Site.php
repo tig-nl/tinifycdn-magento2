@@ -46,7 +46,7 @@ class Site extends AbstractApi
      */
     public function fetchSite($storeId = null)
     {
-        $sites = $this->getAvailableSites();
+        $sites = $this->getAvailableSites($storeId);
         /** @var \Magento\Store\Model\Store $store */
         $store   = $this->getStore($storeId);
         $baseUrl = $store->getBaseUrl();
@@ -85,20 +85,24 @@ class Site extends AbstractApi
     }
 
     /**
+     * @param null $storeId
+     *
      * @return array
      */
-    private function getAvailableSites()
+    private function getAvailableSites($storeId = null)
     {
-        $result = $this->doGetRequest();
+        $result = $this->doGetRequest($storeId);
 
         return json_decode($result['body']);
     }
 
     /**
+     * @param null $storeId
+     *
      * @return array
      */
-    private function doGetRequest()
+    private function doGetRequest($storeId = null)
     {
-        return $this->call(static::TINIFY_API_CDN_SITES, 'get', true);
+        return $this->call(static::TINIFY_API_CDN_SITES, 'get', true, $storeId);
     }
 }

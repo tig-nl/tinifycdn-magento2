@@ -34,6 +34,7 @@ namespace TIG\TinifyCDN\Model;
 
 use Magento\Framework\HTTP\Client\Curl;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Config\Model\ResourceModel\Config\Data\CollectionFactory;
 use TIG\TinifyCDN\Model\Config\Provider\CDN\Configuration;
 
 abstract class AbstractApi
@@ -47,35 +48,43 @@ abstract class AbstractApi
     /** @var Configuration $config */
     private $config;
 
+    /** @var CollectionFactory */
+    private $configCollection;
+
     /**
      * AbstractApi constructor.
      *
      * @param Curl          $curl
+     * @param StoreManagerInterface $storeManager
      * @param Configuration $config
+     * @param CollectionFactory $configCollection
      */
     public function __construct(
         Curl $curl,
         StoreManagerInterface $storeManager,
-        Configuration $config
+        Configuration $config,
+        CollectionFactory $configCollection
     ) {
-        $this->curl         = $curl;
-        $this->storeManager = $storeManager;
-        $this->config       = $config;
+        $this->curl             = $curl;
+        $this->storeManager     = $storeManager;
+        $this->config           = $config;
+        $this->configCollection = $configCollection;
     }
 
     /**
-     * @param string $uri
-     * @param string $method
-     * @param bool   $includeToken
+     * @param string   $uri
+     * @param string   $method
+     * @param bool     $includeToken
+     * @param int|null $storeId
      *
      * @return array
      */
-    public function call(string $uri, string $method, bool $includeToken)
+    public function call(string $uri, string $method, bool $includeToken, int $storeId = null)
     {
         $url = $this->config->getApiUrl($uri);
 
         if ($includeToken) {
-            $token = $this->config->getAccessToken();
+            $token = $this->getAccessTokenFromConfig($storeId);
             $this->curl->addHeader(Configuration::TINIFYCDN_CDN_AUTH_PARAM, 'Bearer ' . $token);
         }
 
@@ -102,5 +111,29 @@ abstract class AbstractApi
     public function getStore($storeId = null)
     {
         return $this->storeManager->getStore($storeId);
+    }
+
+    /**
+     * @param null $storeId
+     *
+     * @return mixed|string|null
+     */
+    public function getAccessTokenFromConfig($storeId = null)
+    {
+        $token = $this->config->getAccessToken($storeId);
+        if ($token != 0) {
+            return $token;
+        }
+
+        // Fallback method: Read directly from core_config_table
+        // Scenario: New install, token is saved in database but config cache return old value
+        $collection = $this->configCollection->create();
+        $collection->addFieldToFilter("path",['eq' => Configuration::XPATH_TINIFYCDN_CDN_ACCESS_TOKEN]);
+        $collection->addFieldToFilter("scope_id",['eq' => intval($storeId)]);
+        if($collection->count()>0){
+            return $collection->getFirstItem()->getData()['value'];
+        }
+
+        return null;
     }
 }
