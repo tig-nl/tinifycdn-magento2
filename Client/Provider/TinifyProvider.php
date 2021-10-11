@@ -1,5 +1,5 @@
 <?php
-namespace TIG\TinifyCDN\Client\Provider;
+namespace Tinify\TinifyCDN\Client\Provider;
 
 use InvalidArgumentException;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;

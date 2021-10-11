@@ -30,15 +30,15 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Controller\Adminhtml\Cdn;
+namespace Tinify\TinifyCDN\Controller\Adminhtml\Cdn;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\Session\SessionManagerInterface;
-use TIG\TinifyCDN\Client\Provider\TinifyProvider;
-use TIG\TinifyCDN\Client\Provider\TinifyProviderFactory;
-use TIG\TinifyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
-use TIG\TinifyCDN\Model\Config\Provider\CDN\Configuration;
-use TIG\TinifyCDN\Model\Config\Source\Cdn\Url;
+use Tinify\TinifyCDN\Client\Provider\TinifyProvider;
+use Tinify\TinifyCDN\Client\Provider\TinifyProviderFactory;
+use Tinify\TinifyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
+use Tinify\TinifyCDN\Model\Config\Provider\CDN\Configuration;
+use Tinify\TinifyCDN\Model\Config\Source\Cdn\Url;
 
 class Connect extends AbstractAdminhtmlController
 {

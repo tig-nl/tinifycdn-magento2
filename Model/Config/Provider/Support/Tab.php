@@ -30,13 +30,13 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Model\Config\Provider\Support;
+namespace Tinify\TinifyCDN\Model\Config\Provider\Support;
 
-use TIG\TinifyCDN\Model\AbstractConfigProvider;
+use Tinify\TinifyCDN\Model\AbstractConfigProvider;
 
 class Tab extends AbstractConfigProvider
 {
-    const XPATH_TINIFYCDN_SUPPORTED_MAGENTO_VERSION = 'tig_tinifycdn/supported_magento_version';
+    const XPATH_TINIFYCDN_SUPPORTED_MAGENTO_VERSION = 'tinify_tinifycdn/supported_magento_version';
 
     /**
      * @param null $store

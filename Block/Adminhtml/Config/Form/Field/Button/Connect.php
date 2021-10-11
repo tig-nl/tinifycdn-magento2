@@ -30,18 +30,18 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Block\Adminhtml\Config\Form\Field\Button;
+namespace Tinify\TinifyCDN\Block\Adminhtml\Config\Form\Field\Button;
 
 use Magento\Backend\Block\Template\Context;
-use TIG\TinifyCDN\Block\Adminhtml\Config\Form\Field\AbstractButton;
-use TIG\TinifyCDN\Model\Config\Source\Cdn\Url;
+use Tinify\TinifyCDN\Block\Adminhtml\Config\Form\Field\AbstractButton;
+use Tinify\TinifyCDN\Model\Config\Source\Cdn\Url;
 
 class Connect extends AbstractButton
 {
     const BUTTON_ID = 'tinify_cdn_connect';
 
     // @codingStandardsIgnoreLine
-    protected $_template = 'TIG_TinifyCDN::config/form/button/connect.phtml';
+    protected $_template = 'Tinify_TinifyCDN::config/form/button/connect.phtml';
 
     /**
      * Button constructor.

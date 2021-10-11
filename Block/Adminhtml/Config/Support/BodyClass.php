@@ -30,7 +30,7 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Block\Adminhtml\Config\Support;
+namespace Tinify\TinifyCDN\Block\Adminhtml\Config\Support;
 
 use Magento\Backend\Block\Template;
 use Magento\Backend\Block\Template\Context;
@@ -44,7 +44,7 @@ class BodyClass extends Template implements BlockInterface
     // @codingStandardsIgnoreLine
     protected function _prepareLayout()
     {
-        if ($this->_request->getParam('section') == 'tig_tinifycdn') {
+        if ($this->_request->getParam('section') == 'tinify_tinifycdn') {
             $this->pageConfig->addBodyClass('tinifycdn-config-page');
         }
         return parent::_prepareLayout();

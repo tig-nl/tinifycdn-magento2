@@ -30,19 +30,19 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Controller\Adminhtml;
+namespace Tinify\TinifyCDN\Controller\Adminhtml;
 
 use Magento\Backend\App\Action;
 use Magento\Framework\Session\SessionManagerInterface;
-use TIG\TinifyCDN\Client\Provider\TinifyProvider;
-use TIG\TinifyCDN\Client\Provider\TinifyProviderFactory;
-use TIG\TinifyCDN\Model\Config\Provider\CDN\Configuration;
+use Tinify\TinifyCDN\Client\Provider\TinifyProvider;
+use Tinify\TinifyCDN\Client\Provider\TinifyProviderFactory;
+use Tinify\TinifyCDN\Model\Config\Provider\CDN\Configuration;
 
 abstract class AbstractAdminhtmlController extends Action
 {
     const TINIFYCDN_OAUTH_CREDENTIALS_PARAM = 'o_auth_credentials';
 
-    const SYSTEM_CONFIG_TIG_TINIFYCDN_SECTION = 'adminhtml/system_config/edit/section/tig_tinifycdn';
+    const SYSTEM_CONFIG_TINIFY_TINIFYCDN_SECTION = 'adminhtml/system_config/edit/section/tinify_tinifycdn';
 
     /** @var SessionManagerInterface $session */
     private $session;

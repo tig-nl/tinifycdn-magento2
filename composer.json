@@ -1,5 +1,5 @@
 {
-    "name": "tig/tinifycdn-magento2",
+    "name": "tinify/tinifycdn-magento2",
     "description": "Allows you to easily setup Tinify CDN for your Magento 2 store.",
     "require": {
         "magento/framework": "~102.0|~103.0",
@@ -16,13 +16,13 @@
             "homepage": "http://tig.nl"
         }
     ],
-    "version": "v1.3.2",
+    "version": "v1.3.3",
     "autoload": {
         "files": [
             "registration.php"
         ],
         "psr-4": {
-            "TIG\\TinifyCDN\\": ""
+            "Tinify\\TinifyCDN\\": ""
         }
     },
     "require-dev": {

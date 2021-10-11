@@ -30,9 +30,9 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Model\Api;
+namespace Tinify\TinifyCDN\Model\Api;
 
-use TIG\TinifyCDN\Model\AbstractApi;
+use Tinify\TinifyCDN\Model\AbstractApi;
 
 class Purge extends AbstractApi
 {

@@ -29,10 +29,10 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-namespace TIG\TinifyCDN\Block\Adminhtml\Config\Form\Field;
+namespace Tinify\TinifyCDN\Block\Adminhtml\Config\Form\Field;
 
 use Magento\Config\Block\System\Config\Form\Fieldset as MagentoFieldset;
-use TIG\TinifyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
+use Tinify\TinifyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
 
 class Fieldset extends MagentoFieldset
 {
