@@ -30,13 +30,13 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Model\Config\Provider\General;
+namespace Tinify\TinifyCDN\Model\Config\Provider\General;
 
-use TIG\TinifyCDN\Model\AbstractConfigProvider;
+use Tinify\TinifyCDN\Model\AbstractConfigProvider;
 
 class Configuration extends AbstractConfigProvider
 {
-    const XPATH_TINIFYCDN_GENERAL_MODE = 'tig_tinifycdn/general/mode';
+    const XPATH_TINIFYCDN_GENERAL_MODE = 'tinify_tinifycdn/general/mode';
 
     /**
      * @return mixed

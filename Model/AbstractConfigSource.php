@@ -30,7 +30,7 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Model;
+namespace Tinify\TinifyCDN\Model;
 
 abstract class AbstractConfigSource extends AbstractModel
 {

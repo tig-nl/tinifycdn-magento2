@@ -2,10 +2,10 @@
 We created this extension to **add immediate image optimization and CDN functionality to Magento 2**. 
 
 ## Installation using Composer
-<pre>composer require tig/tinifycdn-magento2</pre>
+<pre>composer require tinify/tinifycdn-magento2</pre>
 
 ## Installation without using Composer
-_Clone or download_ the contents of this repository into `app/code/TIG/TinifyCDN`.
+_Clone or download_ the contents of this repository into `app/code/Tinify/TinifyCDN`.
 
 ### Development Mode
 After installation, run `bin/magento setup:upgrade` to make the needed database changes and remove/empty Magento 2's generated files and folders.

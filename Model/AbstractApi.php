@@ -30,12 +30,12 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Model;
+namespace Tinify\TinifyCDN\Model;
 
 use Magento\Framework\HTTP\Client\Curl;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Config\Model\ResourceModel\Config\Data\CollectionFactory;
-use TIG\TinifyCDN\Model\Config\Provider\CDN\Configuration;
+use Tinify\TinifyCDN\Model\Config\Provider\CDN\Configuration;
 
 abstract class AbstractApi
 {

@@ -30,15 +30,15 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Controller\Adminhtml\Cdn;
+namespace Tinify\TinifyCDN\Controller\Adminhtml\Cdn;
 
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Session\SessionManagerInterface;
-use TIG\TinifyCDN\Client\Provider\TinifyProvider;
-use TIG\TinifyCDN\Client\Provider\TinifyProviderFactory;
-use TIG\TinifyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
-use TIG\TinifyCDN\Model\Api\Purge as Api;
-use TIG\TinifyCDN\Model\Config\Provider\CDN\Configuration;
+use Tinify\TinifyCDN\Client\Provider\TinifyProvider;
+use Tinify\TinifyCDN\Client\Provider\TinifyProviderFactory;
+use Tinify\TinifyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
+use Tinify\TinifyCDN\Model\Api\Purge as Api;
+use Tinify\TinifyCDN\Model\Config\Provider\CDN\Configuration;
 
 class Purge extends AbstractAdminhtmlController
 {
@@ -85,7 +85,7 @@ class Purge extends AbstractAdminhtmlController
         $this->storeId = $this->getRequest()->getParam('id');
 
         $redirect = $this->resultRedirectFactory->create();
-        $redirect->setPath(static::SYSTEM_CONFIG_TIG_TINIFYCDN_SECTION, [$this->scope => $this->storeId]);
+        $redirect->setPath(static::SYSTEM_CONFIG_TINIFY_TINIFYCDN_SECTION, [$this->scope => $this->storeId]);
 
         if (!$this->storeId) {
             return $redirect;

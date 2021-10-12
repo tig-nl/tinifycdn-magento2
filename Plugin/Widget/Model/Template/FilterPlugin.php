@@ -30,10 +30,10 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Plugin\Widget\Model\Template;
+namespace Tinify\TinifyCDN\Plugin\Widget\Model\Template;
 
 use Magento\Widget\Model\Template\Filter;
-use TIG\TinifyCDN\Plugin\AbstractPlugin;
+use Tinify\TinifyCDN\Plugin\AbstractPlugin;
 
 class FilterPlugin extends AbstractPlugin
 {

@@ -30,10 +30,10 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Plugin\Framework\View\Asset;
+namespace Tinify\TinifyCDN\Plugin\Framework\View\Asset;
 
 use Magento\Framework\View\Asset\File;
-use TIG\TinifyCDN\Plugin\AbstractPlugin;
+use Tinify\TinifyCDN\Plugin\AbstractPlugin;
 
 class FilePlugin extends AbstractPlugin
 {

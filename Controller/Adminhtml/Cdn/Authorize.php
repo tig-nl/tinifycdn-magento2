@@ -30,7 +30,7 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Controller\Adminhtml\Cdn;
+namespace Tinify\TinifyCDN\Controller\Adminhtml\Cdn;
 
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Magento\Backend\App\Action\Context;
@@ -38,12 +38,12 @@ use Magento\Config\Model\ResourceModel\Config as ConfigWriter;
 use Magento\Framework\App\ScopeInterface as FrameworkScopeInterface;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
-use TIG\TinifyCDN\Client\Provider\TinifyProvider;
-use TIG\TinifyCDN\Client\Provider\TinifyProviderFactory;
-use TIG\TinifyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
-use TIG\TinifyCDN\Model\Api\Site;
-use TIG\TinifyCDN\Model\Config\Provider\CDN\Configuration;
-use TIG\TinifyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
+use Tinify\TinifyCDN\Client\Provider\TinifyProvider;
+use Tinify\TinifyCDN\Client\Provider\TinifyProviderFactory;
+use Tinify\TinifyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
+use Tinify\TinifyCDN\Model\Api\Site;
+use Tinify\TinifyCDN\Model\Config\Provider\CDN\Configuration;
+use Tinify\TinifyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
 
 class Authorize extends AbstractAdminhtmlController
 {
@@ -106,7 +106,7 @@ class Authorize extends AbstractAdminhtmlController
         $this->scope   = $this->getSessionData('scope');
 
         $redirect = $this->resultRedirectFactory->create();
-        $redirect->setPath(static::SYSTEM_CONFIG_TIG_TINIFYCDN_SECTION, [$this->scope => $this->storeId]);
+        $redirect->setPath(static::SYSTEM_CONFIG_TINIFY_TINIFYCDN_SECTION, [$this->scope => $this->storeId]);
 
         // Received error from Tinify CDN
         if (isset($errorCode)) {

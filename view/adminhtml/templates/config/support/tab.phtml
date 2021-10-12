@@ -1,7 +1,7 @@
 <?php
-/** @var \TIG\TinifyCDN\Block\Adminhtml\Config\Support\Tab $this */
+/** @var \Tinify\TinifyCDN\Block\Adminhtml\Config\Support\Tab $this */
 ?>
-<div id="supporttab" class="tig-tinifycdn-supporttab" data-mage-init='{"tinifyConfig": true}'>
+<div id="supporttab" class="tinify-tinifycdn-supporttab" data-mage-init='{"tinifyConfig": true}'>
     <div class="colset-2">
         <div class="col-1 legend-version">
             <div class="version-compatibility">
@@ -27,17 +27,17 @@
                         switch ($this->phpVersionCheck()) {
                             case 1:
                                 ?>
-                                <img class="compatible-image" height="16" src="<?= $this->getViewFileUrl('TIG_TinifyCDN::images/green-ok.png'); ?>" alt="">
+                                <img class="compatible-image" height="16" src="<?= $this->getViewFileUrl('Tinify_TinifyCDN::images/green-ok.png'); ?>" alt="">
                                 <?php
                                 break;
                             case 0:
                                 ?>
-                                <img class="compatible-image" height="16" src="<?= $this->getViewFileUrl('TIG_TinifyCDN::images/red-nok.png'); ?>" alt="">
+                                <img class="compatible-image" height="16" src="<?= $this->getViewFileUrl('Tinify_TinifyCDN::images/red-nok.png'); ?>" alt="">
                                 <?php
                                 break;
                             default:
                                 ?>
-                                <img class="compatible-image" height="16" src="<?= $this->getViewFileUrl('TIG_TinifyCDN::images/orange-unknown.png'); ?>" alt="">
+                                <img class="compatible-image" height="16" src="<?= $this->getViewFileUrl('Tinify_TinifyCDN::images/orange-unknown.png'); ?>" alt="">
                                 <?php
                                 break;
                         }
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="col-2 legend-version">
-            <img class="panda-george" src="<?php echo $this->getViewFileUrl('TIG_TinifyCDN::images/george-magento@2x_opt.png'); ?>" alt="George the Tinify CDN panda"/>
+            <img class="panda-george" src="<?php echo $this->getViewFileUrl('Tinify_TinifyCDN::images/george-magento@2x_opt.png'); ?>" alt="George the Tinify CDN panda"/>
         </div>
     </div>
 
@@ -55,7 +55,7 @@
         <div class="collapse-title" data-role="title">
             <h3 data-role="trigger"><?php echo $block->escapeHtml(__('Support')); ?></h3>
         </div>
-        <div class="collapse-content support-tinifycdn-tig" data-role="content" style="display:none;">
+        <div class="collapse-content support-tinifycdn-tinify" data-role="content" style="display:none;">
             <?php echo __('This extension is developed by <a href="https://tig.nl" target="_BLANK">TIG</a>'); ?>
             <div class="colset-2">
                 <div class="col-1">

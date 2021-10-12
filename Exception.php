@@ -30,7 +30,7 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN;
+namespace Tinify\TinifyCDN;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\LocalizedExceptionFactory;

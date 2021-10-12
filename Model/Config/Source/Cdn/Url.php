@@ -30,11 +30,11 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Model\Config\Source\Cdn;
+namespace Tinify\TinifyCDN\Model\Config\Source\Cdn;
 
 use Magento\Backend\Model\UrlInterface as BackendUrlInterface;
 use Magento\Framework\UrlInterface as StandardUrlInterface;
-use TIG\TinifyCDN\Model\AbstractConfigSource;
+use Tinify\TinifyCDN\Model\AbstractConfigSource;
 
 class Url extends AbstractConfigSource
 {
