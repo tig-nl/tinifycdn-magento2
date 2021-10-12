@@ -38,7 +38,7 @@
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config" title="Configuration" sortOrder="20">
-                            <resource id="TIG_TinifyCDN::configuration" title="TinifyCDN" sortOrder="1" />
+                            <resource id="Tinify_TinifyCDN::configuration" title="TinifyCDN" sortOrder="1" />
                         </resource>
                     </resource>
                 </resource>

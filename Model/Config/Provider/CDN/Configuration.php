@@ -30,24 +30,24 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Model\Config\Provider\CDN;
+namespace Tinify\TinifyCDN\Model\Config\Provider\CDN;
 
-use TIG\TinifyCDN\Model\AbstractConfigProvider;
-use TIG\TinifyCDN\Model\Challenge;
-use TIG\TinifyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
-use TIG\TinifyCDN\Model\Config\Source\Cdn\Url;
+use Tinify\TinifyCDN\Model\AbstractConfigProvider;
+use Tinify\TinifyCDN\Model\Challenge;
+use Tinify\TinifyCDN\Model\Config\Provider\General\Configuration as GeneralConfiguration;
+use Tinify\TinifyCDN\Model\Config\Source\Cdn\Url;
 
 class Configuration extends AbstractConfigProvider
 {
-    const XPATH_TINIFYCDN_CDN_TEST         = 'tig_tinifycdn/cdn/test';
+    const XPATH_TINIFYCDN_CDN_TEST         = 'tinify_tinifycdn/cdn/test';
 
-    const XPATH_TINIFYCDN_CDN_LIVE         = 'tig_tinifycdn/cdn/live';
+    const XPATH_TINIFYCDN_CDN_LIVE         = 'tinify_tinifycdn/cdn/live';
 
-    const XPATH_TINIFYCDN_CDN_ACCESS_TOKEN = 'tig_tinifycdn/cdn/access_token';
+    const XPATH_TINIFYCDN_CDN_ACCESS_TOKEN = 'tinify_tinifycdn/cdn/access_token';
 
-    const XPATH_TINIFYCDN_CDN_SITE_ID      = 'tig_tinifycdn/cdn/site_id';
+    const XPATH_TINIFYCDN_CDN_SITE_ID      = 'tinify_tinifycdn/cdn/site_id';
 
-    const XPATH_TINIFYCDN_CDN_ENDPOINT     = 'tig_tinifycdn/cdn/endpoint';
+    const XPATH_TINIFYCDN_CDN_ENDPOINT     = 'tinify_tinifycdn/cdn/endpoint';
 
     const TINIFYCDN_CDN_TOKEN_PARAM        = 'token';
 

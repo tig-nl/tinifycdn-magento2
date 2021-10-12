@@ -30,19 +30,19 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\TinifyCDN\Block\Adminhtml\Config\Form\Field;
+namespace Tinify\TinifyCDN\Block\Adminhtml\Config\Form\Field;
 
 use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use TIG\TinifyCDN\Model\Config\Provider\CDN\Configuration;
+use Tinify\TinifyCDN\Model\Config\Provider\CDN\Configuration;
 
 class Disabled extends Field
 {
     const BUTTON_ID = 'tinify_cdn_site';
 
     // @codingStandardsIgnoreLine
-    protected $_template = 'TIG_TinifyCDN::config/form/disabled.phtml';
+    protected $_template = 'Tinify_TinifyCDN::config/form/disabled.phtml';
 
     /** @var Configuration $config */
     private $config;

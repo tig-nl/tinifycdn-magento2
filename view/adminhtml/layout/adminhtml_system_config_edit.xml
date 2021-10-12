@@ -40,11 +40,11 @@
  -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <css src="TIG_TinifyCDN::css/adminhtml_system_config_edit.css" />
+        <css src="Tinify_TinifyCDN::css/adminhtml_system_config_edit.css" />
     </head>
     <body>
         <referenceContainer name="content">
-            <block class="TIG\TinifyCDN\Block\Adminhtml\Config\Support\BodyClass" name="tinifycdn.support" before="system.config.edit" />
+            <block class="Tinify\TinifyCDN\Block\Adminhtml\Config\Support\BodyClass" name="tinifycdn.support" before="system.config.edit" />
         </referenceContainer>
     </body>
 </page>

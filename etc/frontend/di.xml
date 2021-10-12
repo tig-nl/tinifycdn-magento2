@@ -33,12 +33,12 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="\Magento\Framework\View\Asset\File">
-        <plugin name="tig_tinifycdn_file_after_get_url" type="\TIG\TinifyCDN\Plugin\Framework\View\Asset\FilePlugin" sortOrder="100" />
+        <plugin name="tinify_tinifycdn_file_after_get_url" type="\Tinify\TinifyCDN\Plugin\Framework\View\Asset\FilePlugin" sortOrder="100" />
     </type>
     <type name="\Magento\Catalog\Model\View\Asset\Image">
-        <plugin name="tig_tinifycdn_image_after_get_url" type="\TIG\TinifyCDN\Plugin\Catalog\Model\View\Asset\ImagePlugin" sortOrder="100" />
+        <plugin name="tinify_tinifycdn_image_after_get_url" type="\Tinify\TinifyCDN\Plugin\Catalog\Model\View\Asset\ImagePlugin" sortOrder="100" />
     </type>
     <type name="\Magento\Widget\Model\Template\Filter">
-        <plugin name="tig_tinifycdn_filter_after_get_media_directive" type="\TIG\TinifyCDN\Plugin\Widget\Model\Template\FilterPlugin" sortOrder="100" />
+        <plugin name="tinify_tinifycdn_filter_after_get_media_directive" type="\Tinify\TinifyCDN\Plugin\Widget\Model\Template\FilterPlugin" sortOrder="100" />
     </type>
 </config>

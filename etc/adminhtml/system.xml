@@ -43,13 +43,13 @@
         <tab id="tinify" translate="label" sortOrder="9999" class="tinify-tab">
             <label>Tinify</label>
         </tab>
-        <section id="tig_tinifycdn" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="tinify_tinifycdn" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Tinify CDN</label>
             <tab>tinify</tab>
-            <resource>TIG_TinifyCDN::configuration</resource>
-            <include path="TIG_TinifyCDN::system/support.xml" />
-            <include path="TIG_TinifyCDN::system/general.xml" />
-            <include path="TIG_TinifyCDN::system/cdn.xml" />
+            <resource>Tinify_TinifyCDN::configuration</resource>
+            <include path="Tinify_TinifyCDN::system/support.xml" />
+            <include path="Tinify_TinifyCDN::system/general.xml" />
+            <include path="Tinify_TinifyCDN::system/cdn.xml" />
         </section>
     </system>
 </config>
