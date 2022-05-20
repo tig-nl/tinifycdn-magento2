@@ -43,7 +43,7 @@ class Tab extends Template implements RendererInterface
 {
     const MODULE_NAME       = 'Tinify_TinifyCDN';
 
-    const EXTENSION_VERSION = '1.3.3';
+    const EXTENSION_VERSION = '1.3.4';
 
     // @codingStandardsIgnoreLine
     protected $_template = 'Tinify_TinifyCDN::config/support/tab.phtml';

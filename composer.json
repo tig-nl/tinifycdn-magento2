@@ -3,7 +3,7 @@
     "description": "Allows you to easily setup Tinify CDN for your Magento 2 store.",
     "require": {
         "magento/framework": "~102.0|~103.0",
-        "php": "~7.3|~7.4",
+        "php": "~7.3|~7.4|~8.0|~8.1",
         "ext-json": "*",
         "league/oauth2-client": "^2.4"
     },
@@ -16,7 +16,7 @@
             "homepage": "http://tig.nl"
         }
     ],
-    "version": "v1.3.3",
+    "version": "v1.3.4",
     "autoload": {
         "files": [
             "registration.php"

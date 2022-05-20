@@ -124,7 +124,7 @@ class Configuration extends AbstractConfigProvider
     }
 
     /**
-     * @param string $uri
+     * @param $uri string
      *
      * @return string
      */

@@ -11,7 +11,7 @@ use League\OAuth2\Client\Exception\IDPException;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 
-// @codingStandarsIgnoreFile
+// @codingStandardsIgnoreFile
 class TinifyProvider extends AbstractProvider
 {
     use BearerAuthorizationTrait;

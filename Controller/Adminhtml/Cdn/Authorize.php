@@ -38,6 +38,7 @@ use Magento\Config\Model\ResourceModel\Config as ConfigWriter;
 use Magento\Framework\App\ScopeInterface as FrameworkScopeInterface;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Store\Model\ScopeInterface as StoreScopeInterface;
+use Magento\Tests\NamingConvention\true\string;
 use Tinify\TinifyCDN\Client\Provider\TinifyProvider;
 use Tinify\TinifyCDN\Client\Provider\TinifyProviderFactory;
 use Tinify\TinifyCDN\Controller\Adminhtml\AbstractAdminhtmlController;
@@ -152,11 +153,11 @@ class Authorize extends AbstractAdminhtmlController
     }
 
     /**
-     * @param $scope
+     * @param $scope string
      *
      * @return string
      */
-    private function resolveScope($scope)
+    private function resolveScope(string $scope)
     {
         switch ($scope) {
             case 'website':
@@ -190,7 +191,7 @@ class Authorize extends AbstractAdminhtmlController
 
         // If Authorization is successful, remove oAuth Credentials from session.
         $this->unsetSessionData(static::TINIFYCDN_OAUTH_CREDENTIALS_PARAM);
-        
+
     }
 
     /**
