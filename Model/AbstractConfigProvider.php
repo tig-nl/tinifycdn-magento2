@@ -68,8 +68,8 @@ abstract class AbstractConfigProvider extends AbstractModel
     }
 
     /**
-     * @param $path string
-     * @param null $storeId
+     * @param string    $path
+     * @param null      $storeId
      *
      * @return mixed
      */

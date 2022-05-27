@@ -39,17 +39,17 @@ class Purge extends AbstractApi
     const TINIFY_API_CDN_PURGE = 'cdn/sites/{id}/purge';
 
     /**
-     * @param $id int
+     * @param int $id
      *
      * @return mixed
      */
-    public function purge(int $id)
+    public function purge($id)
     {
         return $this->doPostRequest($id);
     }
 
     /**
-     * @param $id array|string|string[]
+     * @param array|string|string[] $id
      *
      * @return array
      */

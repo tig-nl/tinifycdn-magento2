@@ -43,7 +43,7 @@ namespace Tinify\TinifyCDN\Model;
 class Challenge extends AbstractModel
 {
     /**
-     * @param $verifier string
+     * @param string $verifier
      *
      * @return string
      */
@@ -53,7 +53,7 @@ class Challenge extends AbstractModel
     }
 
     /**
-     * @param $randomValue string
+     * @param string $randomValue
      *
      * @return string
      */
@@ -71,7 +71,7 @@ class Challenge extends AbstractModel
     }
 
     /**
-     * @param $value string
+     * @param  string $value
      *
      * @return string
      */

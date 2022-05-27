@@ -81,7 +81,7 @@ class Url extends AbstractConfigSource
      * parameters when building URLs.
      *
      * @param      $uri
-     * @param $admin bool
+     * @param bool $admin
      * @param null $params
      *
      * @return string
@@ -100,7 +100,7 @@ class Url extends AbstractConfigSource
      * new form key upon each request. But Tinify CDN needs the key to stay intact
      * until after referral.
      *
-     * @param $url string
+     * @param string $url
      *
      * @return bool|string
      */
