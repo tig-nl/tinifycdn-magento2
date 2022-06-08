@@ -152,11 +152,11 @@ class Authorize extends AbstractAdminhtmlController
     }
 
     /**
-     * @param $scope
+     * @param  string $scope
      *
      * @return string
      */
-    private function resolveScope($scope)
+    private function resolveScope(string $scope)
     {
         switch ($scope) {
             case 'website':
@@ -190,7 +190,7 @@ class Authorize extends AbstractAdminhtmlController
 
         // If Authorization is successful, remove oAuth Credentials from session.
         $this->unsetSessionData(static::TINIFYCDN_OAUTH_CREDENTIALS_PARAM);
-        
+
     }
 
     /**

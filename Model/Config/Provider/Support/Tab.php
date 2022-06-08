@@ -39,8 +39,6 @@ class Tab extends AbstractConfigProvider
     const XPATH_TINIFYCDN_SUPPORTED_MAGENTO_VERSION = 'tinify_tinifycdn/supported_magento_version';
 
     /**
-     * @param null $store
-     *
      * @return string
      */
     public function getSupportedMagentoVersions()

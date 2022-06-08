@@ -68,11 +68,12 @@ abstract class AbstractConfigProvider extends AbstractModel
     }
 
     /**
-     * @param $path
+     * @param string    $path
+     * @param null      $storeId
      *
      * @return mixed
      */
-    public function getConfigValue($path, $storeId = null)
+    public function getConfigValue(string $path, $storeId = null)
     {
         return $this->scopeConfig->getValue($path, $this->resolveScope(), $storeId);
     }
