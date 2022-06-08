@@ -43,19 +43,21 @@ namespace Tinify\TinifyCDN\Model;
 class Challenge extends AbstractModel
 {
     /**
+     * @param string $verifier
+     *
      * @return string
      */
-    public function generateChallenge($verifier)
+    public function generateChallenge(string $verifier)
     {
         return $this->encode(pack('H*', hash('sha256', $verifier)));
     }
 
     /**
-     * @param $randomValue
+     * @param string $randomValue
      *
      * @return string
      */
-    public function generateVerifier($randomValue)
+    public function generateVerifier(string $randomValue)
     {
         return $this->encode(pack('H*', $randomValue));
     }
@@ -69,11 +71,11 @@ class Challenge extends AbstractModel
     }
 
     /**
-     * @param $value
+     * @param  string $value
      *
      * @return string
      */
-    private function encode($value)
+    private function encode(string $value)
     {
         $base64    = base64_encode($value);
         $base64    = trim($base64, "=");

@@ -82,10 +82,11 @@ class Url extends AbstractConfigSource
      *
      * @param      $uri
      * @param bool $admin
+     * @param null $params
      *
      * @return string
      */
-    private function buildUrl($uri, $admin = true, $params = null)
+    private function buildUrl($uri, bool $admin = true, $params = null)
     {
         if ($admin) {
             return $this->backendUrlBuilder->getUrl($uri, $params);
@@ -99,11 +100,11 @@ class Url extends AbstractConfigSource
      * new form key upon each request. But Tinify CDN needs the key to stay intact
      * until after referral.
      *
-     * @param $url
+     * @param string $url
      *
      * @return bool|string
      */
-    public function grabKeyFromUrl($url)
+    public function grabKeyFromUrl(string $url)
     {
         $keyParamName = '/' . BackendUrlInterface::SECRET_KEY_PARAM_NAME . '/';
 

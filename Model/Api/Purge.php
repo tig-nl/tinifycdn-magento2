@@ -39,7 +39,7 @@ class Purge extends AbstractApi
     const TINIFY_API_CDN_PURGE = 'cdn/sites/{id}/purge';
 
     /**
-     * @param $id
+     * @param int $id
      *
      * @return mixed
      */
@@ -49,7 +49,7 @@ class Purge extends AbstractApi
     }
 
     /**
-     * @param $id
+     * @param array|string|string[] $id
      *
      * @return array
      */

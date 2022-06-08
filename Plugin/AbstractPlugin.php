@@ -65,12 +65,12 @@ abstract class AbstractPlugin
     }
 
     /**
-     * @param $url
+     * @param string $url
      *
      * @return mixed
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getCdnUrl($url)
+    public function getCdnUrl(string $url)
     {
         if (!$this->generalConfig->isEnabled()) {
             return $url;
